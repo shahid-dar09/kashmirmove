@@ -216,9 +216,8 @@ const DriverOverview = () => {
     isInitialMount.current = false;
   }, [refreshTrigger, fetchProfile, fetchActiveRide]);
 
-  // Socket Setup
   useEffect(() => {
-    socketRef.current = io('http://localhost:5000');
+    socketRef.current = io(`http://${window.location.hostname}:5000`);
     
     socketRef.current.on('connect', () => {
       if (activeRide) {

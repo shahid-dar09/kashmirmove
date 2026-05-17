@@ -110,7 +110,7 @@ const SidebarLayout = () => {
   // Socket.io for real-time notifications
   useEffect(() => {
     if (!user) return;
-    const socket = io("http://localhost:5000", { reconnectionAttempts: 3 });
+    const socket = io(`http://${window.location.hostname}:5000`, { reconnectionAttempts: 3 });
     socket.emit("join", user.id);
 
     socket.on("new_ride_request", (data) => {
@@ -530,7 +530,7 @@ const SidebarLayout = () => {
                 <div className="w-11 h-11 rounded-[14px] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-black text-sm group-hover:scale-105 transition-all overflow-hidden">
                   {user?.avatar_url ? (
                     <img
-                      src={`http://localhost:5000${user.avatar_url}`}
+                      src={`http://${window.location.hostname}:5000${user.avatar_url}`}
                       alt="P"
                       className="w-full h-full object-cover"
                     />

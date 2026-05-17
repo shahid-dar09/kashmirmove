@@ -156,7 +156,7 @@ const AllCustomers = () => {
                   <div className="flex items-center gap-5 mb-6">
                      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20 shadow-inner group-hover:scale-110 transition-transform">
                        {customer.avatar_url ? (
-                         <img src={`http://localhost:5000${customer.avatar_url}`} alt={customer.name} className="w-full h-full object-cover" />
+                         <img src={`http://${window.location.hostname}:5000${customer.avatar_url}`} alt={customer.name} className="w-full h-full object-cover" />
                        ) : (
                          <User size={24} className="text-primary" />
                        )}

@@ -252,7 +252,7 @@ const AllDrivers = () => {
               <div className="flex items-center gap-6 mb-10">
                  <div className="w-20 h-20 rounded-[2rem] bg-slate-100 dark:bg-white/10 border border-white/5 flex items-center justify-center overflow-hidden shadow-xl group-hover:scale-110 transition-transform">
                    {driver.avatar_url ? (
-                     <img src={`http://localhost:5000${driver.avatar_url}`} alt="" className="w-full h-full object-cover" />
+                     <img src={`http://${window.location.hostname}:5000${driver.avatar_url}`} alt="" className="w-full h-full object-cover" />
                    ) : (
                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${driver.name}`} alt="" className="w-full h-full scale-110" />
                    )}
@@ -379,7 +379,7 @@ const AllDrivers = () => {
                        <div className="absolute -inset-0.5 rounded-[1.6rem] bg-gradient-to-tr from-primary to-amber-500 opacity-60 group-hover:opacity-100 transition duration-300" />
                        <div className="w-16 h-16 bg-obsidian rounded-[1.4rem] p-1 relative z-10 border border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
                           {selectedDriver.avatar_url ? (
-                            <img src={`http://localhost:5000${selectedDriver.avatar_url}`} alt="" className="w-full h-full object-cover rounded-[1rem]" />
+                            <img src={`http://${window.location.hostname}:5000${selectedDriver.avatar_url}`} alt="" className="w-full h-full object-cover rounded-[1rem]" />
                           ) : (
                             <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${selectedDriver.name}`} alt="" className="w-full h-full scale-110" />
                           )}
@@ -499,7 +499,7 @@ const AllDrivers = () => {
                        <div className="absolute -inset-0.5 rounded-[1.8rem] bg-gradient-to-tr from-primary to-amber-500 opacity-60 group-hover:opacity-100 transition duration-300" />
                        <div className="w-24 h-24 bg-obsidian rounded-[1.6rem] p-1.5 relative z-10 border border-white/10 shadow-2xl flex items-center justify-center overflow-hidden">
                           {selectedDriver.avatar_url ? (
-                            <img src={`http://localhost:5000${selectedDriver.avatar_url}`} alt="" className="w-full h-full object-cover rounded-[1.1rem]" />
+                            <img src={`http://${window.location.hostname}:5000${selectedDriver.avatar_url}`} alt="" className="w-full h-full object-cover rounded-[1.1rem]" />
                           ) : (
                             <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${selectedDriver.name}`} alt="" className="w-full h-full scale-110" />
                           )}
@@ -594,7 +594,7 @@ const AllDrivers = () => {
                                    <span className="text-[10px] font-black text-white/40 block uppercase tracking-widest italic">{label}</span>
                                    {doc && (
                                      <a 
-                                       href={`http://localhost:5000${doc.file_url}`} 
+                                       href={`http://${window.location.hostname}:5000${doc.file_url}`} 
                                        target="_blank" 
                                        rel="noopener noreferrer"
                                        className="text-[10px] font-black text-primary uppercase tracking-[0.2em] hover:underline mt-2 inline-block italic"

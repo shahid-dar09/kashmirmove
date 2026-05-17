@@ -481,7 +481,7 @@ const Profile = () => {
                   {avatarLoading ? (
                     <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
                   ) : user?.avatar_url ? (
-                    <img src={`http://localhost:5000${user.avatar_url}`} alt="Avatar" className="w-full h-full object-cover" />
+                    <img src={`http://${window.location.hostname}:5000${user.avatar_url}`} alt="Avatar" className="w-full h-full object-cover" />
                   ) : (
                     user?.name?.charAt(0)
                   )}
@@ -1145,7 +1145,7 @@ const Profile = () => {
             <div className="h-32 bg-gradient-to-br from-primary to-secondary relative">
                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-[32px] bg-white dark:bg-obsidian border-4 border-white dark:border-obsidian overflow-hidden shadow-xl">
                   {user?.avatar_url ? (
-                    <img src={`http://localhost:5000${user.avatar_url}`} alt="Avatar" className="w-full h-full object-cover" />
+                    <img src={`http://${window.location.hostname}:5000${user.avatar_url}`} alt="Avatar" className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-4xl font-black text-slate-300">
                       {user?.name?.charAt(0)}

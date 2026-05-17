@@ -138,7 +138,7 @@ const ActiveRide = () => {
       fetchRideDetails();
     });
     
-    socketRef.current = io('http://localhost:5000', {
+    socketRef.current = io(`http://${window.location.hostname}:5000`, {
        transports: ['websocket', 'polling']
     });
     socketRef.current.emit('join_booking', id);

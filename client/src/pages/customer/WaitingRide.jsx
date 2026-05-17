@@ -69,7 +69,7 @@ const WaitingRide = () => {
       fetchBooking();
     });
     
-    socketRef.current = io('http://localhost:5000', {
+    socketRef.current = io(`http://${window.location.hostname}:5000`, {
       transports: ['websocket', 'polling'],
       reconnectionAttempts: 5
     });

@@ -11,7 +11,7 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
   useEffect(() => {
@@ -21,7 +21,12 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
   }, []);
 
   const scrollToBottom = (behavior = 'smooth') => {
-    messagesEndRef.current?.scrollIntoView({ behavior });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior
+      });
+    }
   };
 
   useEffect(() => {
@@ -86,7 +91,8 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
         left: isMobile ? '1rem' : 'auto',
         right: isMobile ? '1rem' : '1.5rem',
         width: isMobile ? 'calc(100% - 2rem)' : '400px',
-        bottom: isMobile ? '5rem' : '8rem'
+        bottom: isMobile ? '5rem' : '8rem',
+        maxHeight: 'calc(100vh - 10rem)'
       }}
       className="fixed bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 z-[9999] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] flex flex-col animate-slide-up rounded-[2.5rem] sm:rounded-[3rem] border border-white/10 overflow-hidden font-display"
     >
@@ -119,7 +125,10 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-black/20">
+      <div 
+        ref={messagesContainerRef}
+        className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-black/20"
+      >
         {loading ? (
           <div className="h-full flex items-center justify-center">
             <Loader2 className="w-8 h-8 text-primary animate-spin" />
@@ -161,7 +170,6 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
             );
           })
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Input */}

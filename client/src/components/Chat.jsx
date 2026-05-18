@@ -74,7 +74,7 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
   };
 
   return createPortal(
-    <div className="fixed bottom-20 sm:bottom-32 left-4 right-4 sm:left-auto sm:right-6 w-auto sm:w-[400px] h-[70vh] sm:h-[600px] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 z-[9999] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] flex flex-col animate-slide-up rounded-[2.5rem] sm:rounded-[3rem] border border-white/10 overflow-hidden font-display">
+    <div className="fixed bottom-20 sm:bottom-32 right-4 sm:right-6 w-[calc(100%-2rem)] sm:w-[400px] h-[70vh] sm:h-[600px] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 z-[9999] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] flex flex-col animate-slide-up rounded-[2.5rem] sm:rounded-[3rem] border border-white/10 overflow-hidden font-display">
       {/* Header */}
       <div className="p-8 border-b border-white/10 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-5">

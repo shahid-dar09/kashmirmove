@@ -170,7 +170,7 @@ const SidebarLayout = () => {
     });
 
     return () => socket.disconnect();
-  }, [user?.id]);
+  }, [user?.id, triggerRefresh]);
 
   // Global Active Ride Check
   useEffect(() => {

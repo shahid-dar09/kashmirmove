@@ -74,7 +74,14 @@ const WaitingRide = () => {
       reconnectionAttempts: 5
     });
     
-    socketRef.current.emit('join_booking', id);
+    const joinRoom = () => {
+      if (socketRef.current) socketRef.current.emit('join_booking', id);
+    };
+
+    if (socketRef.current.connected) {
+      joinRoom();
+    }
+    socketRef.current.on('connect', joinRoom);
     
     socketRef.current.on('booking_status_updated', (data) => {
       if (data.status === 'accepted') {

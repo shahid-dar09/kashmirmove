@@ -141,7 +141,15 @@ const ActiveRide = () => {
     socketRef.current = io(`http://${window.location.hostname}:5000`, {
        transports: ['websocket', 'polling']
     });
-    socketRef.current.emit('join_booking', id);
+    
+    const joinRoom = () => {
+      if (socketRef.current) socketRef.current.emit('join_booking', id);
+    };
+
+    if (socketRef.current.connected) {
+      joinRoom();
+    }
+    socketRef.current.on('connect', joinRoom);
     
     socketRef.current.on('location_update', (data) => {
       setDriverPos([data.lat, data.lng]);

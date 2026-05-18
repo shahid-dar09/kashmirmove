@@ -245,17 +245,28 @@ const DriverOverview = () => {
     };
   }, [triggerRefresh, user?.id]);
 
-  // Join/re-join booking room dynamically when activeRide ID changes
+  // Join/re-join booking room dynamically when activeRide ID changes or socket reconnects
   useEffect(() => {
-    if (activeRide?.id && socketRef.current) {
-      if (socketRef.current.connected) {
-        socketRef.current.emit('join_booking', activeRide.id);
-      } else {
-        socketRef.current.once('connect', () => {
-          socketRef.current.emit('join_booking', activeRide.id);
-        });
-      }
+    if (!activeRide?.id || !socketRef.current) return;
+
+    const joinRoom = () => {
+      console.log('DEBUG: Emitting join_booking for room:', activeRide.id);
+      socketRef.current.emit('join_booking', activeRide.id);
+    };
+
+    // Join immediately if connected
+    if (socketRef.current.connected) {
+      joinRoom();
     }
+
+    // Register connect listener to re-join on reconnects
+    socketRef.current.on('connect', joinRoom);
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.off('connect', joinRoom);
+      }
+    };
   }, [activeRide?.id]);
 
   // Real-time Driver Location Tracking & Emission

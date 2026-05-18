@@ -268,7 +268,7 @@ const ActiveRide = () => {
       </div>
 
       {/* FLOATING CHAT BUBBLE (TOP RIGHT) */}
-      <div className="absolute top-8 right-8 z-10">
+      <div className="absolute top-8 right-8 z-[9999]">
         <button 
           onClick={() => { setChatOpen(true); setUnreadCount(0); }}
           className="w-16 h-16 bg-white dark:bg-obsidian rounded-3xl border-2 border-white/20 shadow-2xl flex items-center justify-center text-slate-600 dark:text-white hover:bg-primary hover:text-obsidian transition-all hover:scale-110 active:scale-95 group relative"

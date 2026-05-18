@@ -109,7 +109,7 @@ const SidebarLayout = () => {
 
   // Socket.io for real-time notifications
   useEffect(() => {
-    if (!user) return;
+    if (!user?.id) return;
     const socket = io(`http://${window.location.hostname}:5000`, { reconnectionAttempts: 3 });
     socket.emit("join", user.id);
 
@@ -170,7 +170,7 @@ const SidebarLayout = () => {
     });
 
     return () => socket.disconnect();
-  }, [user, triggerRefresh]);
+  }, [user?.id]);
 
   // Global Active Ride Check
   useEffect(() => {

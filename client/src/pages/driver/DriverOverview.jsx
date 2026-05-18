@@ -216,13 +216,12 @@ const DriverOverview = () => {
     isInitialMount.current = false;
   }, [refreshTrigger, fetchProfile, fetchActiveRide]);
 
+  // Stable Socket Connection Setup (Runs once on mount)
   useEffect(() => {
     socketRef.current = io(`http://${window.location.hostname}:5000`);
     
     socketRef.current.on('connect', () => {
-      if (activeRide) {
-        socketRef.current.emit('join_booking', activeRide.id);
-      }
+      console.log('DEBUG: Socket connected successfully');
     });
 
     socketRef.current.on('new_ride_request', () => {
@@ -244,7 +243,20 @@ const DriverOverview = () => {
     return () => {
       if (socketRef.current) socketRef.current.disconnect();
     };
-  }, [activeRide, triggerRefresh, user?.id]);
+  }, [triggerRefresh, user?.id]);
+
+  // Join/re-join booking room dynamically when activeRide ID changes
+  useEffect(() => {
+    if (activeRide?.id && socketRef.current) {
+      if (socketRef.current.connected) {
+        socketRef.current.emit('join_booking', activeRide.id);
+      } else {
+        socketRef.current.once('connect', () => {
+          socketRef.current.emit('join_booking', activeRide.id);
+        });
+      }
+    }
+  }, [activeRide?.id]);
 
   // Real-time Driver Location Tracking & Emission
   useEffect(() => {

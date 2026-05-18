@@ -168,6 +168,7 @@ const ActiveRide = () => {
     });
 
     socketRef.current.on('new_message', (msg) => {
+      console.log('DEBUG: Customer received new_message event:', msg, 'chatOpen:', chatOpenRef.current, 'user.id:', user?.id);
       const isMe = String(msg.senderId || msg.sender_id) === String(user?.id);
       if (!isMe && !chatOpenRef.current) {
         setUnreadCount(prev => prev + 1);

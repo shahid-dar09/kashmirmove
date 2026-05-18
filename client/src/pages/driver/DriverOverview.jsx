@@ -602,7 +602,11 @@ const DriverOverview = () => {
                       className="flex-1 h-16 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 transition-all flex items-center justify-center relative group"
                     >
                       <MessageSquare size={20} className="group-hover:scale-110 transition-transform" />
-                      {unreadCount > 0 && <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-obsidian">{unreadCount}</span>}
+                      {unreadCount > 0 && (
+                        <span className="absolute -top-2 -right-2 w-7 h-7 bg-red-500 text-white text-[11px] font-black rounded-full flex items-center justify-center border-2 border-obsidian shadow-glow-red/50 shadow-lg z-20 animate-bounce">
+                          {unreadCount}
+                        </span>
+                      )}
                     </button>
                     <button
                       onClick={() => {

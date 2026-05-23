@@ -92,7 +92,9 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
         right: isMobile ? '1rem' : '1.5rem',
         width: isMobile ? 'calc(100% - 2rem)' : '400px',
         bottom: isMobile ? '4.5rem' : '8rem',
-        maxHeight: isMobile ? 'calc(100vh - 6rem)' : 'calc(100vh - 10rem)'
+        top: isMobile ? '1.5rem' : 'auto',
+        height: isMobile ? 'auto' : '550px',
+        maxHeight: isMobile ? 'none' : 'calc(100vh - 10rem)'
       }}
       className="fixed bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 z-[9999] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] flex flex-col animate-slide-up rounded-[1.5rem] sm:rounded-[3rem] border border-white/10 overflow-hidden font-display"
     >

@@ -14,8 +14,8 @@
 
   body {
     @apply font-sans antialiased transition-colors duration-500;
-    background-color: #FAF9F6; /* Elegant Warm Cream */
-    color: #1A1A1A;
+    background-color: #faf9f6; /* Elegant Warm Cream */
+    color: #1a1a1a;
     overflow-x: hidden;
     overflow-wrap: break-word;
   }
@@ -34,7 +34,7 @@
 
   html.dark body {
     background-color: #030712;
-    color: #F8FAFC;
+    color: #f8fafc;
   }
 
   ::selection {
@@ -189,15 +189,30 @@ html.dark .skeleton-box {
 }
 
 /* Stagger Animations */
-.stagger-1 { animation-delay: 100ms; }
-.stagger-2 { animation-delay: 200ms; }
-.stagger-3 { animation-delay: 300ms; }
-.stagger-4 { animation-delay: 400ms; }
-.stagger-5 { animation-delay: 500ms; }
-.stagger-6 { animation-delay: 600ms; }
-.stagger-7 { animation-delay: 700ms; }
-.stagger-8 { animation-delay: 800ms; }
-
+.stagger-1 {
+  animation-delay: 100ms;
+}
+.stagger-2 {
+  animation-delay: 200ms;
+}
+.stagger-3 {
+  animation-delay: 300ms;
+}
+.stagger-4 {
+  animation-delay: 400ms;
+}
+.stagger-5 {
+  animation-delay: 500ms;
+}
+.stagger-6 {
+  animation-delay: 600ms;
+}
+.stagger-7 {
+  animation-delay: 700ms;
+}
+.stagger-8 {
+  animation-delay: 800ms;
+}
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -219,27 +234,52 @@ html.dark .skeleton-box {
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes slideInLeft {
-  0% { transform: translateX(-100%); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  0% { transform: translateY(-8px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes pulseSlow {
-  0%, 100% { opacity: 0.45; transform: scale(1); }
-  50% { opacity: 0.75; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.05);
+  }
 }
 
 @keyframes spinSlow {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-slide-in-left {
@@ -265,10 +305,10 @@ html.dark .skeleton-box {
 
 /* Fix for browser autofill background in dark theme */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #16162A inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #16162a inset !important;
   -webkit-text-fill-color: white !important;
   transition: background-color 5000s ease-in-out 0s;
 }

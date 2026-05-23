@@ -48,20 +48,19 @@ const makeStopIcon = (num) => L.divIcon({
   iconAnchor: [14, 14]
 });
 
-const MapAutoCenter = ({ driverPos, pickup, recenterTrigger }) => {
+const MapAutoCenter = ({ driverPos, pickup, recenterTrigger, hasCenteredRef }) => {
   const map = useMap();
-  const hasCentered = useRef(false);
 
   useEffect(() => {
     // Initial centering
-    if (driverPos && !hasCentered.current) {
+    if (driverPos && !hasCenteredRef.current) {
       map.setView(driverPos, 15);
-      hasCentered.current = true;
-    } else if (pickup && !driverPos && !hasCentered.current) {
+      hasCenteredRef.current = true;
+    } else if (pickup && !driverPos && !hasCenteredRef.current) {
       map.setView(pickup, 13);
-      hasCentered.current = true;
+      hasCenteredRef.current = true;
     }
-  }, [driverPos, pickup, map]);
+  }, [driverPos, pickup, map, hasCenteredRef]);
 
   // Manual recenter trigger
   useEffect(() => {
@@ -102,6 +101,7 @@ const DriverOverview = () => {
   const socketRef = useRef(null);
   const chatOpenRef = useRef(false);
   const lastSavedTime = useRef(0);
+  const hasCenteredRef = useRef(false);
 
   useEffect(() => {
     chatOpenRef.current = chatOpen;
@@ -744,11 +744,9 @@ const DriverOverview = () => {
               )}
               
               {routePoints.length >= 2 && (
-                <>
-                  <Polyline positions={routePoints} color="#f59e0b" weight={6} opacity={0.8} dashArray="10, 10" />
-                  <MapAutoCenter driverPos={effectiveDriverPos} pickup={pickup} recenterTrigger={recenterTrigger} />
-                </>
+                <Polyline positions={routePoints} color="#f59e0b" weight={6} opacity={0.8} dashArray="10, 10" />
               )}
+              <MapAutoCenter driverPos={effectiveDriverPos} pickup={pickup} recenterTrigger={recenterTrigger} hasCenteredRef={hasCenteredRef} />
             </MapContainer>
             
             {/* Top Telemetry Strip (Responsive Overlay) */}

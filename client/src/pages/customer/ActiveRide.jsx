@@ -61,13 +61,14 @@ const destIcon = L.divIcon({
   iconAnchor: [20, 20]
 });
 
-const RecenterMap = ({ position }) => {
+const RecenterMap = ({ position, hasCenteredRef }) => {
   const map = useMap();
   useEffect(() => {
-    if (position) {
+    if (position && !hasCenteredRef.current) {
       map.setView(position, 15, { animate: true });
+      hasCenteredRef.current = true;
     }
-  }, [position, map]);
+  }, [position, map, hasCenteredRef]);
   return null;
 };
 
@@ -86,6 +87,7 @@ const ActiveRide = () => {
   const { user } = useContext(AuthContext);
   const socketRef = useRef(null);
   const chatOpenRef = useRef(false);
+  const hasCenteredRef = useRef(false);
 
   useEffect(() => {
     chatOpenRef.current = chatOpen;
@@ -248,8 +250,22 @@ const ActiveRide = () => {
               )}
 
               {effectiveDriverPos && <Marker position={effectiveDriverPos} icon={driverIcon} />}
-              <RecenterMap position={effectiveDriverPos} />
+              <RecenterMap position={effectiveDriverPos} hasCenteredRef={hasCenteredRef} />
             </MapContainer>
+      </div>
+
+      {/* FLOATING RECENTER RADAR BUBBLE (BELOW CHAT BUBBLE) */}
+      <div className="absolute top-[10.5rem] right-3 sm:top-28 sm:right-8 z-[9999]">
+        <button 
+          onClick={() => {
+            hasCenteredRef.current = false;
+            setDriverPos(prev => prev ? [...prev] : null);
+          }}
+          className="w-16 h-16 bg-white dark:bg-obsidian rounded-3xl border-2 border-white/20 shadow-2xl flex items-center justify-center text-slate-600 dark:text-white hover:bg-primary hover:text-obsidian transition-all hover:scale-110 active:scale-95 group"
+          title="Recenter Radar"
+        >
+           <LocateFixed size={24} className="group-hover:rotate-12 transition-transform" />
+        </button>
       </div>
 
       {/* TOP FLOATING STATUS BAR */}

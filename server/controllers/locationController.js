@@ -10,12 +10,10 @@ const getSavedLocations = async (req, res) => {
     res.status(200).json({ success: true, locations });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Server error while fetching locations",
-      });
+    res.status(500).json({
+      success: false,
+      message: "Server error while fetching locations",
+    });
   }
 };
 
@@ -40,13 +38,11 @@ const addSavedLocation = async (req, res) => {
       [result.insertId],
     );
 
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "Location saved successfully",
-        location: newLocation[0],
-      });
+    res.status(201).json({
+      success: true,
+      message: "Location saved successfully",
+      location: newLocation[0],
+    });
   } catch (error) {
     console.error(error);
     res
@@ -65,12 +61,10 @@ const deleteSavedLocation = async (req, res) => {
       [id, userId],
     );
     if (location.length === 0) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "Location not found or unauthorized",
-        });
+      return res.status(404).json({
+        success: false,
+        message: "Location not found or unauthorized",
+      });
     }
 
     await pool.query("DELETE FROM saved_locations WHERE id = ?", [id]);
@@ -80,12 +74,10 @@ const deleteSavedLocation = async (req, res) => {
       .json({ success: true, message: "Location deleted successfully" });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Server error while deleting location",
-      });
+    res.status(500).json({
+      success: false,
+      message: "Server error while deleting location",
+    });
   }
 };
 

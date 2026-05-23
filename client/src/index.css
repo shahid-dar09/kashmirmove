@@ -125,7 +125,7 @@
   /* Responsive table container */
   .table-responsive {
     @apply w-full overflow-x-auto -mx-0;
-    -webkit-overflow-scrolling: touch;
+    /* momentum scrolling is on by default in iOS 13+ — no webkit prefix needed */
   }
 
   /* Touch-friendly tap targets */
@@ -198,10 +198,6 @@ html.dark .skeleton-box {
 .stagger-7 { animation-delay: 700ms; }
 .stagger-8 { animation-delay: 800ms; }
 
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.45) transparent;
-}
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

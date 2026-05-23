@@ -100,8 +100,16 @@ const getCustomerBookings = async (req, res) => {
             FROM bookings b
             LEFT JOIN drivers d ON b.driver_id = d.id
             LEFT JOIN users u ON d.user_id = u.id
-            LEFT JOIN vehicles v ON v.driver_id = d.id
-            LEFT JOIN reviews r ON r.booking_id = b.id
+            LEFT JOIN (
+                SELECT driver_id, type, MIN(number) as number, MIN(model) as model
+                FROM vehicles
+                GROUP BY driver_id, type
+            ) v ON v.driver_id = d.id AND v.type = b.vehicle_type
+            LEFT JOIN (
+                SELECT booking_id, MIN(id) as id, MIN(rating) as rating
+                FROM reviews
+                GROUP BY booking_id
+            ) r ON r.booking_id = b.id
             WHERE b.user_id = ?
             ORDER BY b.created_at DESC
         `, [userId]);

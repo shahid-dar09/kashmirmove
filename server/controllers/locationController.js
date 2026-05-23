@@ -116,7 +116,7 @@ const getDriversByDistrict = async (req, res) => {
         .json({ success: false, message: "Invalid district ID" });
     }
 
-    // Fetch approved and online drivers from the database
+    // Fetch approved and online drivers from the database matching the selected area/district
     const [drivers] = await pool.query(`
             SELECT 
                 d.id,
@@ -135,9 +135,11 @@ const getDriversByDistrict = async (req, res) => {
             FROM drivers d
             JOIN users u ON d.user_id = u.id
             LEFT JOIN vehicles v ON v.driver_id = d.id
-            WHERE d.status = 'approved' AND d.is_online = TRUE
+            WHERE d.status = 'approved' 
+              AND d.is_online = TRUE 
+              AND (d.area = ? OR (d.area = 'Budgam' AND ? = 'Badgam') OR (d.area = 'Badgam' AND ? = 'Budgam'))
             ORDER BY d.rating DESC
-        `);
+        `, [district.name, district.name, district.name]);
 
     // Filter drivers by distance from district center (within 50km radius)
     const driversWithDistance = drivers

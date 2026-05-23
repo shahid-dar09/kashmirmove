@@ -101,6 +101,7 @@ const DriverOverview = () => {
   const [systemNotifications, setSystemNotifications] = useState([]);
   const socketRef = useRef(null);
   const chatOpenRef = useRef(false);
+  const lastSavedTime = useRef(0);
 
   useEffect(() => {
     chatOpenRef.current = chatOpen;
@@ -278,6 +279,14 @@ const DriverOverview = () => {
           const lng = position.coords.longitude;
           setDriverPos([lat, lng]);
           
+          // Save to database (throttled to once every 15 seconds)
+          const now = Date.now();
+          if (now - lastSavedTime.current > 15000) {
+            lastSavedTime.current = now;
+            api.put('/driver/location', { lat, lng })
+              .catch(err => console.error("Failed to save live location to DB:", err));
+          }
+
           // Emit to customer if active ride exists
           if (activeRide && socketRef.current && socketRef.current.connected) {
             socketRef.current.emit('update_location', {

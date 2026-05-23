@@ -380,6 +380,19 @@ const cancelRide = async (req, res) => {
     }
 };
 
+const DISTRICT_CENTERS = {
+    'Srinagar': { lat: 34.0837, lng: 74.7973 },
+    'Anantnag': { lat: 33.7298, lng: 75.1467 },
+    'Ganderbal': { lat: 34.3133, lng: 75.5667 },
+    'Budgam': { lat: 34.2044, lng: 75.0044 },
+    'Pulwama': { lat: 33.9244, lng: 75.3244 },
+    'Kulgam': { lat: 33.6133, lng: 75.5333 },
+    'Bandipora': { lat: 34.4244, lng: 74.6344 },
+    'Baramulla': { lat: 34.2044, lng: 74.3444 },
+    'Kupwara': { lat: 34.5244, lng: 74.2544 },
+    'Shopian': { lat: 33.7144, lng: 74.8344 }
+};
+
 const updateLocation = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -397,10 +410,35 @@ const updateLocation = async (req, res) => {
         if (area) {
             updates.push('area = ?');
             params.push(area);
+            
+            // Automatically update coordinates to district center if found
+            const center = DISTRICT_CENTERS[area];
+            if (center) {
+                updates.push('current_lat = ?, current_lng = ?');
+                params.push(center.lat, center.lng);
+            }
         }
+        
+        // If specific coordinates are provided (e.g. from live GPS), they take precedence
         if (lat !== undefined && lng !== undefined) {
-            updates.push('current_lat = ?, current_lng = ?');
-            params.push(lat, lng);
+            // If they are 0, 0 safeguard against Null Island
+            if (lat === 0 && lng === 0) {
+                console.warn("DEBUG: Ignored invalid 0,0 location update request from driver API.");
+            } else {
+                // If coordinates were already pushed by area update above, overwrite them
+                const latIdx = updates.findIndex(u => u.includes('current_lat'));
+                if (latIdx !== -1) {
+                    // Coordinates were already set by area, let's remove that update
+                    updates.splice(latIdx, 1);
+                    // Remove the two params added by the area lookup
+                    // Updates list is: ['area = ?', 'current_lat = ?, current_lng = ?']
+                    // params list is: [area, center.lat, center.lng]
+                    // We need to keep only 'area = ?' and 'area' in params
+                    params = [area];
+                }
+                updates.push('current_lat = ?, current_lng = ?');
+                params.push(lat, lng);
+            }
         }
 
         if (updates.length === 0) {

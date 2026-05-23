@@ -96,6 +96,7 @@ const getCustomerBookings = async (req, res) => {
         const userId = req.user.id;
         const [bookings] = await pool.query(`
             SELECT b.*, u.name as driver_name, u.phone as driver_phone, v.number as vehicle_number, v.model,
+                   d.current_lat as driver_lat, d.current_lng as driver_lng,
                    r.id as review_id, r.rating as review_rating
             FROM bookings b
             LEFT JOIN drivers d ON b.driver_id = d.id

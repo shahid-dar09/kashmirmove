@@ -113,6 +113,14 @@ const ActiveRide = () => {
   
   const { routePoints } = useRoadRoute(waypoints);
 
+  const effectiveDriverPos = useMemo(() => {
+    if (driverPos) return driverPos;
+    if (ride?.driver_lat && ride?.driver_lng) {
+      return [Number(ride.driver_lat), Number(ride.driver_lng)];
+    }
+    return null;
+  }, [driverPos, ride?.driver_lat, ride?.driver_lng]);
+
   const fetchRideDetails = useCallback(async () => {
     try {
       const res = await api.get('/customer/bookings');
@@ -212,7 +220,7 @@ const ActiveRide = () => {
       {/* FULL SCREEN MAP BACKGROUND */}
       <div className="absolute inset-0 z-0">
             <MapContainer 
-              center={driverPos || (ride ? [Number(ride.pickup_lat), Number(ride.pickup_lng)] : [34.0837, 74.7973])} 
+              center={effectiveDriverPos || (ride ? [Number(ride.pickup_lat), Number(ride.pickup_lng)] : [34.0837, 74.7973])} 
               zoom={15} 
               style={{ height: '100%', width: '100%' }}
               zoomControl={false}
@@ -239,8 +247,8 @@ const ActiveRide = () => {
                 </>
               )}
 
-              {driverPos && <Marker position={driverPos} icon={driverIcon} />}
-              <RecenterMap position={driverPos} />
+              {effectiveDriverPos && <Marker position={effectiveDriverPos} icon={driverIcon} />}
+              <RecenterMap position={effectiveDriverPos} />
             </MapContainer>
       </div>
 

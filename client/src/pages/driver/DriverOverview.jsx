@@ -443,6 +443,18 @@ const DriverOverview = () => {
 
   const distToPickup = (effectiveDriverPos && pickup) ? calculateDistance(effectiveDriverPos, pickup) : null;
 
+  // Emit location updates dynamically when effectiveDriverPos changes (including fallbacks)
+  useEffect(() => {
+    if (activeRide && effectiveDriverPos && socketRef.current) {
+      console.log('DEBUG: Emitting live location update:', effectiveDriverPos);
+      socketRef.current.emit('update_location', {
+        bookingId: activeRide.id,
+        lat: effectiveDriverPos[0],
+        lng: effectiveDriverPos[1]
+      });
+    }
+  }, [activeRide?.id, effectiveDriverPos]);
+
   const isScheduledInFuture = activeRide?.scheduled_at && new Date(activeRide.scheduled_at) > new Date();
 
   if (loading) {

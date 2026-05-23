@@ -372,10 +372,10 @@ const BookRide = () => {
               <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">PICK <span className="text-primary">LOCATIONS</span></h3>
            </div>
 
-           {/* Mobile: form on top, map below. Desktop: side-by-side */}
-           <div className="flex flex-col-reverse lg:grid lg:grid-cols-[1fr_400px] gap-6 lg:gap-8 items-start">
+           {/* Mobile: map on top, form below. Desktop: side-by-side */}
+           <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] gap-6 lg:gap-8 items-start w-full">
              {/* MAP */}
-             <div className="h-[300px] sm:h-[420px] lg:h-[600px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
+             <div className="w-full h-[300px] sm:h-[420px] lg:h-[600px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
                <MapContainer center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }}>
                  <TileLayer
                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -398,7 +398,7 @@ const BookRide = () => {
              </div>
 
              {/* FORMS SIDEBAR */}
-             <div className="space-y-8">
+             <div className="w-full space-y-8">
                 {/* Pickup Form */}
                 <div className={`group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${bookingData.pickup ? 'border-primary bg-primary/5 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.15)]' : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5'}`}>
                   {bookingData.pickup && <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl" />}

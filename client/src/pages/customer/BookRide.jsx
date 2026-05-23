@@ -372,9 +372,10 @@ const BookRide = () => {
               <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">PICK <span className="text-primary">LOCATIONS</span></h3>
            </div>
 
-           <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 items-start">
+           {/* Mobile: form on top, map below. Desktop: side-by-side */}
+           <div className="flex flex-col-reverse lg:grid lg:grid-cols-[1fr_400px] gap-6 lg:gap-8 items-start">
              {/* MAP */}
-             <div className="h-[360px] sm:h-[600px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
+             <div className="h-[300px] sm:h-[420px] lg:h-[600px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
                <MapContainer center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }}>
                  <TileLayer
                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

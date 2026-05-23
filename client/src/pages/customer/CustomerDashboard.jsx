@@ -295,7 +295,7 @@ const CustomerDashboard = () => {
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500">Logistics Hub v2.0</span>
           </div>
-          <h2 className="text-4xl sm:text-7xl lg:text-8xl font-black mb-6 italic uppercase text-slate-900 dark:text-white leading-[0.95] sm:leading-[0.9] tracking-tighter">
+          <h2 className="text-3xl sm:text-6xl lg:text-8xl font-black mb-6 italic uppercase text-slate-900 dark:text-white leading-[0.95] sm:leading-[0.9] tracking-tighter">
             HELLO, <span className="text-gradient-primary pr-4">{user?.name} </span>
           </h2>
           <p className="text-lg sm:text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic max-w-xl">

@@ -746,7 +746,7 @@ const DriverOverview = () => {
               )}
               
               {routePoints.length >= 2 && (
-                <Polyline positions={routePoints} color="#f59e0b" weight={6} opacity={0.8} dashArray="10, 10" />
+                <Polyline positions={routePoints} color="#06b6d4" weight={6} opacity={0.8} dashArray="10, 10" />
               )}
               <MapAutoCenter driverPos={effectiveDriverPos} pickup={pickup} recenterTrigger={recenterTrigger} hasCenteredRef={hasCenteredRef} />
             </MapContainer>

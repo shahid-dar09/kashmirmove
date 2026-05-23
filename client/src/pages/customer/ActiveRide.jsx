@@ -236,7 +236,7 @@ const ActiveRide = () => {
               {routePoints.length > 0 && (
                 <Polyline 
                   positions={routePoints} 
-                  color="#F59E0B" 
+                  color="#06b6d4" 
                   weight={6} 
                   opacity={0.8} 
                   dashArray="10, 15"

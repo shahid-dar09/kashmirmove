@@ -50,6 +50,7 @@ const makeStopIcon = (num) => L.divIcon({
 
 const MapAutoCenter = ({ driverPos, pickup, recenterTrigger, hasCenteredRef }) => {
   const map = useMap();
+  const lastTriggered = useRef(0);
 
   useEffect(() => {
     // Initial centering
@@ -64,8 +65,9 @@ const MapAutoCenter = ({ driverPos, pickup, recenterTrigger, hasCenteredRef }) =
 
   // Manual recenter trigger
   useEffect(() => {
-    if (recenterTrigger > 0 && driverPos) {
+    if (recenterTrigger > lastTriggered.current && driverPos) {
       map.setView(driverPos, 15, { animate: true });
+      lastTriggered.current = recenterTrigger;
     }
   }, [recenterTrigger, driverPos, map]);
 

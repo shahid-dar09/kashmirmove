@@ -73,9 +73,9 @@ const LandingPage = () => {
     <div className="min-h-screen bg-midnight text-white selection:bg-primary/30 selection:text-primary overflow-x-hidden">
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-midnight/80 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-6'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
           <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="relative w-14 h-12 flex items-center justify-center overflow-visible">
+            <div className="relative w-11 h-10 sm:w-14 sm:h-12 flex items-center justify-center overflow-visible shrink-0">
                <div className="relative w-full h-full bg-primary rounded-xl flex items-center justify-center">
                   <div className="relative flex items-center justify-center w-full">
                     {/* Overlapping initial state, splitting on hover */}
@@ -84,7 +84,7 @@ const LandingPage = () => {
                   </div>
                </div>
             </div>
-            <span className="text-2xl font-display font-black italic tracking-tight uppercase pr-6">
+            <span className="text-xl sm:text-2xl font-display font-black italic tracking-tight uppercase sm:pr-6">
               Kashmir<span className="text-primary">Move</span>
             </span>
           </div>
@@ -115,30 +115,30 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] animate-pulse-slow" />
           <div className="absolute bottom-[10%] right-[-10%] w-[30%] h-[30%] bg-arctic/10 rounded-full blur-[100px] animate-pulse-slow delay-1000" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 overflow-visible">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 overflow-visible">
           <div className="text-center max-w-5xl mx-auto overflow-visible">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 animate-fade-in max-w-full">
               <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">Live in 10 Districts Across Kashmir</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 leading-snug">Live in 10 Districts Across Kashmir</span>
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-display font-black leading-[0.9] tracking-tight mb-8 uppercase italic animate-slide-up px-10 overflow-visible">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-display font-black leading-[0.95] sm:leading-[0.9] tracking-tight mb-6 sm:mb-8 uppercase italic animate-slide-up px-0 sm:px-10 overflow-visible">
               The Future of <span className="text-primary italic inline-block pr-4">Mobility</span> <br />
               In <span className="text-gradient-saffron inline-block pr-8">Kashmir</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-slate-400 font-medium max-w-2xl mx-auto mb-12 animate-slide-up animate-delay-100">
+            <p className="text-base sm:text-xl md:text-2xl text-slate-400 font-medium max-w-2xl mx-auto mb-10 sm:mb-12 animate-slide-up animate-delay-100">
               Reliable, secure, and instant ride-sharing for the valley. From daily commutes to logistic moves, we've got you covered.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-slide-up animate-delay-200">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6 animate-slide-up animate-delay-200">
               <button onClick={() => navigate('/login')} className="btn-modern-primary group px-10 py-5 text-sm uppercase tracking-[0.2em]">
                 Book Your Ride <ChevronRight className="group-hover:translate-x-1 transition-transform" size={18} />
               </button>
@@ -150,21 +150,21 @@ const LandingPage = () => {
         </div>
 
         {/* Floating Vehicle Mockup */}
-        <div className="mt-20 max-w-5xl mx-auto px-6 relative animate-slide-up animate-delay-300">
-          <div className="relative rounded-[40px] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-4">
-            <div className="aspect-video bg-midnight/40 rounded-[32px] border border-white/5 flex items-center justify-center overflow-hidden">
+        <div className="mt-12 sm:mt-20 max-w-5xl mx-auto px-4 sm:px-6 relative animate-slide-up animate-delay-300">
+          <div className="relative rounded-[28px] sm:rounded-[40px] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-2 sm:p-4">
+            <div className="aspect-[4/3] sm:aspect-video bg-midnight/40 rounded-[22px] sm:rounded-[32px] border border-white/5 flex items-center justify-center overflow-hidden">
                {/* Simplified Mockup UI */}
-               <div className="w-full h-full p-8 flex flex-col">
-                  <div className="flex justify-between items-center mb-8">
+               <div className="w-full h-full p-4 sm:p-8 flex flex-col">
+                  <div className="flex justify-between items-center mb-4 sm:mb-8 gap-3">
                      <div className="flex gap-2">
                         <div className="w-3 h-3 rounded-full bg-red-500" />
                         <div className="w-3 h-3 rounded-full bg-yellow-500" />
                         <div className="w-3 h-3 rounded-full bg-green-500" />
                      </div>
-                     <div className="px-4 py-2 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest">Active Pilots: 142</div>
+                     <div className="px-3 sm:px-4 py-2 bg-white/10 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest">Active Pilots: 142</div>
                   </div>
-                  <div className="flex-1 flex gap-8">
-                     <div className="w-1/3 space-y-4">
+                  <div className="flex-1 flex gap-3 sm:gap-8">
+                     <div className="hidden sm:block w-1/3 space-y-4">
                         <div className="h-12 bg-white/5 rounded-2xl" />
                         <div className="h-12 bg-white/5 rounded-2xl" />
                         <div className="h-24 bg-primary/20 rounded-2xl border border-primary/30" />
@@ -186,7 +186,7 @@ const LandingPage = () => {
 
       {/* Stats Bar */}
       <section className="py-12 border-y border-white/5 bg-white/[0.02]">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           <div className="text-center">
             <h4 className="text-4xl font-display font-black text-primary mb-1">2.5k+</h4>
             <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Rides Completed</p>
@@ -207,9 +207,9 @@ const LandingPage = () => {
       </section>
 
       {/* Features Grid */}
-      <section id="features" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-20">
+      <section id="features" className="py-20 sm:py-32 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="mb-12 sm:mb-20">
             <h2 className="text-4xl md:text-6xl font-display font-black uppercase italic mb-6">Premium <br /> <span className="text-primary">Features</span></h2>
             <p className="text-slate-400 font-medium max-w-xl">Designed for the unique landscape of the valley, providing seamless connectivity through technology.</p>
           </div>
@@ -231,9 +231,9 @@ const LandingPage = () => {
       </section>
 
       {/* How it Works */}
-      <section id="how-it-works" className="py-32 bg-white/[0.02] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-20">
+      <section id="how-it-works" className="py-20 sm:py-32 bg-white/[0.02] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center mb-12 sm:mb-20">
             <h2 className="text-4xl md:text-6xl font-display font-black uppercase italic mb-6">How It <span className="text-arctic">Works</span></h2>
             <p className="text-slate-400 font-medium max-w-xl mx-auto">Three simple steps to start your journey with KashmirMove.</p>
           </div>
@@ -258,9 +258,9 @@ const LandingPage = () => {
       </section>
 
       {/* CTA Footer */}
-      <section className="py-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="relative rounded-[48px] bg-gradient-to-br from-primary to-midnight-100 p-12 md:p-24 overflow-hidden text-center group">
+      <section className="py-20 sm:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="relative rounded-[28px] sm:rounded-[48px] bg-gradient-to-br from-primary to-midnight-100 p-6 sm:p-12 md:p-24 overflow-hidden text-center group">
              {/* Abstract Shapes */}
              <div className="absolute top-0 right-0 w-96 h-96 bg-arctic/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 group-hover:scale-125 transition-transform duration-1000" />
              <div className="absolute bottom-0 left-0 w-64 h-64 bg-saffron/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 group-hover:scale-125 transition-transform duration-1000" />
@@ -268,7 +268,7 @@ const LandingPage = () => {
              <div className="relative z-10 max-w-2xl mx-auto">
                 <h2 className="text-4xl md:text-6xl font-display font-black uppercase italic mb-8">Ready to <br /> Start Your <span className="text-arctic">Journey?</span></h2>
                 <p className="text-white/80 font-medium text-lg mb-12">Join thousands of riders and pilots moving Kashmir forward every day.</p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6">
                   <button onClick={() => navigate('/login')} className="btn-modern-primary px-12 py-5 text-sm uppercase tracking-widest font-black">Register as Rider</button>
                   <button className="btn-ghost border-white/20 text-white hover:bg-white/10 px-12 py-5 text-sm uppercase tracking-widest font-black">Register as Pilot</button>
                 </div>
@@ -279,7 +279,7 @@ const LandingPage = () => {
 
       {/* Simple Footer */}
       <footer className="py-12 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:row justify-between items-center gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
            <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="relative w-10 h-8 flex items-center justify-center overflow-visible">
                <div className="relative w-full h-full bg-primary rounded-lg flex items-center justify-center">

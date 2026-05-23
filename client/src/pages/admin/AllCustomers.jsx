@@ -83,7 +83,7 @@ const AllCustomers = () => {
              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
              <span className="section-label mb-0">Customer Intelligence</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-display font-black tracking-tighter italic uppercase leading-none text-slate-900 dark:text-ghost">
+          <h2 className="text-4xl sm:text-6xl font-display font-black tracking-tighter italic uppercase leading-tight sm:leading-none text-slate-900 dark:text-ghost">
             User <span className="text-gradient">Registry</span>
           </h2>
           <p className="text-slate-500 font-medium mt-4">Platform-wide customer profiles and wallet metrics.</p>
@@ -103,7 +103,7 @@ const AllCustomers = () => {
           <input 
             type="text" 
             placeholder="Search by name, email or phone..."
-            className="w-full h-16 pl-16 pr-8 bg-white dark:bg-obsidian-card border-2 border-slate-200 dark:border-white/10 rounded-[24px] focus:border-primary outline-none transition-all font-bold text-slate-700 dark:text-ghost shadow-premium"
+            className="w-full h-14 sm:h-16 pl-14 sm:pl-16 pr-5 sm:pr-8 bg-white dark:bg-obsidian-card border-2 border-slate-200 dark:border-white/10 rounded-[20px] sm:rounded-[24px] focus:border-primary outline-none transition-all font-bold text-slate-700 dark:text-ghost shadow-premium"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -111,7 +111,7 @@ const AllCustomers = () => {
         <div className="relative z-20">
            <button 
              onClick={() => setShowFilters(!showFilters)} 
-             className={`h-16 px-8 bg-white dark:bg-obsidian-card border-2 rounded-[24px] flex items-center gap-3 font-bold transition-all shadow-premium ${
+             className={`h-14 sm:h-16 w-full sm:w-auto px-6 sm:px-8 bg-white dark:bg-obsidian-card border-2 rounded-[20px] sm:rounded-[24px] flex items-center justify-center gap-3 font-bold transition-all shadow-premium ${
                statusFilter !== 'all' || showFilters 
                  ? 'border-primary text-primary' 
                  : 'border-slate-200 dark:border-white/10 text-slate-400 hover:border-primary hover:text-primary'
@@ -149,12 +149,12 @@ const AllCustomers = () => {
           {filteredCustomers.map((customer, i) => (
             <div 
               key={customer.id} 
-              className={`group bg-white dark:bg-obsidian-card rounded-[32px] p-8 border-2 border-slate-200 dark:border-white/10 shadow-premium hover:border-primary dark:hover:border-primary transition-all hover:translate-y-[-4px] animate-slide-up stagger-${(i % 5) + 1} flex flex-col h-full`}
+              className={`group bg-white dark:bg-obsidian-card rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 border-2 border-slate-200 dark:border-white/10 shadow-premium hover:border-primary dark:hover:border-primary transition-all hover:translate-y-[-4px] animate-slide-up stagger-${(i % 5) + 1} flex flex-col h-full`}
             >
                {/* Profile Identity Ledger */}
                <div className="mb-6">
-                  <div className="flex items-center gap-5 mb-6">
-                     <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20 shadow-inner group-hover:scale-110 transition-transform">
+                  <div className="flex items-center gap-4 sm:gap-5 mb-6">
+                     <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20 shadow-inner group-hover:scale-110 transition-transform shrink-0">
                        {customer.avatar_url ? (
                          <img src={`http://${window.location.hostname}:5000${customer.avatar_url}`} alt={customer.name} className="w-full h-full object-cover" />
                        ) : (

@@ -364,11 +364,11 @@ const SidebarLayout = () => {
         ${isCollapsed ? "md:ml-[80px]" : "md:ml-72"}`}
       >
         {/* ===== HEADER ===== */}
-        <header className="sticky top-0 z-40 bg-white/80 dark:bg-midnight/80 backdrop-blur-xl h-20 px-4 sm:px-8 flex items-center justify-between border-b border-slate-200/50 dark:border-white/5">
-          <div className="flex items-center gap-4">
+        <header className="sticky top-0 z-40 bg-white/80 dark:bg-midnight/80 backdrop-blur-xl h-16 sm:h-20 px-3 sm:px-8 flex items-center justify-between border-b border-slate-200/50 dark:border-white/5">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             <button
               onClick={() => setIsMobileOpen(true)}
-              className="p-3 rounded-2xl bg-white dark:bg-white/5 shadow-sm border border-slate-200 dark:border-white/10 md:hidden"
+              className="p-2.5 sm:p-3 rounded-2xl bg-white dark:bg-white/5 shadow-sm border border-slate-200 dark:border-white/10 md:hidden"
             >
               <Menu className="w-5 h-5 text-slate-600 dark:text-slate-300" />
             </button>
@@ -401,7 +401,7 @@ const SidebarLayout = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             {/* Active Ride Indicator */}
             {activeRide && (
               <Link
@@ -432,7 +432,7 @@ const SidebarLayout = () => {
               </button>
 
               {showNotifs && (
-                <div className="absolute right-0 mt-4 w-96 max-w-[calc(100vw-2rem)] bg-white dark:bg-obsidian-card rounded-[32px] shadow-premium border border-slate-200 dark:border-white/10 p-6 z-50 animate-scale-in origin-top-right">
+                <div className="fixed inset-x-3 top-20 sm:absolute sm:inset-x-auto sm:right-0 sm:top-auto sm:mt-4 sm:w-96 max-w-[calc(100vw-1.5rem)] bg-white dark:bg-obsidian-card rounded-[24px] sm:rounded-[32px] shadow-premium border border-slate-200 dark:border-white/10 p-4 sm:p-6 z-50 animate-scale-in origin-top-right">
                   <div className="flex items-center justify-between mb-6">
                     <div>
                       <h4 className="font-black text-sm uppercase tracking-[0.2em]">
@@ -517,7 +517,7 @@ const SidebarLayout = () => {
             </div>
 
             {/* Profile Terminal */}
-            <div className="flex items-center gap-4 pl-4 border-l border-slate-200 dark:border-white/10">
+            <div className="flex items-center gap-2 sm:gap-4 sm:pl-4 sm:border-l border-slate-200 dark:border-white/10">
               <div className="hidden lg:block text-right">
                 <p className="text-xs font-black uppercase tracking-widest leading-none mb-1">
                   {user?.name}
@@ -527,7 +527,7 @@ const SidebarLayout = () => {
                 </p>
               </div>
               <Link to="/profile" className="group relative">
-                <div className="w-11 h-11 rounded-[14px] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-black text-sm group-hover:scale-105 transition-all overflow-hidden">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-[14px] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-black text-sm group-hover:scale-105 transition-all overflow-hidden">
                   {user?.avatar_url ? (
                     <img
                       src={`http://${window.location.hostname}:5000${user.avatar_url}`}
@@ -545,7 +545,7 @@ const SidebarLayout = () => {
         </header>
 
         {/* ===== CONTENT ===== */}
-        <div className="flex-1 p-4 sm:p-6 lg:p-10 transition-all duration-500">
+        <div className="flex-1 p-3 sm:p-6 lg:p-10 transition-all duration-500">
           <div className="animate-fade-in">
             <Outlet />
           </div>
@@ -559,8 +559,8 @@ const SidebarLayout = () => {
             className="absolute inset-0 bg-obsidian/60 backdrop-blur-md animate-fade-in"
             onClick={() => setIsMobileOpen(false)}
           />
-          <aside className="absolute inset-y-0 left-0 w-[85%] max-w-[320px] bg-white dark:bg-midnight flex flex-col shadow-2xl animate-slide-in-left">
-            <div className="h-24 flex items-center justify-between px-8 border-b border-slate-200 dark:border-white/5">
+          <aside className="absolute inset-y-0 left-0 w-[88vw] max-w-[320px] bg-white dark:bg-midnight flex flex-col shadow-2xl animate-slide-in-left">
+            <div className="h-20 sm:h-24 flex items-center justify-between px-5 sm:px-8 border-b border-slate-200 dark:border-white/5">
               <div className="flex items-center gap-4 group cursor-pointer">
                 <div className="relative w-12 h-10 flex items-center justify-center shrink-0 overflow-visible transition-all duration-500">
                    <div className="relative w-full h-full bg-primary rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 shadow-sm group-hover:shadow-primary/30">

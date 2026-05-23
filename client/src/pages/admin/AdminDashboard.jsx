@@ -78,7 +78,7 @@ const AdminDashboard = () => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto space-y-12 animate-fade-in pb-20 pt-6">
+    <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12 animate-fade-in pb-20 pt-6 px-4 sm:px-0">
       
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10">
@@ -87,12 +87,12 @@ const AdminDashboard = () => {
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Live Systems Terminal</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl font-display font-black tracking-tighter italic uppercase leading-[0.85] text-slate-900 dark:text-white">
+          <h2 className="text-4xl sm:text-7xl font-display font-black tracking-tighter italic uppercase leading-[0.9] sm:leading-[0.85] text-slate-900 dark:text-white">
             FLEET <span className="text-primary">COMMAND</span>
           </h2>
           <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Real-time operational telemetry and global sector metrics.</p>
         </div>
-        <div className="flex gap-4 w-full lg:w-auto">
+        <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
            <button 
             onClick={() => {
               const csvContent = "data:text/csv;charset=utf-8," 
@@ -132,7 +132,7 @@ const AdminDashboard = () => {
           { label: 'Total Missions', value: stats?.total_trips || 0, icon: <CheckCircle size={28} />, color: 'emerald', growth: '2.1%' },
           { label: 'Gross Allotment', value: `₹${Math.round(stats?.total_revenue || 0)}`, icon: <DollarSign size={28} />, color: 'primary', growth: '12.5%', premium: true }
         ].map((item, idx) => (
-          <div key={idx} className={`relative overflow-hidden card-modern p-10 flex flex-col items-start transition-all duration-500 rounded-[3rem] ${
+          <div key={idx} className={`relative overflow-hidden card-modern p-6 sm:p-10 flex flex-col items-start transition-all duration-500 rounded-[2rem] sm:rounded-[3rem] ${
             item.premium 
             ? 'bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 border-primary/20' 
             : 'bg-white dark:bg-white/5 border-white/5'
@@ -161,11 +161,11 @@ const AdminDashboard = () => {
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div className="card-modern p-10 bg-white dark:bg-white/5 border-white/5 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+        <div className="card-modern p-6 sm:p-10 bg-white dark:bg-white/5 border-white/5 rounded-[2rem] sm:rounded-[4rem] shadow-2xl relative overflow-hidden group">
            <div className="absolute top-0 right-0 p-10 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity">
               <Activity size={120} />
            </div>
-           <div className="flex items-center justify-between mb-12 relative z-10">
+           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 sm:mb-12 relative z-10">
              <div>
                <div className="flex items-center gap-3 mb-2">
                   <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
@@ -213,11 +213,11 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="card-modern p-10 bg-white dark:bg-white/5 border-white/5 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+        <div className="card-modern p-6 sm:p-10 bg-white dark:bg-white/5 border-white/5 rounded-[2rem] sm:rounded-[4rem] shadow-2xl relative overflow-hidden group">
            <div className="absolute top-0 right-0 p-10 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity">
               <Target size={120} />
            </div>
-           <div className="flex items-center justify-between mb-12 relative z-10">
+           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 sm:mb-12 relative z-10">
              <div>
                <div className="flex items-center gap-3 mb-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
@@ -266,7 +266,7 @@ const AdminDashboard = () => {
 
       {/* Critical Status Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="card-modern p-10 bg-red-500/5 border-red-500/20 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+        <div className="card-modern p-6 sm:p-10 bg-red-500/5 border-red-500/20 rounded-[2rem] sm:rounded-[4rem] shadow-2xl relative overflow-hidden group">
            <div className="absolute -right-8 -top-8 opacity-[0.03] group-hover:opacity-10 transition-opacity">
               <AlertCircle size={150} />
            </div>
@@ -290,7 +290,7 @@ const AdminDashboard = () => {
            </div>
         </div>
 
-        <div className="card-modern p-10 bg-emerald-500/5 border-emerald-500/20 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+        <div className="card-modern p-6 sm:p-10 bg-emerald-500/5 border-emerald-500/20 rounded-[2rem] sm:rounded-[4rem] shadow-2xl relative overflow-hidden group">
            <div className="absolute -right-8 -top-8 opacity-[0.03] group-hover:opacity-10 transition-opacity">
               <ShieldCheck size={150} />
            </div>

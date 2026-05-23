@@ -269,18 +269,18 @@ const BookRide = () => {
   return (
     <div className="max-w-7xl mx-auto space-y-12 animate-fade-in pb-20 pt-6 px-4">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-10">
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Step {step} of 5</span>
           </div>
-          <h1 className="text-5xl sm:text-7xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.85]">
+          <h1 className="text-4xl sm:text-7xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85]">
             BOOK <span className="text-primary">RIDE</span>
           </h1>
         </div>
 
-        <div className="flex items-center gap-3 p-3 bg-white dark:bg-white/5 rounded-[2.5rem] border border-slate-200 dark:border-white/10 shadow-xl flex-wrap justify-center">
+        <div className="grid grid-cols-5 gap-2 sm:flex sm:items-center sm:gap-3 p-2 sm:p-3 bg-white dark:bg-white/5 rounded-[1.5rem] sm:rounded-[2.5rem] border border-slate-200 dark:border-white/10 shadow-xl w-full md:w-auto">
            {[1, 2, 3, 4, 5].map(s => (
              <div 
                key={s} 
@@ -334,14 +334,14 @@ const BookRide = () => {
               <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">SELECT <span className="text-primary">VEHICLE</span></h3>
            </div>
 
-           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {Object.entries(VEHICLE_TYPES).map(([type, vehicle]) => (
                 <button 
                   key={type}
                   onClick={() => handleVehicleSelect(type)}
-                  className="card-modern p-10 flex flex-col items-center text-center rounded-[3rem] transition-all duration-500 border bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/30"
+                  className="card-modern p-8 sm:p-10 flex flex-col items-center text-center rounded-[2rem] sm:rounded-[3rem] transition-all duration-500 border bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/30"
                 >
-                  <div className="w-24 h-24 rounded-[2.5rem] flex items-center justify-center transition-all mb-10 bg-slate-50 dark:bg-white/10 text-slate-400">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-center transition-all mb-8 sm:mb-10 bg-slate-50 dark:bg-white/10 text-slate-400">
                     {vehicle.icon}
                   </div>
                   
@@ -374,7 +374,7 @@ const BookRide = () => {
 
            <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 items-start">
              {/* MAP */}
-             <div className="h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
+             <div className="h-[360px] sm:h-[600px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
                <MapContainer center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }}>
                  <TileLayer
                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -399,7 +399,7 @@ const BookRide = () => {
              {/* FORMS SIDEBAR */}
              <div className="space-y-8">
                 {/* Pickup Form */}
-                <div className={`group p-8 rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${bookingData.pickup ? 'border-primary bg-primary/5 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.15)]' : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5'}`}>
+                <div className={`group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${bookingData.pickup ? 'border-primary bg-primary/5 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.15)]' : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5'}`}>
                   {bookingData.pickup && <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl" />}
                   
                   <div className="flex items-center justify-between mb-6">
@@ -454,7 +454,7 @@ const BookRide = () => {
                 </div>
 
                 {/* Drop Form */}
-                <div className={`group p-8 rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${bookingData.drop ? 'border-electric-cyan bg-electric-cyan/5 shadow-[0_20px_50px_-12px_rgba(34,211,238,0.15)]' : bookingData.pickup ? 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5' : 'border-slate-100 dark:border-white/5 bg-slate-100 dark:bg-white/10 opacity-30 cursor-not-allowed'}`}>
+                <div className={`group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${bookingData.drop ? 'border-electric-cyan bg-electric-cyan/5 shadow-[0_20px_50px_-12px_rgba(34,211,238,0.15)]' : bookingData.pickup ? 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5' : 'border-slate-100 dark:border-white/5 bg-slate-100 dark:bg-white/10 opacity-30 cursor-not-allowed'}`}>
                   {bookingData.drop && <div className="absolute top-0 right-0 w-32 h-32 bg-electric-cyan/5 rounded-full -mr-16 -mt-16 blur-3xl" />}
                   
                   <div className="flex items-center justify-between mb-6">
@@ -560,11 +560,11 @@ const BookRide = () => {
                     onClick={() => handleSelectDriver(driver)}
                     className="card-modern p-8 rounded-[2.5rem] border-2 transition-all bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/30 hover:shadow-lg"
                   >
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 text-center sm:text-left">
                       <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
                         <Users size={32} />
                       </div>
-                      <div className="flex-1 text-left">
+                      <div className="flex-1 text-center sm:text-left">
                         <h4 className="text-lg font-black text-slate-900 dark:text-white mb-1">{driver.name}</h4>
                         <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest mb-2">{driver.vehicle_type}</p>
                         <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-black">⭐ {Number(driver.rating || 4.8).toFixed(1)} • {Number(driver.distance || 0).toFixed(1)} km away</p>
@@ -593,14 +593,14 @@ const BookRide = () => {
               <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">CONFIRM <span className="text-primary">BOOKING</span></h3>
            </div>
 
-           <div className="relative overflow-hidden rounded-[4rem] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 border border-white/10 p-12 sm:p-20 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.6)]">
+           <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[4rem] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 border border-white/10 p-6 sm:p-20 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.6)]">
               <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
               
-              <div className="relative z-10 space-y-16">
+              <div className="relative z-10 space-y-10 sm:space-y-16">
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-10">
                      <div className="text-center sm:text-left">
                         <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/30 mb-4 italic">Total Fare</p>
-                        <h4 className="text-6xl sm:text-7xl font-display font-black italic tracking-tighter text-white leading-none">₹{bookingData.fare}</h4>
+                        <h4 className="text-5xl sm:text-7xl font-display font-black italic tracking-tighter text-white leading-none">₹{bookingData.fare}</h4>
                      </div>
                      <div className="text-center sm:text-right space-y-4">
                         <div className="p-6 bg-white/5 rounded-[2rem] border border-white/10 space-y-4 min-w-[200px]">
@@ -615,7 +615,7 @@ const BookRide = () => {
                      </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 pt-16 border-t border-white/5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 pt-10 sm:pt-16 border-t border-white/5">
                      <div className="flex items-center gap-6">
                         <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary shadow-2xl">
                            <Car size={32} />
@@ -641,7 +641,7 @@ const BookRide = () => {
                      </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 pt-16 border-t border-white/5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 pt-10 sm:pt-16 border-t border-white/5">
                      <div className="flex items-center gap-6">
                         <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-amber-500 shadow-2xl">
                            <MapPin size={32} />
@@ -664,7 +664,7 @@ const BookRide = () => {
               </div>
            </div>
            
-           <div className="flex gap-8">
+           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
               <button onClick={() => setStep(4)} className="flex-1 py-8 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[2.5rem] font-black uppercase text-[10px] tracking-[0.3em] hover:bg-slate-200 dark:hover:bg-white/10 transition-all flex items-center justify-center gap-4 text-slate-500">
                  <ArrowLeft size={20} /> BACK
               </button>

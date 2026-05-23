@@ -479,13 +479,13 @@ const DriverOverview = () => {
       )}
 
       {/* Profile Header */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 px-4 sm:px-0 pt-6">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 lg:gap-10 px-4 sm:px-0 pt-6">
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500">Fleet ID: {driverStats?.id || 'ALPHA-01'}</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl font-display font-black italic uppercase leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
+          <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
             PILOT <span className="text-primary">CONSOLE</span>
           </h2>
           <div className="flex items-center gap-3 py-2">
@@ -508,7 +508,7 @@ const DriverOverview = () => {
           )}
           <button 
             onClick={toggleStatus}
-            className={`h-20 px-12 rounded-[2rem] text-sm font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-4 shadow-2xl ${
+            className={`min-h-16 sm:h-20 px-6 sm:px-12 rounded-[1.5rem] sm:rounded-[2rem] text-xs sm:text-sm font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-4 shadow-2xl ${
               online 
                 ? 'bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white' 
                 : 'bg-primary text-obsidian shadow-glow-saffron'
@@ -523,7 +523,7 @@ const DriverOverview = () => {
       {/* ===== ACTIVE TRIP BANNER & MAP ===== */}
       {activeRide && (
         <div className="space-y-8 animate-fade-in px-4 sm:px-0">
-          <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 text-white p-8 sm:p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/10">
+          <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[3rem] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 text-white p-5 sm:p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/10">
             {/* Decorative Background Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
             <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-electric-cyan/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -547,7 +547,7 @@ const DriverOverview = () => {
                        isScheduledInFuture ? 'UPCOMING APPOINTMENT' : 'EN ROUTE TO ORIGIN'}
                     </span>
                   </div>
-                  <h3 className="font-display font-black italic uppercase text-3xl sm:text-4xl tracking-tighter leading-none mb-4">
+                  <h3 className="font-display font-black italic uppercase text-2xl sm:text-4xl tracking-tighter leading-none mb-4">
                     {activeRide.customer_name || 'IDENTIFIED UNIT'}
                   </h3>
                   {activeRide.customer_phone && (
@@ -589,7 +589,7 @@ const DriverOverview = () => {
               </div>
 
               {/* Allotment + Command Actions */}
-              <div className="flex flex-col items-center lg:items-end justify-between w-full lg:w-72 gap-8 pt-8 lg:pt-0 lg:pl-10 lg:border-l border-white/5">
+              <div className="flex flex-col items-stretch lg:items-end justify-between w-full lg:w-72 gap-8 pt-8 lg:pt-0 lg:pl-10 lg:border-l border-white/5">
                 <div className="text-center lg:text-right w-full">
                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-3 italic">Operational Allotment</p>
                   <p className="text-5xl sm:text-6xl font-display font-black italic tracking-tighter text-white leading-none">₹{Math.round(activeRide.fare)}</p>
@@ -640,7 +640,7 @@ const DriverOverview = () => {
                     </div>
                   ) : (
                     <div className="w-full space-y-3">
-                       <div className="flex gap-2">
+                       <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-2">
                           <div className="flex-1 h-16 bg-white/5 border border-white/20 rounded-2xl px-4 flex items-center justify-center group-focus-within:border-primary transition-colors">
                              <Shield size={18} className="text-primary mr-3" />
                              <input 
@@ -676,7 +676,7 @@ const DriverOverview = () => {
             </div>
           </div>
           {/* Real-time Map View */}
-          <div className="card-modern p-2 overflow-hidden h-[450px] sm:h-[600px] relative border-white/5 bg-obsidian shadow-2xl">
+          <div className="card-modern p-2 overflow-hidden h-[360px] sm:h-[600px] relative border-white/5 bg-obsidian shadow-2xl">
             <MapContainer 
               key={activeRide.id}
               center={driverPos || pickup || [34.0837, 74.7973]} 
@@ -719,8 +719,8 @@ const DriverOverview = () => {
               )}
             </MapContainer>
             
-            <div className="absolute top-8 left-8 z-[1000] flex flex-col gap-4">
-              <div className="bg-obsidian/80 backdrop-blur-xl p-6 rounded-3xl border border-white/10 shadow-2xl min-w-[220px] pointer-events-none">
+            <div className="absolute top-3 left-3 right-3 sm:top-8 sm:left-8 sm:right-auto z-[1000] flex flex-col gap-3 sm:gap-4">
+              <div className="bg-obsidian/80 backdrop-blur-xl p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl sm:min-w-[220px] pointer-events-none">
                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4 italic">Operational Telemetry</p>
                  <div className="space-y-4">
                    <div className="flex items-center justify-between">
@@ -772,7 +772,7 @@ const DriverOverview = () => {
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6 italic">Today's Allotment</p>
           <div className="flex items-baseline gap-2">
-            {loading ? <Skeleton width="120px" height="3rem" /> : <span className="text-5xl sm:text-6xl font-display font-black italic tracking-tighter text-slate-900 dark:text-white leading-none">₹{driverStats?.today_earnings || 0}</span>}
+            {loading ? <Skeleton width="120px" height="3rem" /> : <span className="text-4xl sm:text-6xl font-display font-black italic tracking-tighter text-slate-900 dark:text-white leading-none">₹{driverStats?.today_earnings || 0}</span>}
           </div>
           <div className="mt-8 flex items-center gap-3">
              <div className="px-3 py-1 bg-emerald-500/10 rounded-full flex items-center gap-2">
@@ -789,7 +789,7 @@ const DriverOverview = () => {
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6 italic">Total Missions</p>
           <div className="flex items-baseline gap-3">
-            <span className="text-5xl sm:text-6xl font-display font-black italic tracking-tighter text-slate-900 dark:text-white leading-none">{driverStats?.total_trips || 0}</span>
+            <span className="text-4xl sm:text-6xl font-display font-black italic tracking-tighter text-slate-900 dark:text-white leading-none">{driverStats?.total_trips || 0}</span>
             <span className="text-xl font-black italic text-slate-400 uppercase tracking-tighter">Nodes</span>
           </div>
           <p className="mt-8 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Verified career operations logged</p>
@@ -799,7 +799,7 @@ const DriverOverview = () => {
           <div className="absolute inset-0 bg-primary/5 blur-[80px] pointer-events-none"></div>
           <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40 mb-6 italic">Pilot Efficiency</p>
           <div className="flex items-center gap-6 relative z-10">
-            <span className="text-6xl sm:text-7xl font-display font-black italic leading-none tracking-tighter">{driverStats?.rating || '5.0'}</span>
+            <span className="text-5xl sm:text-7xl font-display font-black italic leading-none tracking-tighter">{driverStats?.rating || '5.0'}</span>
             <div className="space-y-2">
               <div className="flex text-primary">
                 {[1,2,3,4,5].map(i => <Star key={i} size={18} fill="currentColor" />)}
@@ -897,7 +897,7 @@ const DriverOverview = () => {
              <div className="w-10 h-1 bg-primary rounded-full"></div>
              <h3 className="text-2xl font-display font-black italic uppercase tracking-tight">ACTIVE <span className="text-primary">CARRIER</span></h3>
           </div>
-          <div className="card-modern p-10 flex flex-col sm:flex-row items-center gap-10 group bg-white dark:bg-white/5 border-white/5 overflow-hidden relative">
+          <div className="card-modern p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 group bg-white dark:bg-white/5 border-white/5 overflow-hidden relative">
             <div className="absolute -right-6 -bottom-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
                <Truck size={120} className="-rotate-12" />
             </div>

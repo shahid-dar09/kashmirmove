@@ -124,13 +124,13 @@ const WaitingRide = () => {
   if (!booking) return null;
 
   return (
-    <div className="max-w-4xl mx-auto min-h-[90vh] flex flex-col items-center justify-center py-12 animate-fade-in px-6 text-center font-display relative overflow-hidden">
+    <div className="max-w-4xl mx-auto min-h-[90vh] flex flex-col items-center justify-center py-10 sm:py-12 animate-fade-in px-4 sm:px-6 text-center font-display relative overflow-hidden">
        
        {/* Background Grid - Tactical Overhaul */}
        <div className="absolute inset-0 pointer-events-none opacity-[0.02] dark:opacity-[0.05] bg-[linear-gradient(rgba(0,0,0,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.2)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
        
        {/* High-Fidelity Tactical Radar */}
-       <div className="relative w-80 h-80 sm:w-[450px] sm:h-[450px] mb-20 flex items-center justify-center">
+       <div className="relative w-72 h-72 sm:w-[450px] sm:h-[450px] mb-12 sm:mb-20 flex items-center justify-center">
           {/* Radar Background Rings */}
           <div className="absolute inset-0 border border-primary/5 rounded-full"></div>
           <div className="absolute inset-12 border border-primary/5 rounded-full"></div>
@@ -158,13 +158,13 @@ const WaitingRide = () => {
              </div>
              
              {/* Tactical Marker Icons (Faux detected pilots) */}
-             <div className="absolute -top-6 -right-16 animate-float">
+             <div className="absolute -top-8 right-0 sm:-top-6 sm:-right-16 animate-float">
                 <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 px-5 py-2 rounded-2xl backdrop-blur-xl shadow-2xl">
                    <Target className="text-emerald-500 shadow-glow-emerald/50" size={16} />
                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 italic">Node Identified</span>
                 </div>
              </div>
-             <div className="absolute -bottom-10 -left-20 animate-float" style={{ animationDelay: '2s' }}>
+             <div className="absolute -bottom-12 left-0 sm:-bottom-10 sm:-left-20 animate-float" style={{ animationDelay: '2s' }}>
                 <div className="flex items-center gap-3 bg-primary/10 border border-primary/20 px-5 py-2 rounded-2xl backdrop-blur-xl shadow-2xl">
                    <Activity className="text-primary shadow-glow-saffron/50" size={16} />
                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary italic">Syncing Grid...</span>
@@ -174,8 +174,8 @@ const WaitingRide = () => {
        </div>
 
        {/* Content Text */}
-       <div className="relative z-10 max-w-2xl space-y-10">
-          <div className="flex items-center justify-center gap-4">
+       <div className="relative z-10 max-w-2xl space-y-8 sm:space-y-10">
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
              <div className="w-10 h-1 bg-primary/20 rounded-full"></div>
              <p className="text-[11px] font-black uppercase tracking-[0.5em] text-primary italic animate-pulse">
                 {statusText}
@@ -184,7 +184,7 @@ const WaitingRide = () => {
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-6xl sm:text-8xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.85]">
+            <h2 className="text-4xl sm:text-8xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85]">
               SCANNING FOR <br/> <span className="text-primary">PILOTS</span>
             </h2>
             <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 font-bold italic leading-relaxed max-w-lg mx-auto uppercase tracking-tighter opacity-80">
@@ -217,7 +217,7 @@ const WaitingRide = () => {
              <button 
                onClick={cancelRequest}
                disabled={cancelling}
-               className="group flex items-center gap-6 px-12 py-6 rounded-[2.5rem] bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 font-black uppercase tracking-[0.3em] text-[10px] hover:bg-red-500 hover:text-white dark:hover:bg-red-500 transition-all shadow-2xl border border-white/5"
+               className="group flex w-full sm:w-auto items-center justify-center gap-4 sm:gap-6 px-6 sm:px-12 py-5 sm:py-6 rounded-[1.5rem] sm:rounded-[2.5rem] bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 font-black uppercase tracking-[0.3em] text-[10px] hover:bg-red-500 hover:text-white dark:hover:bg-red-500 transition-all shadow-2xl border border-white/5"
              >
                {cancelling ? <Loader2 size={20} className="animate-spin" /> : <X size={20} className="group-hover:rotate-90 transition-transform" />}
                ABORT MISSION REQUEST

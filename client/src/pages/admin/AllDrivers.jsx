@@ -139,7 +139,7 @@ const AllDrivers = () => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto space-y-12 animate-fade-in pb-20 pt-6">
+    <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12 animate-fade-in pb-20 pt-6">
       
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 px-4 sm:px-0">
@@ -148,13 +148,13 @@ const AllDrivers = () => {
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Fleet Management</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl font-display font-black tracking-tighter italic uppercase leading-[0.85] text-slate-900 dark:text-white">
+          <h2 className="text-4xl sm:text-7xl font-display font-black tracking-tighter italic uppercase leading-[0.9] sm:leading-[0.85] text-slate-900 dark:text-white">
             PARTNER <span className="text-primary">CATALOG</span>
           </h2>
           <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Full registry and operational monitoring of all transport units.</p>
         </div>
         
-        <div className="flex gap-4 w-full lg:w-auto">
+        <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
            <button 
             onClick={() => {
               const headers = ["Name", "Email", "Phone", "Status", "Vehicle Model", "Vehicle Number", "Rating", "Trips", "Earnings"];
@@ -199,7 +199,7 @@ const AllDrivers = () => {
           <input 
             type="text" 
             placeholder="Search by name, vehicle class or unit number..." 
-            className="w-full h-20 pl-20 pr-10 bg-white dark:bg-white/5 border-2 border-slate-100 dark:border-white/10 rounded-[2.5rem] focus:border-primary outline-none transition-all font-black text-lg text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:font-normal italic shadow-xl"
+            className="w-full h-16 sm:h-20 pl-14 sm:pl-20 pr-6 sm:pr-10 bg-white dark:bg-white/5 border-2 border-slate-100 dark:border-white/10 rounded-[1.5rem] sm:rounded-[2.5rem] focus:border-primary outline-none transition-all font-black text-base sm:text-lg text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:font-normal italic shadow-xl"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -207,7 +207,7 @@ const AllDrivers = () => {
         <div className="relative z-20">
            <button 
              onClick={() => setShowFilters(!showFilters)} 
-             className={`h-20 px-10 rounded-[2rem] border-2 flex items-center gap-4 font-black uppercase tracking-widest text-xs transition-all shadow-xl ${
+             className={`h-16 sm:h-20 w-full sm:w-auto px-6 sm:px-10 rounded-[1.5rem] sm:rounded-[2rem] border-2 flex items-center justify-center gap-4 font-black uppercase tracking-widest text-xs transition-all shadow-xl ${
                statusFilter !== 'all' || showFilters 
                  ? 'bg-primary border-primary text-obsidian shadow-glow-saffron' 
                  : 'bg-white dark:bg-white/5 border-slate-100 dark:border-white/10 text-slate-500 hover:border-primary hover:text-primary'
@@ -243,14 +243,14 @@ const AllDrivers = () => {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-4 sm:px-0">
         {filteredDrivers.map((driver) => (
-          <div key={driver.driver_id} className="group animate-slide-up bg-white dark:bg-obsidian border-white/5 rounded-[4rem] p-10 shadow-2xl relative overflow-hidden flex flex-col h-full hover:border-primary/40 transition-all">
+          <div key={driver.driver_id} className="group animate-slide-up bg-white dark:bg-obsidian border-white/5 rounded-[2rem] sm:rounded-[4rem] p-6 sm:p-10 shadow-2xl relative overflow-hidden flex flex-col h-full hover:border-primary/40 transition-all">
             <div className="absolute -right-10 -top-10 opacity-[0.02] group-hover:opacity-[0.06] transition-opacity">
                <Shield size={200} />
             </div>
             
             <div className="relative z-10 flex flex-col h-full">
-              <div className="flex items-center gap-6 mb-10">
-                 <div className="w-20 h-20 rounded-[2rem] bg-slate-100 dark:bg-white/10 border border-white/5 flex items-center justify-center overflow-hidden shadow-xl group-hover:scale-110 transition-transform">
+               <div className="flex items-center gap-5 sm:gap-6 mb-8 sm:mb-10">
+                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[1.5rem] sm:rounded-[2rem] bg-slate-100 dark:bg-white/10 border border-white/5 flex items-center justify-center overflow-hidden shadow-xl group-hover:scale-110 transition-transform shrink-0">
                    {driver.avatar_url ? (
                      <img src={`http://${window.location.hostname}:5000${driver.avatar_url}`} alt="" className="w-full h-full object-cover" />
                    ) : (
@@ -270,7 +270,7 @@ const AllDrivers = () => {
  
                <div className="space-y-3 mb-10 flex-1">
                  {/* Fleet Unit */}
-                 <div className="flex items-center justify-between bg-slate-50 dark:bg-white/5 px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all">
+                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50 dark:bg-white/5 px-5 sm:px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all">
                     <div className="flex items-center gap-3 text-slate-400">
                        <Truck size={14} />
                        <span className="text-[9px] font-black uppercase tracking-widest italic">Fleet Unit</span>
@@ -282,7 +282,7 @@ const AllDrivers = () => {
                  </div>
 
                  {/* Vehicle Class */}
-                 <div className="flex items-center justify-between bg-slate-50 dark:bg-white/5 px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all">
+                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50 dark:bg-white/5 px-5 sm:px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all">
                     <div className="flex items-center gap-3 text-slate-400">
                        <Zap size={14} className="text-primary" />
                        <span className="text-[9px] font-black uppercase tracking-widest italic">Vehicle Class</span>
@@ -293,7 +293,7 @@ const AllDrivers = () => {
                  </div>
 
                  {/* Voice Link */}
-                 <div className="flex items-center justify-between bg-slate-50 dark:bg-white/5 px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all">
+                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50 dark:bg-white/5 px-5 sm:px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all">
                     <div className="flex items-center gap-3 text-slate-400">
                        <Phone size={14} className="text-emerald-500" />
                        <span className="text-[9px] font-black uppercase tracking-widest italic">Voice Link</span>
@@ -304,7 +304,7 @@ const AllDrivers = () => {
                  </div>
 
                  {/* Secure Mail */}
-                 <div className="flex items-center justify-between bg-slate-50 dark:bg-white/5 px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all min-w-0">
+                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50 dark:bg-white/5 px-5 sm:px-6 py-3.5 rounded-2xl border border-transparent hover:border-white/5 transition-all min-w-0">
                     <div className="flex items-center gap-3 text-slate-400 shrink-0">
                        <Mail size={14} className="text-blue-500" />
                        <span className="text-[9px] font-black uppercase tracking-widest italic">Secure Mail</span>
@@ -334,7 +334,7 @@ const AllDrivers = () => {
                  </div>
               </div>
 
-              <div className="pt-8 border-t border-slate-100 dark:border-white/5 grid grid-cols-2 gap-4">
+              <div className="pt-8 border-t border-slate-100 dark:border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-4">
                  <button 
                   onClick={() => openContact(driver)}
                   className="py-5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[1.5rem] font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 dark:hover:bg-white/10 transition-all flex items-center justify-center gap-3 text-slate-500 dark:text-white"
@@ -354,7 +354,7 @@ const AllDrivers = () => {
       </div>
 
       {filteredDrivers.length === 0 && (
-        <div className="py-40 text-center card-modern bg-white dark:bg-white/5 border-white/5 rounded-[4rem]">
+        <div className="py-24 sm:py-40 px-4 text-center card-modern bg-white dark:bg-white/5 border-white/5 rounded-[2rem] sm:rounded-[4rem]">
            <Filter size={64} className="mx-auto mb-8 opacity-10 text-slate-400" />
            <h3 className="text-3xl font-display font-black italic uppercase tracking-tight text-slate-900 dark:text-white mb-3">No Units Located</h3>
            <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">No partners match your current filter parameters.</p>
@@ -472,10 +472,10 @@ const AllDrivers = () => {
 
       {showDetailsModal && selectedDriver && createPortal(
         <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-8 bg-black/85 backdrop-blur-sm animate-fade-in overflow-hidden">
-           <div className="w-full max-w-6xl bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 rounded-[4rem] shadow-[0_50px_200px_-20px_rgba(0,0,0,0.9)] border border-white/10 overflow-hidden animate-slide-up relative flex flex-col max-h-[90vh]">
+           <div className="w-full max-w-6xl bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 rounded-[2rem] sm:rounded-[4rem] shadow-[0_50px_200px_-20px_rgba(0,0,0,0.9)] border border-white/10 overflow-hidden animate-slide-up relative flex flex-col max-h-[90vh]">
               <button 
                 onClick={() => setShowDetailsModal(false)}
-                className="absolute top-6 right-6 z-[60] w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-red-500 transition-all shadow-2xl"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[60] w-10 h-10 sm:w-12 sm:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-red-500 transition-all shadow-2xl"
               >
                 <X size={20} />
               </button>
@@ -558,7 +558,7 @@ const AllDrivers = () => {
                              <div className="w-10 h-1 bg-primary rounded-full"></div>
                              <h5 className="text-[11px] font-black uppercase tracking-[0.4em] text-white/30 italic">Registered Fleet Unit</h5>
                           </div>
-                          <div className="p-10 bg-white/5 rounded-[3rem] border border-white/5 shadow-2xl flex flex-col sm:flex-row justify-between items-center gap-10 hover:border-primary/20 transition-all group">
+                          <div className="p-6 sm:p-10 bg-white/5 rounded-[2rem] sm:rounded-[3rem] border border-white/5 shadow-2xl flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-10 hover:border-primary/20 transition-all group">
                              <div className="flex items-center gap-8">
                                 <div className="w-24 h-24 bg-primary/10 text-primary rounded-[2rem] flex items-center justify-center shadow-inner group-hover:scale-105 transition-all">
                                    <Truck size={48} />
@@ -583,7 +583,7 @@ const AllDrivers = () => {
                           <div className="w-10 h-1 bg-emerald-500 rounded-full"></div>
                           <h5 className="text-[11px] font-black uppercase tracking-[0.4em] text-white/30 italic">Clearance Protocol</h5>
                        </div>
-                       <div className="p-8 bg-white/5 rounded-[3rem] border border-white/5 shadow-2xl space-y-6">
+                       <div className="p-6 sm:p-8 bg-white/5 rounded-[2rem] sm:rounded-[3rem] border border-white/5 shadow-2xl space-y-6">
                           {['license', 'rc', 'insurance'].map((type) => {
                             const doc = driverDocs.find(d => d.document_type === type);
                             const label = type === 'license' ? 'Driving License' : type === 'rc' ? 'Vehicle RC' : 'Vehicle Insurance';
@@ -615,7 +615,7 @@ const AllDrivers = () => {
                           })}
                        </div>
 
-                       <div className={`p-10 rounded-[3rem] border shadow-2xl relative overflow-hidden group ${selectedDriver.status === 'suspended' ? 'bg-emerald-500/5 border-emerald-500/10' : 'bg-red-500/5 border-red-500/10'}`}>
+                       <div className={`p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border shadow-2xl relative overflow-hidden group ${selectedDriver.status === 'suspended' ? 'bg-emerald-500/5 border-emerald-500/10' : 'bg-red-500/5 border-red-500/10'}`}>
                           <div className="absolute right-0 top-0 p-8 opacity-[0.05]">
                              <ShieldAlert size={80} />
                           </div>

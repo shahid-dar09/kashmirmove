@@ -51,7 +51,7 @@ const RegisterCustomer = () => {
   };
 
   return (
-    <div className="h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-hidden font-display">
+    <div className="min-h-screen lg:h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-y-auto lg:overflow-hidden font-display">
       
       {/* Sidebar Info Panel */}
       <div className="hidden lg:flex flex-col justify-between p-12 bg-[#0B0C14] border-r border-white/5 h-full overflow-hidden select-none">
@@ -95,17 +95,17 @@ const RegisterCustomer = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
+      <div className="flex-1 flex flex-col p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
         
         {/* Top Navigation */}
-        <div className="flex justify-between items-center mb-16 relative z-10">
+        <div className="flex justify-between items-center gap-4 mb-8 sm:mb-16 relative z-10">
            <button onClick={() => navigate('/')} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors group">
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> EXIT
            </button>
            
-           <div className="flex items-center gap-8">
+           <div className="flex items-center justify-end gap-3 sm:gap-8 flex-wrap">
               <Link to="/login" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">LOGIN</Link>
-              <div className="relative px-6 py-2 bg-electric-cyan/10 border border-electric-cyan/20 rounded-full">
+              <div className="relative px-4 sm:px-6 py-2 bg-electric-cyan/10 border border-electric-cyan/20 rounded-full">
                  <span className="text-[10px] font-black uppercase tracking-widest text-electric-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]">RIDER</span>
                  <div className="absolute inset-0 rounded-full bg-electric-cyan/5 animate-pulse"></div>
               </div>
@@ -114,16 +114,16 @@ const RegisterCustomer = () => {
         </div>
 
         {/* Content Body */}
-        <div className="w-full max-w-[600px] m-auto py-12 relative z-10">
-           <div className="text-left mb-10">
-              <h1 className="text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
+        <div className="w-full max-w-[600px] m-auto py-8 sm:py-12 relative z-10">
+           <div className="text-left mb-8 sm:mb-10">
+              <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
                 ENROLL AS<br/><span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">RIDER</span>
               </h1>
               <p className="text-slate-400 font-medium italic text-base">Begin your journey with the valley's premium transport network.</p>
            </div>
 
            {/* Form Container */}
-           <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[2.5rem] p-10 relative">
+           <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[1.5rem] sm:rounded-[2.5rem] p-5 sm:p-10 relative">
               
               <form onSubmit={handleSubmit}>
                  <div className="space-y-6">
@@ -177,7 +177,7 @@ const RegisterCustomer = () => {
                        </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                        <div className="space-y-2">
                           <label className="text-[9px] font-black uppercase tracking-widest text-slate-500 ml-2">PASSWORD</label>
                           <div className="relative group/field">
@@ -230,7 +230,7 @@ const RegisterCustomer = () => {
               </form>
 
               <div className="mt-10">
-                 <div className="flex items-center gap-4 mb-8">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-8">
                     <div className="h-px bg-white/5 flex-1"></div>
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">NEXUS GATE</span>
                     <div className="h-px bg-white/5 flex-1"></div>

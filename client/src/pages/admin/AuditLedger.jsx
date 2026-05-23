@@ -75,7 +75,7 @@ const AuditLedger = () => {
              <div className="w-12 h-1 bg-amber-500 rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-amber-500 italic">Platform Governance</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl font-display font-black italic uppercase leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
+          <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
             AUDIT <span className="text-primary">LEDGER</span>
           </h2>
           <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Immutable operational logs and system-wide state changes.</p>
@@ -88,7 +88,7 @@ const AuditLedger = () => {
           <input 
             type="text" 
             placeholder="Search mission logs, action protocols or targets..."
-            className="w-full h-20 pl-20 pr-10 bg-white dark:bg-white/5 border-2 border-slate-100 dark:border-white/10 rounded-[2.5rem] focus:border-primary outline-none transition-all font-black text-lg text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:font-normal italic shadow-xl"
+            className="w-full h-16 sm:h-20 pl-14 sm:pl-20 pr-5 sm:pr-10 bg-white dark:bg-white/5 border-2 border-slate-100 dark:border-white/10 rounded-[1.5rem] sm:rounded-[2.5rem] focus:border-primary outline-none transition-all font-black text-base sm:text-lg text-slate-900 dark:text-white placeholder:text-slate-400 placeholder:font-normal italic shadow-xl"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -111,7 +111,7 @@ const AuditLedger = () => {
             </div>
           ))
         ) : filteredLogs.length === 0 ? (
-          <div className="py-40 text-center card-modern bg-white dark:bg-obsidian border-white/5 rounded-[3.5rem] shadow-2xl">
+          <div className="py-24 sm:py-40 px-4 text-center card-modern bg-white dark:bg-obsidian border-white/5 rounded-[2rem] sm:rounded-[3.5rem] shadow-2xl">
             <div className="w-24 h-24 bg-slate-100 dark:bg-white/5 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 opacity-20">
                <History size={48} className="text-slate-400" />
             </div>
@@ -126,14 +126,14 @@ const AuditLedger = () => {
             return (
               <div 
                 key={log.id}
-                className={`group relative bg-white dark:bg-obsidian border border-slate-200/50 dark:border-white/5 rounded-[2.5rem] p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.01] animate-fade-in border-l-4 ${styles.border}`}
+                className={`group relative bg-white dark:bg-obsidian border border-slate-200/50 dark:border-white/5 rounded-[1.5rem] sm:rounded-[2.5rem] p-5 sm:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.01] animate-fade-in border-l-4 ${styles.border}`}
                 style={{ animationDelay: `${idx * 40}ms` }}
               >
                 {/* Main Card Flex Row */}
                 <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 xl:gap-8">
                   
                   {/* Left Column: Timeline Entry (Time/Date) */}
-                  <div className="flex items-center gap-4 shrink-0 min-w-[140px]">
+                  <div className="flex items-center gap-4 shrink-0 sm:min-w-[140px]">
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${styles.dot}`}>
                       <Clock size={20} />
                     </div>
@@ -149,7 +149,7 @@ const AuditLedger = () => {
 
                   {/* Middle Left: Action Protocol Badge */}
                   <div className="shrink-0 xl:min-w-[200px]">
-                    <span className={`pl-5 pr-7 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] italic border-2 flex items-center justify-center w-fit gap-2 ${styles.badge}`}>
+                    <span className={`pl-4 sm:pl-5 pr-5 sm:pr-7 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] italic border-2 flex items-center justify-center w-full sm:w-fit gap-2 ${styles.badge}`}>
                       {log.action.toUpperCase().includes('SUSPEND') || log.action.toUpperCase().includes('REJECT') ? (
                         <ShieldAlert size={14} />
                       ) : (
@@ -173,7 +173,7 @@ const AuditLedger = () => {
                   </div>
 
                   {/* Right-most: Admin Signature & Details Toggle */}
-                  <div className="flex items-center justify-between xl:justify-end gap-6 shrink-0 border-t border-slate-100 dark:border-white/5 xl:border-t-0 pt-6 xl:pt-0">
+                  <div className="flex items-center justify-between xl:justify-end gap-4 sm:gap-6 shrink-0 border-t border-slate-100 dark:border-white/5 xl:border-t-0 pt-6 xl:pt-0">
                     <div className="text-left xl:text-right min-w-0 shrink">
                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1.5 italic">Admin Signature</p>
                       <p className="text-xs font-black text-slate-900 dark:text-white uppercase italic tracking-tight">
@@ -212,28 +212,28 @@ const AuditLedger = () => {
                           
                           {/* Event signature info block */}
                           <div className="space-y-4">
-                            <div className="flex justify-between items-center border-b border-slate-200/50 dark:border-white/5 pb-4">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-slate-200/50 dark:border-white/5 pb-4">
                               <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider italic">Protocol Event ID</span>
                               <span className="text-xs font-mono font-black text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-lg">
                                 #{String(log.id).padStart(5, '0')}
                               </span>
                             </div>
 
-                            <div className="flex justify-between items-center border-b border-slate-200/50 dark:border-white/5 pb-4">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-slate-200/50 dark:border-white/5 pb-4">
                               <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider italic">Action Code</span>
                               <span className="text-xs font-black uppercase italic text-slate-900 dark:text-white">
                                 {log.action.replace(/_/g, ' ')}
                               </span>
                             </div>
 
-                            <div className="flex justify-between items-center border-b border-slate-200/50 dark:border-white/5 pb-4">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-slate-200/50 dark:border-white/5 pb-4">
                               <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider italic">Operator Sig</span>
                               <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                                 {log.admin_name || 'System'} (ID: {log.admin_id})
                               </span>
                             </div>
 
-                            <div className="flex justify-between items-center border-b border-slate-200/50 dark:border-white/5 pb-4">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-slate-200/50 dark:border-white/5 pb-4">
                               <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider italic">Target Signature</span>
                               <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                                 {log.target_name} ({log.target_type})
@@ -304,7 +304,7 @@ const AuditLedger = () => {
 
       {/* Operational Summary Node */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-         <div className="card-modern p-10 bg-white dark:bg-white/5 border-white/5 rounded-[3rem] flex flex-col justify-between group">
+         <div className="card-modern p-6 sm:p-10 bg-white dark:bg-white/5 border-white/5 rounded-[2rem] sm:rounded-[3rem] flex flex-col justify-between group">
             <div className="flex items-center justify-between mb-10">
                <div className="w-14 h-14 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <Shield size={28} />
@@ -319,7 +319,7 @@ const AuditLedger = () => {
             </div>
          </div>
 
-         <div className="card-modern p-10 bg-white dark:bg-white/5 border-white/5 rounded-[3rem] flex flex-col justify-between group">
+         <div className="card-modern p-6 sm:p-10 bg-white dark:bg-white/5 border-white/5 rounded-[2rem] sm:rounded-[3rem] flex flex-col justify-between group">
             <div className="flex items-center justify-between mb-10">
                <div className="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center shadow-lg">
                   <Activity size={28} />
@@ -334,7 +334,7 @@ const AuditLedger = () => {
             </div>
          </div>
 
-         <div className="card-modern p-10 bg-white dark:bg-white/5 border-white/5 rounded-[3rem] flex flex-col justify-between group">
+         <div className="card-modern p-6 sm:p-10 bg-white dark:bg-white/5 border-white/5 rounded-[2rem] sm:rounded-[3rem] flex flex-col justify-between group">
             <div className="flex items-center justify-between mb-10">
                <div className="w-14 h-14 bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <History size={28} />

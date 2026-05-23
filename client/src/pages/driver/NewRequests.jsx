@@ -65,13 +65,13 @@ const NewRequests = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12 animate-fade-in pb-20 pt-6">
+    <div className="max-w-4xl mx-auto space-y-10 sm:space-y-12 animate-fade-in pb-20 pt-6 px-4 sm:px-0">
       <div className="space-y-4">
         <div className="flex items-center gap-4">
            <div className="w-12 h-1 bg-primary rounded-full"></div>
            <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Sector Intelligence</span>
         </div>
-        <h2 className="text-5xl sm:text-6xl font-display font-black italic uppercase leading-none tracking-tighter text-slate-900 dark:text-white">
+        <h2 className="text-4xl sm:text-6xl font-display font-black italic uppercase leading-none tracking-tighter text-slate-900 dark:text-white">
           MISSION <span className="text-primary">ACQUISITION</span>
         </h2>
         <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Available deployments in your current operating zone.</p>
@@ -93,10 +93,10 @@ const NewRequests = () => {
                  <Target size={120} />
               </div>
               
-              <div className="p-8 sm:p-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-10">
+              <div className="p-5 sm:p-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-6 sm:gap-10">
                 <div className="flex-1 space-y-8 w-full">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                    <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                        <span className="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-black rounded-full uppercase tracking-[0.2em] border border-primary/20 shadow-glow-saffron/10">
                          {req.vehicle_type || 'Standard'}
                        </span>
@@ -104,7 +104,7 @@ const NewRequests = () => {
                          MISSION ID: #{req.id}
                        </span>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 italic">Est. Allotment</p>
                       <p className="text-4xl font-display font-black text-primary italic tracking-tighter">₹{Math.round(req.fare)}</p>
                     </div>
@@ -131,7 +131,7 @@ const NewRequests = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-8 pt-6 border-t border-slate-100 dark:border-white/5">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 pt-6 border-t border-slate-100 dark:border-white/5">
                     <div className="flex items-center gap-2.5 text-slate-400 group-hover:text-primary transition-colors">
                       <Clock size={16} />
                       <span className="text-[10px] font-black uppercase tracking-widest">{new Date(req.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} Uplink</span>

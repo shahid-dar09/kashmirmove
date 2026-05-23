@@ -88,7 +88,7 @@ const RegisterDriver = () => {
   };
 
   return (
-    <div className="h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-hidden font-display">
+    <div className="min-h-screen lg:h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-y-auto lg:overflow-hidden font-display">
       
       {/* Sidebar Info Panel */}
       <div className="hidden lg:flex flex-col justify-between p-12 pr-20 bg-[#0B0C14] border-r border-white/5 h-full select-none relative">
@@ -129,18 +129,18 @@ const RegisterDriver = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
+      <div className="flex-1 flex flex-col p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
         
         {/* Top Navigation */}
-        <div className="flex justify-between items-center mb-16 relative z-10">
+        <div className="flex justify-between items-center gap-4 mb-8 sm:mb-16 relative z-10">
            <button onClick={() => step === 2 ? setStep(1) : navigate('/')} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors group">
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> {step === 2 ? 'BACK' : 'EXIT'}
            </button>
            
-           <div className="flex items-center gap-8">
+           <div className="flex items-center justify-end gap-3 sm:gap-8 flex-wrap">
               <Link to="/login" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">LOGIN</Link>
               <Link to="/register" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">RIDER</Link>
-              <div className="relative px-6 py-2 bg-electric-purple/10 border border-electric-purple/20 rounded-full">
+              <div className="relative px-4 sm:px-6 py-2 bg-electric-purple/10 border border-electric-purple/20 rounded-full">
                  <span className="text-[10px] font-black uppercase tracking-widest text-electric-purple shadow-[0_0_15px_rgba(139,92,246,0.2)]">PILOT</span>
                  <div className="absolute inset-0 rounded-full bg-electric-purple/5 animate-pulse"></div>
               </div>
@@ -148,23 +148,23 @@ const RegisterDriver = () => {
         </div>
 
         {/* Content Body */}
-        <div className="w-full max-w-[650px] m-auto py-12 relative z-10">
-           <div className="text-center mb-16">
-              <h1 className="text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
+        <div className="w-full max-w-[650px] m-auto py-8 sm:py-12 relative z-10">
+           <div className="text-center mb-10 sm:mb-16">
+              <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
                 PILOT <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">ENROLLMENT</span>
               </h1>
               <p className="text-slate-400 font-medium italic text-base mt-4">Elevate your status. Command the roads.</p>
            </div>
 
            {/* Form Container */}
-           <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[40px] p-12 relative overflow-hidden">
-              <div className="absolute top-12 right-12 flex gap-1">
+           <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[1.5rem] sm:rounded-[40px] p-5 sm:p-12 relative overflow-hidden">
+              <div className="absolute top-6 right-6 sm:top-12 sm:right-12 flex gap-1">
                  <div className={`w-8 h-1 ${step >= 1 ? 'bg-electric-purple' : 'bg-white/10'} rounded-full transition-colors`}></div>
                  <div className={`w-8 h-1 ${step >= 2 ? 'bg-electric-cyan' : 'bg-white/10'} rounded-full transition-colors`}></div>
               </div>
               
               <div className="relative z-10 mb-12">
-                 <h3 className="text-3xl font-black italic uppercase tracking-tighter mb-2">
+                 <h3 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tighter mb-2">
                    PHASE <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan px-1">{step === 1 ? '01' : '02'}</span>
                  </h3>
                  <p className="text-slate-500 font-medium italic text-sm">
@@ -244,7 +244,7 @@ const RegisterDriver = () => {
                  ) : (
                    /* STEP 2: VEHICLE & DOCS */
                    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                          <div className="space-y-3">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4 opacity-60">VEHICLE TYPE</label>
                             <div className="relative">
@@ -277,7 +277,7 @@ const RegisterDriver = () => {
                          </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                          <div className="space-y-3">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4 opacity-60">VEHICLE NUMBER</label>
                             <div className="relative">

@@ -347,10 +347,10 @@ const Profile = () => {
 
   return (
     <>
-      <div className="max-w-6xl mx-auto space-y-10 animate-fade-in">
+      <div className="max-w-6xl mx-auto space-y-8 sm:space-y-10 animate-fade-in px-4 sm:px-0">
       {/* Page Title */}
       <div>
-        <h2 className="text-4xl font-display font-black tracking-tight mb-2 uppercase italic">
+        <h2 className="text-3xl sm:text-4xl font-display font-black tracking-tight mb-2 uppercase italic">
           Account <span className="text-primary">Command</span>
         </h2>
         <p className="text-slate-500 font-medium">
@@ -361,13 +361,13 @@ const Profile = () => {
       {/* Phase 3: Pilot Intelligence (Analytics) */}
       {user?.role === 'driver' && analytics && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 card-modern p-8 flex flex-col min-h-[400px]">
-            <div className="flex items-center justify-between mb-8">
+          <div className="lg:col-span-2 card-modern p-5 sm:p-8 flex flex-col min-h-[400px]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
               <div>
                 <h4 className="text-2xl font-display font-black uppercase italic">Financial <span className="text-primary">Pulse</span></h4>
                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">7-Day Earnings Trend</p>
               </div>
-              <div className="p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center gap-3">
+              <div className="p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center gap-3 w-full sm:w-auto justify-center">
                 <TrendingUp size={20} />
                 <span className="font-black text-lg">₹{analytics.summary?.total_earnings || '0.00'}</span>
               </div>
@@ -466,7 +466,7 @@ const Profile = () => {
       <div className="w-full flex flex-col lg:flex-row gap-8 items-stretch">
         <div className={`w-full ${user?.role === 'driver' ? 'grid grid-cols-1 lg:grid-cols-2 gap-8' : 'flex-1 max-w-2xl'}`}>
           {/* Personal Console */}
-          <div className="card-modern p-8 flex flex-col h-full">
+          <div className="card-modern p-5 sm:p-8 flex flex-col h-full">
             <div className="flex flex-col items-center text-center">
               <div className="relative group cursor-pointer mb-6">
                 <input 
@@ -598,19 +598,19 @@ const Profile = () => {
                 </form>
               ) : (
                 <>
-                  <div className="flex items-center justify-between group">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 group">
                     <div className="flex items-center gap-4 text-slate-500 font-medium">
                       <Mail size={18} /> Email
                     </div>
-                    <span className="font-bold group-hover:text-primary transition-colors">
+                    <span className="font-bold group-hover:text-primary transition-colors break-all sm:text-right">
                       {user?.email}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between group">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 group">
                     <div className="flex items-center gap-4 text-slate-500 font-medium">
                       <Phone size={18} /> Phone
                     </div>
-                    <span className="font-bold group-hover:text-primary transition-colors">
+                    <span className="font-bold group-hover:text-primary transition-colors break-all sm:text-right">
                       {user?.phone ? (
                         <a href={`tel:${user.phone}`}>{user.phone}</a>
                       ) : "Not set"}
@@ -618,25 +618,25 @@ const Profile = () => {
                   </div>
                   {user.role === "driver" && (
                     <>
-                      <div className="flex items-center justify-between group">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 group">
                         <div className="flex items-center gap-4 text-slate-500 font-medium">
                           <Settings size={18} /> Vehicle
                         </div>
-                        <span className="font-bold group-hover:text-primary transition-colors">
+                        <span className="font-bold group-hover:text-primary transition-colors break-all sm:text-right">
                           {driverInfo ? (driverInfo.vehicle_model || "Not set") : "Loading..."}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between group">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 group">
                         <div className="flex items-center gap-4 text-slate-500 font-medium">
                           <CreditCard size={18} /> Plate
                         </div>
-                        <span className="font-bold group-hover:text-primary transition-colors">
+                        <span className="font-bold group-hover:text-primary transition-colors break-all sm:text-right">
                           {driverInfo ? (driverInfo.vehicle_plate || "Not set") : "Loading..."}
                         </span>
                       </div>
                     </>
                   )}
-                  <div className="flex items-center justify-between group">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 group">
                     <div className="flex items-center gap-4 text-slate-500 font-medium">
                       <ShieldCheck size={18} /> Identity
                     </div>
@@ -672,7 +672,7 @@ const Profile = () => {
 
           {/* Side-by-side SOS for Drivers */}
           {user?.role === 'driver' && (
-            <div className="card-modern p-8 flex flex-col h-full border-primary/20">
+            <div className="card-modern p-5 sm:p-8 flex flex-col h-full border-primary/20">
               <div className="flex items-center justify-between mb-8">
                 <div>
                   <h4 className="text-2xl font-display font-black uppercase italic">Safety <span className="text-secondary">Network</span></h4>
@@ -688,7 +688,7 @@ const Profile = () => {
 
               <div className="flex-1 space-y-6">
                 {isAddingContact && (
-                  <form onSubmit={handleAddContact} className="p-6 bg-slate-50 dark:bg-white/5 rounded-[32px] border border-primary/20 animate-slide-up space-y-4">
+                  <form onSubmit={handleAddContact} className="p-4 sm:p-6 bg-slate-50 dark:bg-white/5 rounded-[24px] sm:rounded-[32px] border border-primary/20 animate-slide-up space-y-4">
                     <input 
                       type="text" placeholder="Contact Name" 
                       className="w-full bg-white dark:bg-obsidian border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm font-bold shadow-inner"
@@ -724,7 +724,7 @@ const Profile = () => {
                     emergencyContacts.map(contact => (
                       <div 
                         key={contact.id} 
-                        className="flex items-center justify-between p-5 bg-slate-50 dark:bg-white/5 rounded-[32px] group hover:border-primary border border-transparent transition-all cursor-pointer"
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 sm:p-5 bg-slate-50 dark:bg-white/5 rounded-[24px] sm:rounded-[32px] group hover:border-primary border border-transparent transition-all cursor-pointer"
                         onClick={() => window.location.href = `tel:${contact.phone}`}
                       >
                         <div className="flex items-center gap-4">
@@ -817,7 +817,7 @@ const Profile = () => {
                     savedLocations.map(loc => (
                       <div 
                         key={loc.id} 
-                        className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-white/5 group cursor-pointer hover:border-primary border border-transparent transition-all"
+                      className="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-white/5 group cursor-pointer hover:border-primary border border-transparent transition-all"
                         onClick={() => navigate('/customer/book', { state: { prefilledDestination: loc } })}
                       >
                         <div className="flex items-center gap-3">
@@ -839,7 +839,7 @@ const Profile = () => {
                               console.error(err);
                             }
                           }}
-                          className="text-[10px] font-bold text-red-500 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest"
+                        className="text-[10px] font-bold text-red-500 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity uppercase tracking-widest shrink-0"
                         >
                           Remove
                         </button>
@@ -1160,7 +1160,7 @@ const Profile = () => {
                 <p className="text-[10px] font-black uppercase text-primary tracking-[0.2em] mt-1">{user?.role} Pilot</p>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl">
                   <p className="text-[9px] font-black text-slate-400 uppercase mb-1">Status</p>
                   <p className="text-xs font-bold text-emerald-500">Active</p>

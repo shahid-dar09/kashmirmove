@@ -207,7 +207,7 @@ const ActiveRide = () => {
   if (!ride) return null;
 
   return (
-    <div className="relative h-[calc(100vh-80px)] w-full overflow-hidden animate-fade-in font-display">
+    <div className="relative h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] w-full overflow-hidden animate-fade-in font-display">
       
       {/* FULL SCREEN MAP BACKGROUND */}
       <div className="absolute inset-0 z-0">
@@ -245,8 +245,8 @@ const ActiveRide = () => {
       </div>
 
       {/* TOP FLOATING STATUS BAR */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 w-[90%] max-w-lg">
-        <div className="card-modern p-4 bg-white/90 dark:bg-obsidian/90 backdrop-blur-xl border-white/20 rounded-[2rem] shadow-2xl flex items-center gap-6">
+      <div className="absolute top-4 sm:top-8 left-1/2 -translate-x-1/2 z-10 w-[calc(100%-1.5rem)] sm:w-[90%] max-w-lg">
+        <div className="card-modern p-3 sm:p-4 bg-white/90 dark:bg-obsidian/90 backdrop-blur-xl border-white/20 rounded-[1.5rem] sm:rounded-[2rem] shadow-2xl flex items-center gap-3 sm:gap-6">
            <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary shrink-0 animate-pulse">
               <Navigation size={24} />
            </div>
@@ -268,7 +268,7 @@ const ActiveRide = () => {
       </div>
 
       {/* FLOATING CHAT BUBBLE (TOP RIGHT) */}
-      <div className="absolute top-8 right-8 z-[9999]">
+      <div className="absolute top-24 right-3 sm:top-8 sm:right-8 z-[9999]">
         <button 
           onClick={() => { setChatOpen(true); setUnreadCount(0); }}
           className="w-16 h-16 bg-white dark:bg-obsidian rounded-3xl border-2 border-white/20 shadow-2xl flex items-center justify-center text-slate-600 dark:text-white hover:bg-primary hover:text-obsidian transition-all hover:scale-110 active:scale-95 group relative"
@@ -294,7 +294,7 @@ const ActiveRide = () => {
       )}
 
       {/* BOTTOM CONTROL CARD */}
-      <div className={`absolute bottom-0 left-0 right-0 z-20 transition-all duration-700 ease-in-out px-4 sm:px-8 pb-8 ${isMinimized ? 'translate-y-[80%]' : 'translate-y-0'}`}>
+      <div className={`absolute bottom-0 left-0 right-0 z-20 transition-all duration-700 ease-in-out px-2 sm:px-8 pb-4 sm:pb-8 ${isMinimized ? 'translate-y-[80%]' : 'translate-y-0'}`}>
          <div className="max-w-5xl mx-auto">
             {/* MINIMIZE TOGGLE */}
             <div className="flex justify-center mb-[-20px] relative z-30">
@@ -309,14 +309,14 @@ const ActiveRide = () => {
                </button>
             </div>
 
-            <div className="card-modern bg-white/95 dark:bg-obsidian/95 backdrop-blur-2xl border-2 border-white/20 rounded-[3.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden">
+            <div className="card-modern bg-white/95 dark:bg-obsidian/95 backdrop-blur-2xl border-2 border-white/20 rounded-[2rem] sm:rounded-[3.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden">
                {/* Main Card Content */}
-               <div className="p-8 sm:p-12">
-                  <div className="flex flex-col lg:flex-row items-center gap-10">
+               <div className="p-5 sm:p-12">
+                  <div className="flex flex-col lg:flex-row items-start sm:items-center gap-6 sm:gap-10">
                      {/* Driver Profile */}
-                     <div className="flex items-center gap-8 flex-1 w-full">
+                     <div className="flex items-center gap-5 sm:gap-8 flex-1 w-full">
                         <div className="relative shrink-0">
-                           <div className="w-24 h-24 sm:w-32 sm:h-32 bg-slate-100 dark:bg-white/5 rounded-[2.5rem] border-4 border-primary/20 overflow-hidden shadow-2xl group">
+                           <div className="w-20 h-20 sm:w-32 sm:h-32 bg-slate-100 dark:bg-white/5 rounded-[2rem] sm:rounded-[2.5rem] border-4 border-primary/20 overflow-hidden shadow-2xl group">
                               <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${ride.driver_name}`} alt="Pilot" className="w-full h-full scale-110 group-hover:scale-125 transition-transform duration-500" />
                            </div>
                            <div className="absolute -bottom-2 -right-2 bg-primary text-obsidian p-2.5 rounded-2xl shadow-glow-saffron border-4 border-white dark:border-obsidian">
@@ -325,13 +325,13 @@ const ActiveRide = () => {
                         </div>
                         <div className="min-w-0">
                            <div className="flex flex-wrap items-center gap-3 mb-3">
-                              <h3 className="text-3xl sm:text-4xl font-display font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate">{ride.driver_name}</h3>
+                              <h3 className="text-2xl sm:text-4xl font-display font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate">{ride.driver_name}</h3>
                               <div className="flex gap-2">
                                  <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-widest rounded-full italic">TOP RATED</span>
                                  <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-black uppercase tracking-widest rounded-full italic">VERIFIED PILOT</span>
                               </div>
                            </div>
-                           <div className="flex items-center gap-6">
+                           <div className="flex flex-wrap items-center gap-3 sm:gap-6">
                               <div className="flex items-center gap-2">
                                  <Star size={14} className="text-primary" fill="currentColor" />
                                  <span className="text-sm font-black text-slate-600 dark:text-slate-300">5.0</span>
@@ -362,7 +362,7 @@ const ActiveRide = () => {
                </div>
 
                {/* Card Footer Metrics */}
-               <div className="bg-slate-50/50 dark:bg-white/5 border-t border-slate-100 dark:border-white/5 p-6 sm:px-12 flex flex-col sm:flex-row justify-between items-center gap-6">
+               <div className="bg-slate-50/50 dark:bg-white/5 border-t border-slate-100 dark:border-white/5 p-5 sm:px-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                   <div className="flex items-center gap-4">
                      <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/5 flex items-center justify-center text-slate-400 shadow-sm border border-white/10">
                         <LocateFixed size={20} />

@@ -56,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-hidden font-display">
+    <div className="min-h-screen lg:h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-y-auto lg:overflow-hidden font-display">
       
       {/* Sidebar Info Panel */}
       <div className="hidden lg:flex flex-col justify-between p-12 bg-[#0B0C14] border-r border-white/5 h-full overflow-hidden select-none">
@@ -101,16 +101,16 @@ const Login = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
+      <div className="flex-1 flex flex-col p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
         
         {/* Top Navigation */}
-        <div className="flex justify-between items-center mb-16 relative z-10">
+        <div className="flex justify-between items-center gap-4 mb-8 sm:mb-16 relative z-10">
            <button onClick={() => navigate('/')} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors group">
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> EXIT
            </button>
            
-           <div className="flex items-center gap-8">
-              <div className="relative px-6 py-2 bg-electric-purple/10 border border-electric-purple/20 rounded-full">
+           <div className="flex items-center justify-end gap-3 sm:gap-8 flex-wrap">
+              <div className="relative px-4 sm:px-6 py-2 bg-electric-purple/10 border border-electric-purple/20 rounded-full">
                  <span className="text-[10px] font-black uppercase tracking-widest text-electric-purple shadow-[0_0_15px_rgba(139,92,246,0.2)]">LOGIN</span>
                  <div className="absolute inset-0 rounded-full bg-electric-purple/5 animate-pulse"></div>
               </div>
@@ -120,16 +120,16 @@ const Login = () => {
         </div>
 
         {/* Content Body */}
-        <div className="w-full max-w-[480px] m-auto py-12 relative z-10">
-           <div className="text-center mb-10">
-              <h1 className="text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
+        <div className="w-full max-w-[480px] m-auto py-8 sm:py-12 relative z-10">
+           <div className="text-center mb-8 sm:mb-10">
+              <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
                 WELCOME<span className="text-electric-purple px-1">BACK</span>
               </h1>
               <p className="text-slate-400 font-medium italic text-base">Authorize your session to continue your journey.</p>
            </div>
 
            {/* Form Container */}
-           <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[2.5rem] p-10 relative">
+           <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[1.5rem] sm:rounded-[2.5rem] p-5 sm:p-10 relative">
               
               <form onSubmit={handleSubmit}>
                  <div className="space-y-6">
@@ -204,7 +204,7 @@ const Login = () => {
               </form>
 
               <div className="mt-10">
-                 <div className="flex items-center gap-4 mb-8">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-8">
                     <div className="h-px bg-white/5 flex-1"></div>
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">NEXUS GATE</span>
                     <div className="h-px bg-white/5 flex-1"></div>

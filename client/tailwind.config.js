@@ -31,6 +31,7 @@ export default {
           light: '#22D3EE',
           dark: '#0891B2',
         },
+        rose: '#F43F5E',
         electric: {
           cyan: '#00F5FF',
           blue: '#3B82F6',
@@ -85,6 +86,8 @@ export default {
         'glow-saffron': '0 0 30px rgba(245, 158, 11, 0.4)',
         'glow-emerald': '0 0 30px rgba(16, 185, 129, 0.4)',
         'glow-cyan': '0 0 30px rgba(6, 182, 212, 0.4)',
+        'glow-red': '0 0 30px rgba(239, 68, 68, 0.35)',
+        'glow-amber': '0 0 30px rgba(245, 158, 11, 0.35)',
         'premium': '0 32px 64px -12px rgba(0, 0, 0, 0.5)',
       },
     },

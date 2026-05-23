@@ -237,11 +237,11 @@ const CustomerDashboard = () => {
               <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none"></div>
               <div className="absolute -right-20 -top-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] group-hover:bg-primary/20 transition-all duration-1000"></div>
               
-              <div className="relative z-10 p-6 sm:p-10 flex flex-col lg:row items-center justify-between gap-8">
-                 <div className="flex items-center gap-6 sm:gap-8 w-full lg:w-auto">
+              <div className="relative z-10 p-5 sm:p-10 flex flex-col lg:flex-row items-start sm:items-center justify-between gap-8">
+                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 w-full lg:w-auto">
                     <div className="relative shrink-0">
-                       <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-[0_0_40px_rgba(245,158,11,0.4)] animate-glow-pulse">
-                          <Activity size={36} className="text-obsidian" />
+                       <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary rounded-2xl flex items-center justify-center shadow-[0_0_40px_rgba(245,158,11,0.4)] animate-glow-pulse">
+                          <Activity size={32} className="text-obsidian" />
                        </div>
                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-white dark:bg-obsidian rounded-xl border-2 border-primary flex items-center justify-center">
                           <span className="w-3 h-3 bg-primary rounded-full animate-ping"></span>
@@ -268,7 +268,7 @@ const CustomerDashboard = () => {
                     </div>
                  </div>
 
-                 <div className="flex items-center gap-4 w-full lg:w-auto">
+                 <div className="flex items-center gap-3 sm:gap-4 w-full lg:w-auto">
                     <button 
                       onClick={() => navigate(
                         activeRideData.status === 'pending' ? `/customer/waiting/${activeRideData.id}` :
@@ -289,13 +289,13 @@ const CustomerDashboard = () => {
       )}
 
       {/* Welcome Header */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pt-4">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-10 pt-4">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-6">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500">Logistics Hub v2.0</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black mb-6 italic uppercase text-slate-900 dark:text-white leading-[0.9] tracking-tighter">
+          <h2 className="text-4xl sm:text-7xl lg:text-8xl font-black mb-6 italic uppercase text-slate-900 dark:text-white leading-[0.95] sm:leading-[0.9] tracking-tighter">
             HELLO, <span className="text-gradient-primary pr-4">{user?.name} </span>
           </h2>
           <p className="text-lg sm:text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic max-w-xl">
@@ -305,7 +305,7 @@ const CustomerDashboard = () => {
         
         <Link 
           to="/customer/book" 
-          className="group relative h-20 sm:h-24 px-10 sm:px-14 flex items-center justify-center gap-4 bg-primary rounded-[2rem] overflow-hidden shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all duration-300"
+          className="group relative min-h-16 sm:h-24 w-full lg:w-auto px-6 sm:px-14 flex items-center justify-center gap-4 bg-primary rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all duration-300"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           <span className="text-lg sm:text-xl font-black uppercase italic tracking-widest text-obsidian relative z-10">Initialize Booking</span>
@@ -323,8 +323,8 @@ const CustomerDashboard = () => {
         </div>
 
         <div className={`relative overflow-hidden group transition-all duration-700 ease-out border border-slate-200 dark:border-white/10 rounded-[32px] bg-white dark:bg-obsidian-light shadow-premium ${showMap ? 'h-[400px] sm:h-[550px]' : 'h-32'}`}>
-          <div className="absolute top-6 left-6 z-[1000]">
-             <div className="bg-white/80 dark:bg-obsidian/80 backdrop-blur-xl px-5 py-3 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl flex items-center gap-4 group/info">
+          <div className="absolute top-3 left-3 right-16 sm:top-6 sm:left-6 sm:right-auto z-[1000]">
+             <div className="bg-white/80 dark:bg-obsidian/80 backdrop-blur-xl px-3 sm:px-5 py-3 rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl flex items-center gap-3 sm:gap-4 group/info">
                 <div className="relative">
                    <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary group-hover/info:rotate-12 transition-transform">
                       <Zap size={20} fill="currentColor" />
@@ -340,7 +340,7 @@ const CustomerDashboard = () => {
              </div>
           </div>
 
-          <div className="absolute top-6 right-6 z-[1000]">
+          <div className="absolute top-3 right-3 sm:top-6 sm:right-6 z-[1000]">
              <button 
                 onClick={() => setShowMap(!showMap)}
                 className="w-12 h-12 flex items-center justify-center bg-white/80 dark:bg-obsidian/80 backdrop-blur-xl rounded-2xl border border-slate-200 dark:border-white/10 shadow-2xl hover:border-primary/50 hover:text-primary transition-all active:scale-95"
@@ -397,7 +397,7 @@ const CustomerDashboard = () => {
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Dispatch History</p>
           <div className="flex items-baseline gap-4">
             {loading ? <Skeleton width="100px" height="4rem" /> : 
-              <span className="text-6xl font-black italic tracking-tighter text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+              <span className="text-5xl sm:text-6xl font-black italic tracking-tighter text-slate-900 dark:text-white group-hover:text-primary transition-colors">
                 {stats.totalRides}
               </span>
             }
@@ -440,7 +440,7 @@ const CustomerDashboard = () => {
 
       {/* Recent Activity - Tactical List */}
       <div className="space-y-8">
-        <div className="flex items-center justify-between px-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2 sm:px-4">
            <div className="flex items-center gap-3">
               <History className="text-primary" size={24} />
               <h3 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tight text-slate-900 dark:text-white">

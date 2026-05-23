@@ -142,14 +142,14 @@ const RideHistory = () => {
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Deployment Archives</span>
           </div>
-          <h2 className="text-6xl sm:text-7xl font-display font-black italic uppercase leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
+          <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
             SECTOR <span className="text-primary">LOGS</span>
           </h2>
           <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Logbook of your verified field operations.</p>
         </div>
         
         {!loading && rides.length > 0 && (
-           <div className="bg-white dark:bg-white/5 px-8 py-5 rounded-[2rem] border border-white/10 flex items-center gap-8 shadow-2xl">
+           <div className="bg-white dark:bg-white/5 px-6 sm:px-8 py-5 rounded-[2rem] border border-white/10 flex items-center justify-between gap-6 sm:gap-8 shadow-2xl w-full md:w-auto">
               <div className="text-right">
                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic">Total Missions</p>
                  <p className="text-4xl font-display font-black text-slate-900 dark:text-white leading-none tracking-tighter">{rides.length}</p>
@@ -172,7 +172,7 @@ const RideHistory = () => {
             <div key={i} className="h-64 rounded-[3rem] bg-slate-100 dark:bg-white/5 animate-pulse border border-white/5" />
           ))
         ) : rides.length === 0 ? (
-          <div className="py-40 text-center bg-slate-50 dark:bg-white/5 rounded-[4rem] border border-dashed border-slate-200 dark:border-white/10">
+          <div className="py-24 sm:py-40 px-4 text-center bg-slate-50 dark:bg-white/5 rounded-[2rem] sm:rounded-[4rem] border border-dashed border-slate-200 dark:border-white/10">
             <Activity size={64} className="mx-auto mb-8 text-slate-300 opacity-20" />
             <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-xs italic">Archives Empty</p>
           </div>
@@ -180,17 +180,17 @@ const RideHistory = () => {
           rides.map((ride) => (
             <div 
               key={ride.id}
-              className={`group transition-all duration-500 rounded-[3rem] border bg-white dark:bg-slate-900/50 backdrop-blur-sm shadow-2xl overflow-hidden ${
+              className={`group transition-all duration-500 rounded-[2rem] sm:rounded-[3rem] border bg-white dark:bg-slate-900/50 backdrop-blur-sm shadow-2xl overflow-hidden ${
                 expandedRideId === ride.id ? 'border-primary/30 ring-4 ring-primary/5' : 'border-slate-100 dark:border-white/5 hover:border-white/20'
               }`}
             >
               {/* Summary View */}
               <div 
                 onClick={() => setExpandedRideId(expandedRideId === ride.id ? null : ride.id)}
-                className="p-8 sm:p-12 cursor-pointer flex flex-col lg:flex-row items-center gap-10"
+                className="p-5 sm:p-12 cursor-pointer flex flex-col lg:flex-row items-start sm:items-center gap-6 sm:gap-10"
               >
                 {/* Date & Client Summary */}
-                <div className="flex items-center gap-6 shrink-0">
+                <div className="flex items-center gap-4 sm:gap-6 shrink-0 w-full lg:w-auto">
                   <div className={`w-20 h-20 rounded-[2rem] flex items-center justify-center border transition-all duration-500 ${
                     ['started', 'accepted'].includes(ride.status)
                     ? 'bg-primary/20 border-primary/30 text-primary shadow-glow-saffron/20'
@@ -229,12 +229,12 @@ const RideHistory = () => {
                 </div>
 
                 {/* Revenue & Status */}
-                <div className="flex items-center justify-between lg:justify-end gap-10 w-full lg:w-auto shrink-0">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-10 w-full lg:w-auto shrink-0">
                   <div className="text-right">
                     <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Mission Allotment</p>
                     <p className="text-4xl font-display font-black italic text-emerald-500 tracking-tighter">₹{Math.round(ride.fare)}</p>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
                     <span className={`px-6 py-3 rounded-2xl text-[9px] font-black uppercase tracking-[0.3em] border shadow-xl ${getStatusStyle(ride.status)}`}>
                       {ride.status}
                     </span>
@@ -247,7 +247,7 @@ const RideHistory = () => {
 
               {/* Detailed View */}
               {expandedRideId === ride.id && (
-                <div className="p-8 sm:p-12 bg-slate-50 dark:bg-white/[0.02] border-t border-white/5 animate-slide-up">
+                <div className="p-5 sm:p-12 bg-slate-50 dark:bg-white/[0.02] border-t border-white/5 animate-slide-up">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     {/* Client Data */}
                     <div className="space-y-6">

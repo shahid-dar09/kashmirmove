@@ -38,14 +38,14 @@ const PendingDrivers = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-12 animate-fade-in pb-20 pt-6">
+    <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12 animate-fade-in pb-20 pt-6 px-4 sm:px-0">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-10">
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-red-500 rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-red-500 italic">Security Verification</span>
           </div>
-          <h2 className="text-5xl sm:text-7xl font-display font-black italic uppercase leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
+          <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
             PENDING <span className="text-primary">PILOTS</span>
           </h2>
           <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Review mission-readiness and verification applications.</p>
@@ -67,7 +67,7 @@ const PendingDrivers = () => {
            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 animate-pulse italic">Scanning Application Ledger...</p>
         </div>
       ) : drivers.length === 0 ? (
-        <div className="card-modern py-40 text-center bg-white dark:bg-white/5 border-white/5 rounded-[4rem]">
+        <div className="card-modern py-24 sm:py-40 px-4 text-center bg-white dark:bg-white/5 border-white/5 rounded-[2rem] sm:rounded-[4rem]">
           <div className="w-24 h-24 bg-slate-100 dark:bg-white/5 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 opacity-20">
              <Activity size={48} className="text-slate-400" />
           </div>
@@ -77,14 +77,14 @@ const PendingDrivers = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {drivers.map(driver => (
-            <div key={driver.id} className="card-modern p-10 flex flex-col justify-between bg-white dark:bg-obsidian border-white/5 rounded-[3.5rem] shadow-2xl relative overflow-hidden group">
+            <div key={driver.id} className="card-modern p-6 sm:p-10 flex flex-col justify-between bg-white dark:bg-obsidian border-white/5 rounded-[2rem] sm:rounded-[3.5rem] shadow-2xl relative overflow-hidden group">
               <div className="absolute -right-10 -top-10 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
                  <ShieldCheck size={180} />
               </div>
               
               <div className="relative z-10 space-y-10">
-                <div className="flex items-center gap-6">
-                   <div className="w-20 h-20 bg-slate-100 dark:bg-white/5 rounded-[2rem] flex items-center justify-center border border-white/10 group-hover:border-primary/30 transition-all overflow-hidden shadow-xl">
+                <div className="flex items-center gap-4 sm:gap-6">
+                   <div className="w-16 h-16 sm:w-20 sm:h-20 bg-slate-100 dark:bg-white/5 rounded-[1.5rem] sm:rounded-[2rem] flex items-center justify-center border border-white/10 group-hover:border-primary/30 transition-all overflow-hidden shadow-xl shrink-0">
                       <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${driver.name}`} alt={driver.name} className="w-full h-full scale-110" />
                    </div>
                    <div className="min-w-0">
@@ -99,7 +99,7 @@ const PendingDrivers = () => {
                      { icon: <Car size={14} />, label: "Fleet Class", value: driver.vehicle_type, premium: true },
                      { icon: <Target size={14} />, label: "Application ID", value: `#PK-${driver.id}` }
                    ].map((item, idx) => (
-                     <div key={idx} className="flex justify-between items-center bg-slate-50 dark:bg-white/5 px-6 py-4 rounded-2xl border border-transparent hover:border-white/5 transition-all">
+                     <div key={idx} className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 bg-slate-50 dark:bg-white/5 px-5 sm:px-6 py-4 rounded-2xl border border-transparent hover:border-white/5 transition-all">
                         <div className="flex items-center gap-3 text-slate-400 group-hover:text-primary transition-colors">
                            {item.icon}
                            <span className="text-[9px] font-black uppercase tracking-widest italic">{item.label}</span>
@@ -110,7 +110,7 @@ const PendingDrivers = () => {
                 </div>
               </div>
 
-              <div className="flex gap-6 mt-12 relative z-10">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 sm:mt-12 relative z-10">
                  <button 
                   onClick={() => handleAction(driver.id, 'rejected')} 
                   className="flex-1 py-5 bg-red-500/5 text-red-500 border border-red-500/10 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-red-500 hover:text-white transition-all flex items-center justify-center gap-3"

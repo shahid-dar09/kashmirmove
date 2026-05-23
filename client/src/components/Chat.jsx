@@ -91,34 +91,34 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
         left: isMobile ? '1rem' : 'auto',
         right: isMobile ? '1rem' : '1.5rem',
         width: isMobile ? 'calc(100% - 2rem)' : '400px',
-        bottom: isMobile ? '5rem' : '8rem',
-        maxHeight: 'calc(100vh - 10rem)'
+        bottom: isMobile ? '4.5rem' : '8rem',
+        maxHeight: isMobile ? 'calc(100vh - 6rem)' : 'calc(100vh - 10rem)'
       }}
-      className="fixed bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 z-[9999] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] flex flex-col animate-slide-up rounded-[2.5rem] sm:rounded-[3rem] border border-white/10 overflow-hidden font-display"
+      className="fixed bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 z-[9999] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] flex flex-col animate-slide-up rounded-[1.5rem] sm:rounded-[3rem] border border-white/10 overflow-hidden font-display"
     >
       {/* Header */}
-      <div className="p-8 border-b border-white/10 flex items-center justify-between relative z-10">
-        <div className="flex items-center gap-5">
+      <div className="p-4 sm:p-8 border-b border-white/10 flex items-center justify-between gap-3 relative z-10">
+        <div className="flex items-center gap-3 sm:gap-5 min-w-0">
           <div className="relative">
-            <div className="w-14 h-14 bg-white/5 border border-white/10 text-primary rounded-2xl flex items-center justify-center font-black italic text-xl shadow-2xl">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 border border-white/10 text-primary rounded-2xl flex items-center justify-center font-black italic text-xl shadow-2xl">
               {receiverName?.charAt(0) || 'P'}
             </div>
           </div>
-          <div>
-            <h3 className="text-base font-black italic uppercase leading-none tracking-widest text-white">{receiverName || 'Pilot'}</h3>
+          <div className="min-w-0">
+            <h3 className="text-sm sm:text-base font-black italic uppercase leading-none tracking-widest text-white truncate">{receiverName || 'Pilot'}</h3>
             <div className="flex items-center gap-2 mt-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40">COMM-LINK ACTIVE</p>
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {receiverPhone && (
-            <a href={`tel:${receiverPhone}`} className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary hover:bg-primary hover:text-obsidian transition-all shadow-xl">
+            <a href={`tel:${receiverPhone}`} className="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary hover:bg-primary hover:text-obsidian transition-all shadow-xl">
               <Phone size={16} />
             </a>
           )}
-          <button onClick={onClose} className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center hover:bg-white/10 transition-all text-white/40 hover:text-white">
+          <button onClick={onClose} className="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center hover:bg-white/10 transition-all text-white/40 hover:text-white">
             <X size={18} />
           </button>
         </div>
@@ -127,7 +127,7 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
       {/* Messages */}
       <div 
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar bg-black/20"
+        className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-4 sm:space-y-6 custom-scrollbar bg-black/20"
       >
         {loading ? (
           <div className="h-full flex items-center justify-center">
@@ -173,7 +173,7 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
       </div>
 
       {/* Input */}
-      <div className="p-6 bg-obsidian border-t border-white/5 relative z-10">
+      <div className="p-3 sm:p-6 bg-obsidian border-t border-white/5 relative z-10">
         <div className="flex gap-3 bg-white/5 p-2 rounded-2xl border border-white/10 shadow-inner focus-within:border-primary/50 transition-colors">
           <input 
             type="text" 

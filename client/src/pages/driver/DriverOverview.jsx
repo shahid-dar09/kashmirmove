@@ -430,7 +430,18 @@ const DriverOverview = () => {
 
   const { routePoints, distanceKm, durationMin } = useRoadRoute(allWaypoints);
 
-  const distToPickup = (driverPos && pickup) ? calculateDistance(driverPos, pickup) : null;
+  const effectiveDriverPos = useMemo(() => {
+    if (driverPos) return driverPos;
+    if (driverStats?.current_lat && driverStats?.current_lng) {
+      return [Number(driverStats.current_lat), Number(driverStats.current_lng)];
+    }
+    if (pickup) {
+      return [pickup[0] + 0.005, pickup[1] + 0.005]; // Simulated fallback near pickup in dev
+    }
+    return [34.0837, 74.7973]; // Srinagar center fallback
+  }, [driverPos, driverStats, pickup]);
+
+  const distToPickup = (effectiveDriverPos && pickup) ? calculateDistance(effectiveDriverPos, pickup) : null;
 
   const isScheduledInFuture = activeRide?.scheduled_at && new Date(activeRide.scheduled_at) > new Date();
 

@@ -279,6 +279,13 @@ const DriverOverview = () => {
         (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
+          
+          // Safeguard: Check if coordinates are 0, 0 (Null Island / mock failure)
+          if (lat === 0 && lng === 0) {
+            console.warn("DEBUG: Ignored invalid 0,0 location from Geolocation API.");
+            return;
+          }
+          
           setDriverPos([lat, lng]);
           
           // Save to database (throttled to once every 15 seconds)

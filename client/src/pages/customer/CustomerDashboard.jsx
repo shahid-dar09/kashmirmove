@@ -36,12 +36,25 @@ const MapAutoCenter = ({ drivers }) => {
   const hasCentered = useRef(false);
 
   useEffect(() => {
-    if (drivers.length > 0 && !hasCentered.current) {
-      const firstDriver = drivers.find(d => d.current_lat && d.current_lng);
-      if (firstDriver) {
-        map.setView([firstDriver.current_lat, firstDriver.current_lng], 12);
-        hasCentered.current = true;
+    const validDrivers = drivers.filter(
+      d => d.current_lat && d.current_lng && 
+           parseFloat(d.current_lat) !== 0 && 
+           parseFloat(d.current_lng) !== 0
+    );
+
+    if (validDrivers.length > 0 && !hasCentered.current) {
+      if (validDrivers.length === 1) {
+        // Center on the single available driver
+        const d = validDrivers[0];
+        map.setView([parseFloat(d.current_lat), parseFloat(d.current_lng)], 13);
+      } else {
+        // Fit bounds to show all available drivers dynamically
+        const bounds = L.latLngBounds(
+          validDrivers.map(d => [parseFloat(d.current_lat), parseFloat(d.current_lng)])
+        );
+        map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
       }
+      hasCentered.current = true;
     }
   }, [drivers, map]);
 

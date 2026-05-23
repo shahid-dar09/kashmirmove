@@ -119,7 +119,7 @@ const ActiveRide = () => {
       return [Number(ride.driver_lat), Number(ride.driver_lng)];
     }
     return null;
-  }, [driverPos, ride?.driver_lat, ride?.driver_lng]);
+  }, [driverPos, ride]);
 
   const fetchRideDetails = useCallback(async () => {
     try {

@@ -453,7 +453,7 @@ const DriverOverview = () => {
         lng: effectiveDriverPos[1]
       });
     }
-  }, [activeRide?.id, effectiveDriverPos]);
+  }, [activeRide, effectiveDriverPos]);
 
   const isScheduledInFuture = activeRide?.scheduled_at && new Date(activeRide.scheduled_at) > new Date();
 

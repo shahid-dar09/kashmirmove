@@ -676,12 +676,12 @@ const DriverOverview = () => {
             </div>
           </div>
           {/* Real-time Map View */}
-          <div className="card-modern p-2 overflow-hidden h-[360px] sm:h-[600px] relative border-white/5 bg-obsidian shadow-2xl">
+          <div className="relative rounded-[2.5rem] overflow-hidden h-[360px] sm:h-[600px] bg-obsidian shadow-2xl border-none">
             <MapContainer 
               key={activeRide.id}
-              center={driverPos || pickup || [34.0837, 74.7973]} 
+              center={effectiveDriverPos || pickup || [34.0837, 74.7973]} 
               zoom={14} 
-              style={{ height: '100%', width: '100%', borderRadius: '2rem' }}
+              style={{ height: '100%', width: '100%', borderRadius: '2.5rem' }}
               zoomControl={false}
             >
               <TileLayer
@@ -696,9 +696,9 @@ const DriverOverview = () => {
               ))}
               {destination && <Marker position={destination} icon={DESTINATION_ICON} />}
 
-              {driverPos && (
+              {effectiveDriverPos && (
                 <Marker 
-                  position={driverPos} 
+                  position={effectiveDriverPos} 
                   icon={L.divIcon({
                     className: 'driver-icon-container',
                     html: `<div style="width:40px;height:40px;background:#f59e0b;border:4px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(245,158,11,0.4);position:relative;">
@@ -714,45 +714,47 @@ const DriverOverview = () => {
               {routePoints.length >= 2 && (
                 <>
                   <Polyline positions={routePoints} color="#f59e0b" weight={6} opacity={0.8} dashArray="10, 10" />
-                  <MapAutoCenter driverPos={driverPos} pickup={pickup} recenterTrigger={recenterTrigger} />
+                  <MapAutoCenter driverPos={effectiveDriverPos} pickup={pickup} recenterTrigger={recenterTrigger} />
                 </>
               )}
             </MapContainer>
             
-            <div className="absolute top-3 left-3 right-3 sm:top-8 sm:left-8 sm:right-auto z-[1000] flex flex-col gap-3 sm:gap-4">
-              <div className="bg-obsidian/80 backdrop-blur-xl p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl sm:min-w-[220px] pointer-events-none">
-                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4 italic">Operational Telemetry</p>
-                 <div className="space-y-4">
-                   <div className="flex items-center justify-between">
-                     <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Pilot to Origin</span>
-                     <span className="text-sm font-black text-white italic">{distToPickup ? `${distToPickup} KM` : 'SCANNING...'}</span>
+            {/* Top Telemetry Strip (Responsive Overlay) */}
+            <div className="absolute top-0 left-0 right-0 sm:top-8 sm:left-8 sm:right-auto z-[1000] w-full sm:w-auto">
+              <div className="bg-obsidian/90 backdrop-blur-xl p-3 sm:p-6 rounded-none sm:rounded-3xl border-b sm:border border-white/10 shadow-2xl sm:min-w-[240px] pointer-events-none w-full">
+                 <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-2 sm:mb-4 italic text-center sm:text-left">Operational Telemetry</p>
+                 <div className="flex flex-row sm:flex-col justify-around sm:justify-start items-center sm:items-stretch gap-4 sm:space-y-4 w-full">
+                   <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left">
+                     <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Pilot to Origin</span>
+                     <span className="text-xs sm:text-sm font-black text-white italic block sm:mt-0 mt-0.5">{distToPickup ? `${distToPickup} KM` : 'SCANNING...'}</span>
                    </div>
-                   <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                   <div className="hidden sm:block h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                      <div className="h-full bg-primary w-2/3 animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
                    </div>
                    {distanceKm && (
-                     <div className="flex items-center justify-between pt-2 border-t border-white/5">
-                       <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Route Total</span>
-                       <span className="text-sm font-black text-electric-cyan italic">{distanceKm} KM</span>
+                     <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left sm:pt-2 sm:border-t sm:border-white/5">
+                       <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Route Total</span>
+                       <span className="text-xs sm:text-sm font-black text-electric-cyan italic block sm:mt-0 mt-0.5">{distanceKm} KM</span>
                      </div>
                    )}
                    {durationMin && (
-                     <div className="flex items-center justify-between">
-                       <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Est. Deployment</span>
-                       <span className="text-sm font-black text-amber-500 italic">~{durationMin} MIN</span>
+                     <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left">
+                       <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Est. Deployment</span>
+                       <span className="text-xs sm:text-sm font-black text-primary italic block sm:mt-0 mt-0.5">~{durationMin} MIN</span>
                      </div>
                    )}
                  </div>
               </div>
-              
-              <button 
-                onClick={() => setRecenterTrigger(prev => prev + 1)}
-                className="bg-primary text-obsidian h-14 px-8 rounded-2xl shadow-glow-saffron hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 group w-fit"
-              >
-                <Navigation size={18} className="group-hover:rotate-12 transition-transform" />
-                <span className="text-[10px] font-black uppercase tracking-widest">RECENTER RADAR</span>
-              </button>
             </div>
+
+            {/* Recenter Radar Floating GPS Button */}
+            <button 
+              onClick={() => setRecenterTrigger(prev => prev + 1)}
+              className="absolute bottom-4 right-4 z-[1000] bg-primary text-obsidian w-12 h-12 rounded-full shadow-glow-saffron hover:scale-105 active:scale-95 transition-all flex items-center justify-center group"
+              title="Recenter Radar"
+            >
+              <Navigation size={18} className="group-hover:rotate-12 transition-transform" />
+            </button>
           </div>
         </div>
       )}

@@ -2,10 +2,11 @@ const bcrypt = require('bcrypt');
 const pool = require('../config/db');
 
 const registerDriver = async (req, res) => {
-    // Transaction needed to ensure atomicity
-    const connection = await pool.getConnection();
+    let connection;
     
     try {
+        // Transaction needed to ensure atomicity
+        connection = await pool.getConnection();
         await connection.beginTransaction();
 
         const { name, email, phone, password, vehicleType, vehicleNumber, model, capacity, licenseNumber } = req.body;
@@ -72,11 +73,11 @@ const registerDriver = async (req, res) => {
         });
 
     } catch (error) {
-        await connection.rollback();
+        if (connection) await connection.rollback();
         console.error(error);
-        res.status(500).json({ success: false, message: 'Server error' });
+        res.status(500).json({ success: false, message: 'Server error: ' + error.message });
     } finally {
-        connection.release();
+        if (connection) connection.release();
     }
 };
 const toggleOnlineStatus = async (req, res) => {

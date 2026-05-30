@@ -71,6 +71,8 @@ async function initializeDatabase() {
         await ensureColumn('bookings', 'pickup_lng', 'DECIMAL(11, 8) DEFAULT NULL');
         await ensureColumn('bookings', 'drop_lat', 'DECIMAL(10, 8) DEFAULT NULL');
         await ensureColumn('bookings', 'drop_lng', 'DECIMAL(11, 8) DEFAULT NULL');
+        await ensureColumn('bookings', 'stops', 'JSON DEFAULT NULL');
+        await ensureColumn('bookings', 'scheduled_at', 'TIMESTAMP NULL DEFAULT NULL');
 
         await modifyColumn('bookings', 'vehicle_type', "ENUM('cab', 'pickup', 'truck', 'rickshaw') NOT NULL");
         await modifyColumn('bookings', 'status', "ENUM('pending', 'accepted', 'started', 'completed', 'cancelled') DEFAULT 'pending'");
@@ -142,6 +144,28 @@ async function initializeDatabase() {
                 FOREIGN KEY (driver_id) REFERENCES drivers(id) ON DELETE CASCADE
             )
         `);
+
+        // driver_documents Table (Phase 3 Pilot Document Vault)
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS driver_documents (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                driver_id INT NOT NULL,
+                document_type ENUM('license', 'rc', 'insurance', 'other') NOT NULL,
+                file_url VARCHAR(255) NOT NULL,
+                status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+                expiry_date DATE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (driver_id) REFERENCES drivers(id) ON DELETE CASCADE
+            )
+        `);
+
+        // Ensure UNIQUE constraint on reviews.booking_id (Reviews Constraint)
+        try {
+            await pool.query('ALTER TABLE reviews ADD CONSTRAINT unique_booking UNIQUE (booking_id)');
+            console.log('[DB Initialization] UNIQUE constraint added to reviews table.');
+        } catch (err) {
+            // Ignore if constraint already exists (like ER_DUP_KEYNAME)
+        }
 
         console.log('✅ [DB Initialization] Schema Stabilization Complete and Database is Ready!');
     } catch (err) {

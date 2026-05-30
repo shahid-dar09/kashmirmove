@@ -123,7 +123,19 @@ app.get('/api/health', (req, res) => {
     res.json({ success: true, message: 'Server is running' });
 });
 
+const { initializeDatabase } = require('./config/dbInit');
+
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+
+// Initialize database schema and start server
+initializeDatabase()
+    .then(() => {
+        server.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.error('CRITICAL: Failed to initialize database schema. Server shutting down.', err);
+        process.exit(1);
+    });
+

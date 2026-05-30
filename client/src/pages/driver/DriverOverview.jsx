@@ -221,7 +221,8 @@ const DriverOverview = () => {
 
   // Stable Socket Connection Setup (Runs once on mount)
   useEffect(() => {
-    socketRef.current = io(`http://${window.location.hostname}:5000`);
+    const SOCKET_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`;
+    socketRef.current = io(SOCKET_URL);
     
     socketRef.current.on('connect', () => {
       console.log('DEBUG: Socket connected successfully');

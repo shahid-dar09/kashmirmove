@@ -69,7 +69,8 @@ const WaitingRide = () => {
       fetchBooking();
     });
     
-    socketRef.current = io(`http://${window.location.hostname}:5000`, {
+    const SOCKET_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`;
+    socketRef.current = io(SOCKET_URL, {
       transports: ['websocket', 'polling'],
       reconnectionAttempts: 5
     });

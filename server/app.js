@@ -21,8 +21,15 @@ const io = require('socket.io')(server, {
 // Make io accessible to our routes
 app.set('io', io);
 
-// Middleware
-app.use(cors());
+// CORS Configuration
+const allowedOrigins = process.env.CLIENT_URL
+  ? [process.env.CLIENT_URL, 'http://localhost:5173', 'http://localhost:3000']
+  : true; // Allow all in dev
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -483,7 +483,7 @@ const DriverOverview = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full animate-spin" style={{animationDuration: '2s'}}></div>
           <div className="absolute inset-1 bg-white dark:bg-obsidian rounded-full"></div>
         </div>
-        <p className="font-display font-bold text-slate-500 uppercase tracking-widest text-xs">Loading Driver Console</p>
+        <p className="font-display font-bold text-slate-500 uppercase tracking-widest text-xs">Loading Driver Dashboard</p>
       </div>
     );
   }
@@ -525,15 +525,15 @@ const DriverOverview = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
-             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500">Fleet ID: {driverStats?.id || 'ALPHA-01'}</span>
+             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500">Driver ID: {driverStats?.id || 'ALPHA-01'}</span>
           </div>
           <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
-            PILOT <span className="text-primary">CONSOLE</span>
+            DRIVER <span className="text-primary">DASHBOARD</span>
           </h2>
           <div className="flex items-center gap-3 py-2">
              <div className={`w-2 h-2 rounded-full ${online ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] animate-pulse' : 'bg-red-500'}`}></div>
              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-               {online ? 'Uplink Established' : 'Network Disconnected'}
+               {online ? 'Online & Ready' : 'Offline'}
              </span>
           </div>
         </div>
@@ -543,8 +543,8 @@ const DriverOverview = () => {
             <div className="flex items-center gap-4 bg-primary/5 px-8 py-4 rounded-3xl border border-primary/20">
                <Activity size={20} className="text-primary animate-pulse" />
                <div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-primary/60 leading-none mb-1.5">Mission Queue</p>
-                  <p className="text-base font-black text-slate-900 dark:text-white uppercase tracking-tight">{upcomingRides.length} PENDING DUTIES</p>
+                  <p className="text-[9px] font-black uppercase tracking-widest text-primary/60 leading-none mb-1.5">Ride Queue</p>
+                  <p className="text-base font-black text-slate-900 dark:text-white uppercase tracking-tight">{upcomingRides.length} PENDING RIDES</p>
                </div>
             </div>
           )}
@@ -556,7 +556,7 @@ const DriverOverview = () => {
                 : 'bg-primary text-obsidian shadow-glow-saffron'
             }`}
           >
-            {online ? 'TERMINATE UPLINK' : 'INITIALIZE NETWORK'}
+            {online ? 'GO OFFLINE' : 'GO ONLINE'}
             <Zap className={`w-5 h-5 ${online ? '' : 'animate-pulse'}`} fill="currentColor" />
           </button>
         </div>
@@ -585,21 +585,21 @@ const DriverOverview = () => {
                       isScheduledInFuture ? 'bg-amber-500' : 'bg-electric-cyan animate-pulse'
                     }`} />
                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
-                      {activeRide.status === 'started' ? 'MISSION IN PROGRESS' : 
-                       isScheduledInFuture ? 'UPCOMING APPOINTMENT' : 'EN ROUTE TO ORIGIN'}
+                      {activeRide.status === 'started' ? 'RIDE IN PROGRESS' : 
+                       isScheduledInFuture ? 'UPCOMING APPOINTMENT' : 'HEADING TO PICKUP'}
                     </span>
                   </div>
                   <h3 className="font-display font-black italic uppercase text-2xl sm:text-4xl tracking-tighter leading-none mb-4">
-                    {activeRide.customer_name || 'IDENTIFIED UNIT'}
+                    {activeRide.customer_name || 'CUSTOMER'}
                   </h3>
                   {activeRide.customer_phone && (
                     <a 
                       href={`tel:${activeRide.customer_phone}`} 
                       className="inline-flex items-center gap-3 px-6 py-2.5 bg-white/5 hover:bg-primary hover:text-obsidian rounded-2xl border border-white/10 transition-all text-xs font-black uppercase tracking-widest"
                     >
-                      <Phone size={14} fill="currentColor" />
-                      SECURE COMMS: {activeRide.customer_phone}
-                    </a>
+                       <Phone size={14} fill="currentColor" />
+                       CALL CUSTOMER: {activeRide.customer_phone}
+                     </a>
                   )}
                 </div>
                 
@@ -610,7 +610,7 @@ const DriverOverview = () => {
                       <MapPin size={18} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30 mb-1">Origin Node</p>
+                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30 mb-1">Pickup Location</p>
                       <p className="text-sm font-bold text-white/70 truncate leading-snug">
                         {getCleanName(activeRide.pickup_location)}
                       </p>
@@ -621,7 +621,7 @@ const DriverOverview = () => {
                       <Target size={18} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30 mb-1">Target Node</p>
+                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30 mb-1">Drop-off Location</p>
                       <p className="text-sm font-bold text-white truncate leading-snug">
                         {getCleanName(activeRide.drop_location)}
                       </p>
@@ -633,8 +633,8 @@ const DriverOverview = () => {
               {/* Allotment + Command Actions */}
               <div className="flex flex-col items-stretch lg:items-end justify-between w-full lg:w-72 gap-8 pt-8 lg:pt-0 lg:pl-10 lg:border-l border-white/5">
                 <div className="text-center lg:text-right w-full">
-                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-3 italic">Operational Allotment</p>
-                  <p className="text-5xl sm:text-6xl font-display font-black italic tracking-tighter text-white leading-none">₹{Math.round(activeRide.fare)}</p>
+                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-3 italic">Earning Amount</p>
+                   <p className="text-5xl sm:text-6xl font-display font-black italic tracking-tighter text-white leading-none">₹{Math.round(activeRide.fare)}</p>
                 </div>
                 
                 <div className="flex flex-wrap lg:flex-col gap-3 w-full">
@@ -673,12 +673,12 @@ const DriverOverview = () => {
                       className="w-full h-16 bg-emerald-500 text-white rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-lg shadow-emerald-500/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
                     >
                       {completing ? <Loader2 size={18} className="animate-spin" /> : <CheckCircle size={18} />}
-                      FINALIZE MISSION
+                      FINISH RIDE
                     </button>
                   ) : isScheduledInFuture ? (
                     <div className="w-full h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center gap-3 opacity-50 cursor-not-allowed">
                        <Clock size={18} className="text-amber-500" />
-                       <span className="text-xs font-black uppercase tracking-widest">SCHEDULE LOCK</span>
+                       <span className="text-xs font-black uppercase tracking-widest">SCHEDULED LOCK</span>
                     </div>
                   ) : (
                     <div className="w-full space-y-3">
@@ -700,7 +700,7 @@ const DriverOverview = () => {
                             className="flex-[1.5] h-16 bg-primary text-obsidian rounded-2xl font-black uppercase text-xs tracking-widest shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
                           >
                             {verifyingOtp ? <Loader2 size={18} className="animate-spin" /> : <Zap size={18} fill="currentColor" />}
-                            START MISSION
+                            START RIDE
                           </button>
                        </div>
                        <button
@@ -709,7 +709,7 @@ const DriverOverview = () => {
                          className="w-full py-3 text-red-400 hover:text-white hover:bg-red-500/20 rounded-xl transition-all font-black uppercase text-[10px] tracking-[0.3em] flex items-center justify-center gap-2"
                        >
                          {cancelling ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />}
-                         ABORT DEPLOYMENT
+                         CANCEL RIDE
                        </button>
                     </div>
                   )}
@@ -762,27 +762,27 @@ const DriverOverview = () => {
             {/* Top Telemetry Strip (Responsive Overlay) */}
             <div className="absolute top-0 left-0 right-0 sm:top-8 sm:left-8 sm:right-auto z-[1000] w-full sm:w-auto">
               <div className="bg-obsidian/90 backdrop-blur-xl p-3 sm:p-6 rounded-none sm:rounded-3xl border-b sm:border border-white/10 shadow-2xl sm:min-w-[240px] pointer-events-none w-full">
-                 <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-2 sm:mb-4 italic text-center sm:text-left">Operational Telemetry</p>
-                 <div className="flex flex-row sm:flex-col justify-around sm:justify-start items-center sm:items-stretch gap-4 sm:space-y-4 w-full">
-                   <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left">
-                     <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Pilot to Origin</span>
-                     <span className="text-xs sm:text-sm font-black text-white italic block sm:mt-0 mt-0.5">{distToPickup ? `${distToPickup} KM` : 'SCANNING...'}</span>
-                   </div>
-                   <div className="hidden sm:block h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                     <div className="h-full bg-primary w-2/3 animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
-                   </div>
-                   {distanceKm && (
-                     <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left sm:pt-2 sm:border-t sm:border-white/5">
-                       <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Route Total</span>
-                       <span className="text-xs sm:text-sm font-black text-electric-cyan italic block sm:mt-0 mt-0.5">{distanceKm} KM</span>
-                     </div>
-                   )}
-                   {durationMin && (
-                     <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left">
-                       <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Est. Deployment</span>
-                       <span className="text-xs sm:text-sm font-black text-primary italic block sm:mt-0 mt-0.5">~{durationMin} MIN</span>
-                     </div>
-                   )}
+                  <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-2 sm:mb-4 italic text-center sm:text-left">Ride Live Stats</p>
+                  <div className="flex flex-row sm:flex-col justify-around sm:justify-start items-center sm:items-stretch gap-4 sm:space-y-4 w-full">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left">
+                      <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Distance to Pickup</span>
+                      <span className="text-xs sm:text-sm font-black text-white italic block sm:mt-0 mt-0.5">{distToPickup ? `${distToPickup} KM` : 'SCANNING...'}</span>
+                    </div>  
+                    <div className="hidden sm:block h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                       <div className="h-full bg-primary w-2/3 animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+                    </div>
+                    {distanceKm && (
+                       <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left sm:pt-2 sm:border-t sm:border-white/5">
+                         <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Total Distance</span>
+                         <span className="text-xs sm:text-sm font-black text-electric-cyan italic block sm:mt-0 mt-0.5">{distanceKm} KM</span>
+                       </div>
+                    )}
+                    {durationMin && (
+                       <div className="flex flex-col sm:flex-row sm:items-center justify-between text-center sm:text-left">
+                          <span className="text-[8px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest block sm:inline">Est. Ride Time</span>
+                         <span className="text-xs sm:text-sm font-black text-primary italic block sm:mt-0 mt-0.5">~{durationMin} MIN</span>
+                       </div>
+                    )}
                  </div>
               </div>
             </div>
@@ -812,7 +812,7 @@ const DriverOverview = () => {
           <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
             <Activity size={160} className="rotate-12" />
           </div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6 italic">Today's Allotment</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6 italic">Today's Earnings</p>
           <div className="flex items-baseline gap-2">
             {loading ? <Skeleton width="120px" height="3rem" /> : <span className="text-4xl sm:text-6xl font-display font-black italic tracking-tighter text-slate-900 dark:text-white leading-none">₹{driverStats?.today_earnings || 0}</span>}
           </div>
@@ -829,17 +829,17 @@ const DriverOverview = () => {
           <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
             <Target size={160} className="-rotate-12" />
           </div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6 italic">Total Missions</p>
-          <div className="flex items-baseline gap-3">
-            <span className="text-4xl sm:text-6xl font-display font-black italic tracking-tighter text-slate-900 dark:text-white leading-none">{driverStats?.total_trips || 0}</span>
-            <span className="text-xl font-black italic text-slate-400 uppercase tracking-tighter">Nodes</span>
-          </div>
-          <p className="mt-8 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Verified career operations logged</p>
+           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6 italic">Total Rides</p>
+           <div className="flex items-baseline gap-3">
+             <span className="text-4xl sm:text-6xl font-display font-black italic tracking-tighter text-slate-900 dark:text-white leading-none">{driverStats?.total_trips || 0}</span>
+             <span className="text-xl font-black italic text-slate-400 uppercase tracking-tighter">Rides</span>
+           </div>
+           <p className="mt-8 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Verified career rides completed</p>
         </div>
 
         <div className="card-modern bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 text-white flex flex-col justify-between border-white/10 shadow-2xl relative overflow-hidden group">
           <div className="absolute inset-0 bg-primary/5 blur-[80px] pointer-events-none"></div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40 mb-6 italic">Pilot Efficiency</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40 mb-6 italic">Driver Performance</p>
           <div className="flex items-center gap-6 relative z-10">
             <span className="text-5xl sm:text-7xl font-display font-black italic leading-none tracking-tighter">{driverStats?.rating || '5.0'}</span>
             <div className="space-y-2">
@@ -863,11 +863,11 @@ const DriverOverview = () => {
               <MapPin className="w-10 h-10 text-primary" />
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-2 italic">Operating Sector</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-2 italic">Operating Area</p>
               <div className="flex flex-wrap items-center gap-4">
                 <span className="text-3xl sm:text-4xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-none">{area}</span>
                 <span className="text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 bg-emerald-500/10 text-emerald-500 rounded-full border border-emerald-500/20">
-                  ACTIVE DEPLOYMENT ZONE
+                  ACTIVE DRIVING ZONE
                 </span>
                 {areaSuccess && (
                   <div className="flex items-center gap-2 text-emerald-500 animate-fade-in">
@@ -876,7 +876,7 @@ const DriverOverview = () => {
                   </div>
                 )}
               </div>
-              <p className="text-[10px] text-slate-400 mt-3 font-bold uppercase tracking-widest">Visibility Protocol: Global broadcast active in this sector.</p>
+              <p className="text-[10px] text-slate-400 mt-3 font-bold uppercase tracking-widest">Visibility Status: Live broadcast active in this sector.</p>
             </div>
           </div>
           <div className="flex items-center gap-4 shrink-0 w-full sm:w-80">
@@ -903,7 +903,7 @@ const DriverOverview = () => {
         <div className="space-y-8">
           <div className="flex items-center gap-3">
              <div className="w-10 h-1 bg-primary rounded-full"></div>
-             <h3 className="text-2xl font-display font-black italic uppercase tracking-tight">OPERATIONAL <span className="text-primary">NODES</span></h3>
+             <h3 className="text-2xl font-display font-black italic uppercase tracking-tight">QUICK <span className="text-primary">LINKS</span></h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <Link to="/driver/requests" className="card-modern group hover:bg-primary transition-all p-10 flex flex-col items-center justify-center text-center gap-6 relative overflow-hidden bg-white dark:bg-white/5">
@@ -915,7 +915,7 @@ const DriverOverview = () => {
               </div>
               <div>
                  <p className="font-black italic uppercase tracking-tighter text-xl group-hover:text-obsidian">New Requests</p>
-                 <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1 group-hover:text-obsidian/60">Incoming Signals</p>
+                 <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1 group-hover:text-obsidian/60">Incoming requests</p>
               </div>
             </Link>
             <Link to="/driver/history" className="card-modern group hover:bg-obsidian transition-all p-10 flex flex-col items-center justify-center text-center gap-6 relative overflow-hidden bg-white dark:bg-white/5 dark:hover:bg-ghost">
@@ -927,7 +927,7 @@ const DriverOverview = () => {
               </div>
               <div>
                  <p className="font-black italic uppercase tracking-tighter text-xl group-hover:text-white dark:group-hover:text-obsidian">Trip History</p>
-                 <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1 group-hover:text-white/60 dark:group-hover:text-obsidian/60">Mission Archives</p>
+                 <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1 group-hover:text-white/60 dark:group-hover:text-obsidian/60">Earning records</p>
               </div>
             </Link>
           </div>
@@ -937,7 +937,7 @@ const DriverOverview = () => {
         <div className="space-y-8">
           <div className="flex items-center gap-3">
              <div className="w-10 h-1 bg-primary rounded-full"></div>
-             <h3 className="text-2xl font-display font-black italic uppercase tracking-tight">ACTIVE <span className="text-primary">CARRIER</span></h3>
+             <h3 className="text-2xl font-display font-black italic uppercase tracking-tight">ACTIVE <span className="text-primary">VEHICLE</span></h3>
           </div>
           <div className="card-modern p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 group bg-white dark:bg-white/5 border-white/5 overflow-hidden relative">
             <div className="absolute -right-6 -bottom-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
@@ -950,13 +950,13 @@ const DriverOverview = () => {
                <div>
                   <div className="flex items-center justify-center sm:justify-between gap-4 mb-2">
                     <h4 className="text-2xl sm:text-3xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white truncate leading-none">{driverStats?.vehicle_model || 'Standard Move'}</h4>
-                    <span className="hidden sm:inline-block text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 bg-emerald-500/10 text-emerald-500 rounded-full border border-emerald-500/20">VERIFIED UNIT</span>
+                    <span className="hidden sm:inline-block text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 bg-emerald-500/10 text-emerald-500 rounded-full border border-emerald-500/20">VERIFIED VEHICLE</span>
                   </div>
                   <p className="text-[11px] font-black text-primary uppercase tracking-[0.3em] italic">{driverStats?.vehicle_plate || 'JK01-XXXX'}</p>
                </div>
                <div className="space-y-2">
                   <div className="flex justify-between text-[9px] font-black uppercase tracking-widest text-slate-500 italic">
-                     <span>Deployment Ready</span>
+                     <span>Vehicle status: Ready</span>
                      <span>98% Integrity</span>
                   </div>
                   <div className="h-2 w-full bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden flex gap-1">

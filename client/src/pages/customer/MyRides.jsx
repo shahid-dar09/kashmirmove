@@ -117,37 +117,37 @@ const MyRides = () => {
               <div class="tagline">The Royal Valley Network</div>
             </div>
             <div class="invoice-meta">
-              <h1 class="invoice-title">INVOICE</h1>
-              <div class="invoice-id">REF: KM-DEPL-${ride.id} / ${new Date(ride.created_at).getFullYear()}</div>
+              <h1 class="invoice-title">RECEIPT</h1>
+              <div class="invoice-id">REF: KM-RIDE-${ride.id} / ${new Date(ride.created_at).getFullYear()}</div>
             </div>
           </div>
 
           <div class="grid">
             <div class="section">
-              <div class="section-title">Logistics Parameters</div>
-              <div class="data-item"><div class="label">Origin Sector</div><div class="value">${ride.pickup_location}</div></div>
-              <div class="data-item"><div class="label">Target Destination</div><div class="value">${ride.drop_location}</div></div>
-              <div class="data-item"><div class="label">Deployment Timestamp</div><div class="value">${new Date(ride.created_at).toLocaleString()}</div></div>
+              <div class="section-title">Ride Details</div>
+              <div class="data-item"><div class="label">Pickup Location</div><div class="value">${ride.pickup_location}</div></div>
+              <div class="data-item"><div class="label">Drop-off Location</div><div class="value">${ride.drop_location}</div></div>
+              <div class="data-item"><div class="label">Ride Date & Time</div><div class="value">${new Date(ride.created_at).toLocaleString()}</div></div>
             </div>
             <div class="section">
-              <div class="section-title">Deployment Asset</div>
-              <div class="data-item"><div class="label">Assigned Pilot</div><div class="value">${ride.driver_name || 'Generic Service'}</div></div>
-              <div class="data-item"><div class="label">Unit Identifier</div><div class="value">${ride.model || 'Standard Unit'} (${ride.vehicle_number || 'UNRESTRICTED'})</div></div>
-              <div class="data-item"><div class="label">Mission Status</div><div class="value" style="color: ${ride.status === 'completed' ? '#10b981' : '#f59e0b'}">${ride.status.toUpperCase()}</div></div>
+              <div class="section-title">Driver & Vehicle</div>
+              <div class="data-item"><div class="label">Assigned Driver</div><div class="value">${ride.driver_name || 'Standard Service'}</div></div>
+              <div class="data-item"><div class="label">Vehicle Details</div><div class="value">${ride.model || 'Standard Vehicle'} (${ride.vehicle_number || 'UNRESTRICTED'})</div></div>
+              <div class="data-item"><div class="label">Ride Status</div><div class="value" style="color: ${ride.status === 'completed' ? '#10b981' : '#f59e0b'}">${ride.status.toUpperCase()}</div></div>
             </div>
           </div>
 
           <div class="fare-box">
             <div>
-              <div class="fare-label">Total Mission Allotment</div>
-              <div style="font-size: 11px; color: #94a3b8; margin-top: 4px; font-weight: 700;">PAYMENT METHOD: NETWORK WALLET</div>
+              <div class="fare-label">Total Amount Charged</div>
+              <div style="font-size: 11px; color: #94a3b8; margin-top: 4px; font-weight: 700;">PAYMENT METHOD: WALLET</div>
             </div>
             <div class="fare-amount">₹${Math.round(ride.fare)}</div>
           </div>
 
           <div class="footer">
-            <p>This is an electronically generated document for the KashmirMove Network. All deployments are recorded on the secure ledger.</p>
-            <div class="seal">VERIFIED DEPLOYMENT</div>
+            <p>This is an electronically generated receipt for your ride with KashmirMove. All transactions are securely recorded.</p>
+            <div class="seal">OFFICIAL RECEIPT</div>
           </div>
         </body>
       </html>
@@ -188,18 +188,18 @@ const MyRides = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
-             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Network Logs</span>
+             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Ride History</span>
           </div>
           <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
             YOUR <span className="text-primary">RIDES</span>
           </h2>
-          <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Historical archives of your tactical deployments.</p>
+          <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Historical records of your valley bookings.</p>
         </div>
         
         {!loading && rides.length > 0 && (
            <div className="bg-white dark:bg-white/5 px-6 sm:px-8 py-5 rounded-[2rem] border border-white/10 flex items-center justify-between gap-6 sm:gap-8 shadow-2xl w-full md:w-auto">
               <div className="text-right">
-                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic">Total Missions</p>
+                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic">Total Rides</p>
                  <p className="text-4xl font-display font-black text-slate-900 dark:text-white leading-none tracking-tighter">{rides.length}</p>
               </div>
               <div className="w-px h-12 bg-white/10"></div>
@@ -223,12 +223,12 @@ const MyRides = () => {
         ) : rides.length === 0 ? (
           <div className="py-24 sm:py-40 px-4 text-center bg-slate-50 dark:bg-white/5 rounded-[2rem] sm:rounded-[4rem] border border-dashed border-slate-200 dark:border-white/10">
             <Activity size={64} className="mx-auto mb-8 text-slate-300 opacity-20" />
-            <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-xs italic">No Operations Logged</p>
+            <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-xs italic">No Rides Booked Yet</p>
             <button 
               onClick={() => navigate('/customer/book')}
               className="mt-8 px-12 py-5 bg-primary text-obsidian rounded-[2rem] font-black uppercase text-[11px] tracking-widest shadow-glow-saffron hover:scale-105 transition-all"
             >
-              INITIALIZE FIRST MISSION
+              BOOK YOUR FIRST RIDE
             </button>
           </div>
         ) : (
@@ -287,7 +287,7 @@ const MyRides = () => {
                 {/* Price & Status */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-10 w-full lg:w-auto shrink-0">
                   <div className="text-right">
-                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Mission Fare</p>
+                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Ride Fare</p>
                     <p className="text-4xl font-display font-black italic text-primary tracking-tighter">₹{Math.round(ride.fare)}</p>
                   </div>
                   <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
@@ -307,11 +307,11 @@ const MyRides = () => {
               {expandedRideId === ride.id && (
                 <div className="p-5 sm:p-12 bg-slate-50 dark:bg-white/[0.02] border-t border-white/5 animate-slide-up">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    {/* Pilot Detail */}
+                    {/* Driver Detail */}
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <User size={14} className="text-primary" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Pilot Profile</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Driver Profile</p>
                       </div>
                       <div className="p-6 bg-white dark:bg-white/5 rounded-[2rem] border border-white/5 space-y-4 shadow-xl">
                         <div className="flex items-center gap-4">
@@ -331,44 +331,44 @@ const MyRides = () => {
                              <Car size={20} />
                            </div>
                            <div>
-                             <p className="text-[10px] font-black text-slate-400 uppercase italic">{ride.model || 'Generic Asset'}</p>
+                             <p className="text-[10px] font-black text-slate-400 uppercase italic">{ride.model || 'Standard Vehicle'}</p>
                              <p className="text-[9px] font-bold text-white/50 tracking-widest mt-1">{ride.vehicle_number || 'UNKNOWN'}</p>
                            </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Sector Map */}
+                    {/* Ride Route */}
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <MapPin size={14} className="text-emerald-500" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Mission Sector</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Ride Route</p>
                       </div>
                       <div className="p-6 bg-white dark:bg-white/5 rounded-[2rem] border border-white/5 space-y-6 shadow-xl">
                         <div>
-                          <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 italic">Pickup Hub</p>
-                          <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.pickup_location}</p>
+                           <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 italic">Pickup Location</p>
+                           <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.pickup_location}</p>
                         </div>
                         <div className="h-px bg-white/5 border-dashed border-b"></div>
                         <div>
-                          <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-2 italic">Terminal Node</p>
-                          <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.drop_location}</p>
+                           <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-2 italic">Drop-off Location</p>
+                           <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.drop_location}</p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Operational Commands */}
+                    {/* Actions */}
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <ShieldCheck size={14} className="text-electric-cyan" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Commands</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Actions</p>
                       </div>
                       <div className="space-y-4">
                         <button 
                           onClick={() => handleDownloadInvoice(ride)}
                           className="w-full py-5 bg-white dark:bg-white/5 hover:bg-primary hover:text-obsidian hover:shadow-glow-saffron border border-slate-200 dark:border-white/10 rounded-2xl flex items-center justify-center gap-4 text-slate-900 dark:text-white text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-lg active:scale-95 group/btn"
                         >
-                          <Download size={16} className="group-hover/btn:animate-bounce" /> INVOICE MANIFEST
+                          <Download size={16} className="group-hover/btn:animate-bounce" /> DOWNLOAD RECEIPT
                         </button>
                         {ride.status === 'completed' && (
                           ride.review_id ? (
@@ -390,7 +390,7 @@ const MyRides = () => {
                               onClick={() => setRatingRide(ride)}
                               className="w-full py-5 bg-primary text-obsidian rounded-2xl flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] shadow-glow-saffron transition-all hover:scale-[1.02] hover:shadow-2xl active:scale-95"
                             >
-                              <Star size={16} /> RATE MISSION
+                              <Star size={16} /> RATE RIDE
                             </button>
                           )
                         )}
@@ -423,8 +423,8 @@ const MyRides = () => {
                  <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary mx-auto shadow-inner">
                     <Star size={28} className="drop-shadow-glow-saffron" />
                  </div>
-                 <h3 className="text-2xl font-display font-black italic uppercase tracking-tight text-white leading-none">MISSION <br/><span className="bg-gradient-to-r from-primary to-saffron bg-clip-text text-transparent text-3xl">FEEDBACK</span></h3>
-                 <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-2">Log Registry #{ratingRide.id}</p>
+                 <h3 className="text-2xl font-display font-black italic uppercase tracking-tight text-white leading-none">RIDE <br/><span className="bg-gradient-to-r from-primary to-saffron bg-clip-text text-transparent text-3xl">FEEDBACK</span></h3>
+                 <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-2">Ride ID #{ratingRide.id}</p>
               </div>
 
               <div className="flex justify-center gap-3 py-1 relative z-10">
@@ -444,11 +444,11 @@ const MyRides = () => {
               </div>
 
               <div className="space-y-2 relative z-10">
-                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 italic ml-2">Assessment Log</p>
+                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 italic ml-2">Your Review</p>
                  <textarea 
                   value={ratingComment}
                   onChange={(e) => setRatingComment(e.target.value)}
-                  placeholder="Provide tactical assessment..."
+                  placeholder="Tell us about your ride experience..."
                   className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-white text-sm outline-none focus:border-primary/50 transition-all min-h-[90px] resize-none placeholder:text-slate-600 shadow-inner"
                  />
               </div>
@@ -458,18 +458,18 @@ const MyRides = () => {
                   onClick={() => setRatingRide(null)}
                   className="flex-1 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-[9px] font-black uppercase tracking-widest text-slate-400 transition-all"
                  >
-                   ABORT
+                   CANCEL
                  </button>
                  <button 
                   onClick={submitRating}
                   disabled={submittingRating}
                   className="flex-[2] py-4 bg-gradient-to-r from-primary to-saffron text-obsidian rounded-xl text-[9px] font-black uppercase tracking-widest shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
                  >
-                   {submittingRating ? 'TRANSMITTING...' : 'COMMIT FEEDBACK'}
+                   {submittingRating ? 'SENDING...' : 'SUBMIT FEEDBACK'}
                  </button>
               </div>
               
-              <div className="text-[8px] text-center font-bold text-slate-500 uppercase tracking-[0.3em] opacity-50">Protocol: Secure Encryption Active</div>
+              <div className="text-[8px] text-center font-bold text-slate-500 uppercase tracking-[0.3em] opacity-50">Secure Connection Active</div>
            </div>
         </div>,
         document.body

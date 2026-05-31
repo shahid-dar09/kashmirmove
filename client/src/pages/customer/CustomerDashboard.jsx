@@ -134,10 +134,10 @@ const PilotCard = ({ driver, onBook }) => {
            className="group relative w-full h-14 bg-primary rounded-xl overflow-hidden shadow-glow-saffron hover:scale-[1.03] active:scale-95 transition-all duration-300"
          >
            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-           <div className="flex items-center justify-center gap-2 relative z-10">
-              <span className="text-[10px] font-black uppercase italic tracking-[0.2em] text-obsidian">Initiate Deployment</span>
-              <ArrowUpRight size={16} className="text-obsidian group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-           </div>
+            <div className="flex items-center justify-center gap-2 relative z-10">
+               <span className="text-[10px] font-black uppercase italic tracking-[0.2em] text-obsidian">Book Driver</span>
+               <ArrowUpRight size={16} className="text-obsidian group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </div>
          </button>
       </div>
     </div>
@@ -263,21 +263,21 @@ const CustomerDashboard = () => {
                     
                     <div className="min-w-0">
                        <div className="flex items-center gap-3 mb-2">
-                          <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">
-                                Live Dispatch Protocol
-                             </p>
-                          </div>
-                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{activeRideData.status}</span>
-                       </div>
-                       <h3 className="text-3xl sm:text-4xl font-black italic uppercase leading-none tracking-tight text-white mb-2">
-                          {activeRideData.status === 'pending' ? 'Searching for Pilot' : `Pilot ${activeRideData.driver_name}`}
-                       </h3>
-                       <p className="text-sm font-medium text-slate-400 flex items-center gap-2 italic">
-                          <MapPin size={14} className="text-primary" /> 
-                          {activeRideData.status === 'started' ? 'En Route to Destination' : 
-                           activeRideData.status === 'pending' ? 'Handshaking with nearby fleet...' : 'Approaching Pickup Location'}
-                       </p>
+                           <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">
+                                 Live Dispatch Status
+                              </p>
+                           </div>
+                           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{activeRideData.status}</span>
+                        </div>
+                        <h3 className="text-3xl sm:text-4xl font-black italic uppercase leading-none tracking-tight text-white mb-2">
+                           {activeRideData.status === 'pending' ? 'Searching for Driver' : `Driver ${activeRideData.driver_name}`}
+                        </h3>
+                        <p className="text-sm font-medium text-slate-400 flex items-center gap-2 italic">
+                           <MapPin size={14} className="text-primary" /> 
+                           {activeRideData.status === 'started' ? 'En Route to Destination' : 
+                            activeRideData.status === 'pending' ? 'Connecting with nearby drivers...' : 'Approaching Pickup Location'}
+                        </p>
                     </div>
                  </div>
 
@@ -290,7 +290,7 @@ const CustomerDashboard = () => {
                       )}
                       className="flex-1 lg:flex-none h-16 px-12 rounded-2xl bg-primary text-obsidian font-black text-sm uppercase tracking-widest hover:shadow-glow-saffron hover:-translate-y-1 active:scale-95 transition-all duration-300"
                     >
-                      Enter Command Center
+                      View Active Ride
                     </button>
                     <button className="h-16 w-16 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all">
                        <ShieldCheck size={24} />
@@ -306,13 +306,13 @@ const CustomerDashboard = () => {
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-6">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
-             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500">Logistics Hub v2.0</span>
+             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500">Passenger Dashboard</span>
           </div>
           <h2 className="text-3xl sm:text-6xl lg:text-8xl font-black mb-6 italic uppercase text-slate-900 dark:text-white leading-[0.95] sm:leading-[0.9] tracking-tighter">
             HELLO, <span className="text-gradient-primary pr-4">{user?.name} </span>
           </h2>
           <p className="text-lg sm:text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic max-w-xl">
-            Command the valley's most sophisticated transport network. Your premium fleet is ready for immediate dispatch.
+            Book safe, comfortable, and reliable rides across the valley with our top-rated local drivers.
           </p>
         </div>
         
@@ -321,7 +321,7 @@ const CustomerDashboard = () => {
           className="group relative min-h-16 sm:h-24 w-full lg:w-auto px-6 sm:px-14 flex items-center justify-center gap-4 bg-primary rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all duration-300"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          <span className="text-lg sm:text-xl font-black uppercase italic tracking-widest text-obsidian relative z-10">Initialize Booking</span>
+          <span className="text-lg sm:text-xl font-black uppercase italic tracking-widest text-obsidian relative z-10">Book a Ride</span>
           <ArrowUpRight className="w-6 h-6 sm:w-8 sm:h-8 text-obsidian group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform relative z-10" />
         </Link>
       </div>
@@ -331,7 +331,7 @@ const CustomerDashboard = () => {
         <div className="flex items-center justify-between px-2">
            <div className="flex items-center gap-3">
               <Compass className="text-primary animate-spin-slow" size={20} />
-              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500">Tactical Fleet Overlay</h3>
+              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500">Available Drivers Map</h3>
            </div>
         </div>
 
@@ -345,9 +345,9 @@ const CustomerDashboard = () => {
                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white dark:border-obsidian animate-pulse"></div>
                 </div>
                 <div>
-                   <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-0.5">Live Grid Active</p>
+                   <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-0.5">Live Driver Map</p>
                    <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">
-                     {availableDrivers.length} Active Nodes • 94% Coverage
+                     {availableDrivers.length} Active Drivers • 94% Coverage
                    </p>
                 </div>
              </div>
@@ -396,7 +396,7 @@ const CustomerDashboard = () => {
                   <div className="w-12 h-12 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400 dark:text-slate-600 animate-pulse">
                      <Compass size={24} />
                   </div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-600">Fleet Map Standby</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-600">Driver Map Standby</p>
                </div>
             </div>
           )}
@@ -407,14 +407,14 @@ const CustomerDashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         <div className="card-modern group hover:border-primary/50 transition-all p-8 animate-slide-up stagger-1 overflow-hidden relative">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Dispatch History</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Total Bookings</p>
           <div className="flex items-baseline gap-4">
             {loading ? <Skeleton width="100px" height="4rem" /> : 
               <span className="text-5xl sm:text-6xl font-black italic tracking-tighter text-slate-900 dark:text-white group-hover:text-primary transition-colors">
                 {stats.totalRides}
               </span>
             }
-            <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Nodes</span>
+            <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Rides</span>
           </div>
           <div className="mt-8 h-2 rounded-full bg-slate-100 dark:bg-white/5 overflow-hidden">
             <div 
@@ -426,26 +426,26 @@ const CustomerDashboard = () => {
 
         <div className="card-modern group hover:border-emerald-500/50 transition-all p-8 animate-slide-up stagger-2 relative overflow-hidden">
           <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Capital Outflow</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Total Spent</p>
           <div className="flex items-baseline gap-2">
             <span className="text-5xl sm:text-6xl font-black italic tracking-tighter text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">
               ₹{Math.round(stats.totalSpent)}
             </span>
             <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Total</span>
           </div>
-          <p className="mt-8 text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] italic">Cumulative expenditure logged</p>
+          <p className="mt-8 text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] italic">Total amount spent</p>
         </div>
 
         <div className="bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 rounded-[2.5rem] border border-white/10 p-8 flex flex-col justify-between animate-slide-up stagger-3 group hover:border-electric-cyan/50 transition-all relative overflow-hidden">
           <div className="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-electric-cyan/5 blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Network Status</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Member Status</p>
           <div className="flex items-center gap-6">
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-electric-cyan shadow-[0_0_30px_rgba(0,245,255,0.3)] group-hover:rotate-6 transition-transform">
               <Star className="w-8 h-8 text-obsidian" fill="currentColor" />
             </div>
             <div>
-              <p className="text-2xl font-black uppercase italic text-white tracking-tight">Elite Pilot</p>
-              <p className="text-[10px] font-bold text-electric-cyan uppercase tracking-[0.2em] mt-1">Priority Dispatch Active</p>
+              <p className="text-2xl font-black uppercase italic text-white tracking-tight">Priority Passenger</p>
+              <p className="text-[10px] font-bold text-electric-cyan uppercase tracking-[0.2em] mt-1">Fast Booking Enabled</p>
             </div>
           </div>
         </div>
@@ -457,14 +457,14 @@ const CustomerDashboard = () => {
            <div className="flex items-center gap-3">
               <History className="text-primary" size={24} />
               <h3 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tight text-slate-900 dark:text-white">
-                Recent Logs
+                Recent Rides
               </h3>
            </div>
            <Link
              to="/customer/rides"
              className="text-[10px] font-black uppercase tracking-[0.3em] text-primary bg-primary/10 px-4 py-2 rounded-full border border-primary/20 hover:bg-primary hover:text-obsidian transition-all"
            >
-             Access Archive
+             View All Rides
            </Link>
         </div>
 
@@ -472,7 +472,7 @@ const CustomerDashboard = () => {
           {recentRides.length === 0 ? (
             <div className="col-span-full card-modern border-dashed border-white/10 py-24 flex flex-col items-center justify-center text-slate-500 dark:text-slate-600">
               <Navigation className="w-20 h-20 mb-6 opacity-5 animate-float" />
-              <p className="font-black uppercase tracking-[0.3em] text-xs italic">No operational records found in current sector</p>
+              <p className="font-black uppercase tracking-[0.3em] text-xs italic">No ride records found</p>
             </div>
           ) : (
             recentRides.map((ride, i) => (
@@ -493,7 +493,7 @@ const CustomerDashboard = () => {
                 <div className="flex-1 min-w-0 text-center sm:text-left w-full">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-3">
                     <h4 className="font-black text-xl italic uppercase tracking-tight text-slate-900 dark:text-white truncate">
-                      {ride.driver_name || "Unassigned Node"}
+                      {ride.driver_name || "Unassigned Driver"}
                     </h4>
                     <span className={`text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border shrink-0 ${
                       ride.status === "completed"

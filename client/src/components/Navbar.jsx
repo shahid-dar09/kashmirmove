@@ -63,7 +63,7 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
             className="px-4 py-3 text-xs font-black uppercase tracking-widest text-slate-300 hover:bg-white/5 hover:text-primary rounded-xl flex items-center justify-between"
           >
-            Safety Protocols <ShieldCheck size={16} className="text-emerald-500" />
+            Safety Guidelines <ShieldCheck size={16} className="text-emerald-500" />
           </Link>
           <div className="h-px w-full bg-white/10 my-4"></div>
           <Link 

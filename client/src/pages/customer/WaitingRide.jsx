@@ -14,13 +14,13 @@ import {
 } from 'lucide-react';
 
 const statusMessages = [
-  'Broadcasting coordinates...',
-  'Scanning Srinagar sector...',
-  'Identifying nearest available node...',
-  'Handshaking with fleet pilots...',
-  'Awaiting protocol confirmation...',
-  'Synchronizing with valley grid...',
-  'Optimizing route interception...'
+  'Locating closest drivers...',
+  'Checking Srinagar area...',
+  'Finding nearest available driver...',
+  'Connecting with nearby drivers...',
+  'Waiting for driver response...',
+  'Syncing with live maps...',
+  'Calculating best route...'
 ];
 
 const WaitingRide = () => {
@@ -31,7 +31,7 @@ const WaitingRide = () => {
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const [cancelling, setCancelling] = useState(false);
-  const [statusText, setStatusText] = useState('Initializing Uplink...');
+  const [statusText, setStatusText] = useState('Connecting...');
   const socketRef = useRef(null);
 
 
@@ -86,10 +86,10 @@ const WaitingRide = () => {
     
     socketRef.current.on('booking_status_updated', (data) => {
       if (data.status === 'accepted') {
-        addToast("Pilot Found!", "A pilot has accepted your mission.", "success");
+        addToast("Driver Found!", "A driver has accepted your ride request.", "success");
         navigate(`/customer/ride/${id}`);
       } else if (data.status === 'cancelled') {
-        addToast("Mission Aborted", "The ride request was cancelled.", "error");
+        addToast("Ride Cancelled", "The ride request was cancelled.", "error");
         navigate('/dashboard');
       }
     });
@@ -103,7 +103,7 @@ const WaitingRide = () => {
     setCancelling(true);
     try {
       await api.post('/customer/cancel-ride', { bookingId: id });
-      addToast("Request Cancelled", "Your mission request was aborted.", "success");
+      addToast("Request Cancelled", "Your ride request has been cancelled.", "success");
       navigate('/dashboard');
     } catch (err) {
       addToast("Error", err.response?.data?.message || "Failed to cancel", "error");
@@ -118,7 +118,7 @@ const WaitingRide = () => {
          <div className="w-24 h-24 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
          <Signal className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={32} />
       </div>
-      <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 animate-pulse italic">Establishing Sector Uplink...</p>
+      <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 animate-pulse italic">Connecting to service...</p>
     </div>
   );
 
@@ -162,13 +162,13 @@ const WaitingRide = () => {
              <div className="absolute -top-8 right-0 sm:-top-6 sm:-right-16 animate-float">
                 <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 px-5 py-2 rounded-2xl backdrop-blur-xl shadow-2xl">
                    <Target className="text-emerald-500 shadow-glow-emerald/50" size={16} />
-                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 italic">Node Identified</span>
+                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 italic">Driver Located</span>
                 </div>
              </div>
              <div className="absolute -bottom-12 left-0 sm:-bottom-10 sm:-left-20 animate-float" style={{ animationDelay: '2s' }}>
                 <div className="flex items-center gap-3 bg-primary/10 border border-primary/20 px-5 py-2 rounded-2xl backdrop-blur-xl shadow-2xl">
                    <Activity className="text-primary shadow-glow-saffron/50" size={16} />
-                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary italic">Syncing Grid...</span>
+                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary italic">Connecting...</span>
                 </div>
              </div>
           </div>
@@ -186,10 +186,10 @@ const WaitingRide = () => {
           
           <div className="space-y-4">
             <h2 className="text-4xl sm:text-8xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85]">
-              SCANNING FOR <br/> <span className="text-primary">PILOTS</span>
+              SEARCHING FOR <br/> <span className="text-primary">DRIVERS</span>
             </h2>
             <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 font-bold italic leading-relaxed max-w-lg mx-auto uppercase tracking-tighter opacity-80">
-              Broadcasting mission parameters to the valley's elite pilot network. Stand by for protocol acknowledgement.
+              Connecting you with available drivers in the area. Please wait a moment.
             </p>
           </div>
 
@@ -199,7 +199,7 @@ const WaitingRide = () => {
                    <MapPin size={24} />
                 </div>
                 <div className="min-w-0">
-                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Deployment Origin</p>
+                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Pickup Location</p>
                    <p className="font-black italic text-slate-900 dark:text-white truncate text-lg tracking-tight uppercase leading-none">{booking.pickup_location.split('|||')[0]}</p>
                 </div>
              </div>
@@ -208,7 +208,7 @@ const WaitingRide = () => {
                    <Target size={24} />
                 </div>
                 <div className="min-w-0">
-                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Mission Target</p>
+                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Drop-off Location</p>
                    <p className="font-black italic text-slate-900 dark:text-white truncate text-lg tracking-tight uppercase leading-none">{booking.drop_location.split('|||')[0]}</p>
                 </div>
              </div>
@@ -221,12 +221,12 @@ const WaitingRide = () => {
                className="group flex w-full sm:w-auto items-center justify-center gap-4 sm:gap-6 px-6 sm:px-12 py-5 sm:py-6 rounded-[1.5rem] sm:rounded-[2.5rem] bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 font-black uppercase tracking-[0.3em] text-[10px] hover:bg-red-500 hover:text-white dark:hover:bg-red-500 transition-all shadow-2xl border border-white/5"
              >
                {cancelling ? <Loader2 size={20} className="animate-spin" /> : <X size={20} className="group-hover:rotate-90 transition-transform" />}
-               ABORT MISSION REQUEST
+               CANCEL RIDE REQUEST
              </button>
              
              <div className="flex items-center gap-4">
                 <div className="w-4 h-4 rounded-full bg-emerald-500 animate-pulse shadow-glow-emerald"></div>
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Security Protocols Active</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Secure Connection Active</span>
              </div>
           </div>
        </div>

@@ -73,7 +73,7 @@ const AdminDashboard = () => {
          <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
          <Activity className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={20} />
       </div>
-      <p className="font-display font-black text-slate-500 uppercase tracking-[0.4em] text-[10px] animate-pulse">Aggregating System Intelligence</p>
+      <p className="font-display font-black text-slate-500 uppercase tracking-[0.4em] text-[10px] animate-pulse">Loading Dashboard Statistics</p>
     </div>
   );
 
@@ -85,12 +85,12 @@ const AdminDashboard = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
-             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Live Systems Terminal</span>
+             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Live System Dashboard</span>
           </div>
           <h2 className="text-4xl sm:text-7xl font-display font-black tracking-tighter italic uppercase leading-[0.9] sm:leading-[0.85] text-slate-900 dark:text-white">
-            FLEET <span className="text-primary">COMMAND</span>
+            ADMIN <span className="text-primary">DASHBOARD</span>
           </h2>
-          <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Real-time operational telemetry and global sector metrics.</p>
+          <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Real-time operational statistics and regional metrics.</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
            <button 
@@ -128,9 +128,9 @@ const AdminDashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {[
           { label: 'Customer Base', value: stats?.total_users || 0, icon: <Users size={28} />, color: 'blue', growth: '8.4%' },
-          { label: 'Verified Pilots', value: stats?.active_drivers || 0, icon: <Truck size={28} />, color: 'purple', growth: '12.1%' },
-          { label: 'Total Missions', value: stats?.total_trips || 0, icon: <CheckCircle size={28} />, color: 'emerald', growth: '2.1%' },
-          { label: 'Gross Allotment', value: `₹${Math.round(stats?.total_revenue || 0)}`, icon: <DollarSign size={28} />, color: 'primary', growth: '12.5%', premium: true }
+          { label: 'Verified Drivers', value: stats?.active_drivers || 0, icon: <Truck size={28} />, color: 'purple', growth: '12.1%' },
+          { label: 'Total Rides', value: stats?.total_trips || 0, icon: <CheckCircle size={28} />, color: 'emerald', growth: '2.1%' },
+          { label: 'Total Revenue', value: `₹${Math.round(stats?.total_revenue || 0)}`, icon: <DollarSign size={28} />, color: 'primary', growth: '12.5%', premium: true }
         ].map((item, idx) => (
           <div key={idx} className={`relative overflow-hidden card-modern p-6 sm:p-10 flex flex-col items-start transition-all duration-500 rounded-[2rem] sm:rounded-[3rem] ${
             item.premium 
@@ -169,12 +169,12 @@ const AdminDashboard = () => {
              <div>
                <div className="flex items-center gap-3 mb-2">
                   <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Telemetry</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Analytics</span>
                </div>
-               <h3 className="font-display font-black text-3xl italic uppercase text-slate-900 dark:text-white tracking-tight leading-none">Mission <span className="text-primary">Velocity</span></h3>
+               <h3 className="font-display font-black text-3xl italic uppercase text-slate-900 dark:text-white tracking-tight leading-none">Ride <span className="text-primary">Growth</span></h3>
              </div>
              <div className="bg-primary/10 px-4 py-2 rounded-2xl border border-primary/20">
-                <span className="text-[10px] font-black uppercase tracking-widest text-primary italic">Live Cycle Feed</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-primary italic">Live Statistics</span>
              </div>
            </div>
            <div className="h-[350px] relative z-10">
@@ -221,9 +221,9 @@ const AdminDashboard = () => {
              <div>
                <div className="flex items-center gap-3 mb-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Sector Intel</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Regional Activity</span>
                </div>
-               <h3 className="font-display font-black text-3xl italic uppercase text-slate-900 dark:text-white tracking-tight leading-none">Territorial <span className="text-primary">Yield</span></h3>
+               <h3 className="font-display font-black text-3xl italic uppercase text-slate-900 dark:text-white tracking-tight leading-none">Regional <span className="text-primary">Revenue</span></h3>
              </div>
              <div className="bg-white/5 px-4 py-2 rounded-2xl border border-white/5">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 italic">Regional Distribution</span>
@@ -275,16 +275,16 @@ const AdminDashboard = () => {
                  <AlertCircle size={44} />
               </div>
               <div className="flex-1 text-center sm:text-left">
-                 <p className="text-[11px] font-black uppercase tracking-[0.4em] text-red-500 mb-3 italic leading-none">Priority Intervention Needed</p>
+                 <p className="text-[11px] font-black uppercase tracking-[0.4em] text-red-500 mb-3 italic leading-none">Action Required</p>
                  <h4 className="text-3xl font-display font-black text-slate-900 dark:text-white mb-3 italic uppercase tracking-tight">Pending Approvals</h4>
                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-10 font-bold leading-relaxed uppercase tracking-widest text-[10px]">
-                   There {stats?.pending_approvals === 1 ? 'is' : 'are'} <span className="text-red-500">{stats?.pending_approvals || 0}</span> pilot application{stats?.pending_approvals !== 1 ? 's' : ''} awaiting background verification terminal.
+                   There {stats?.pending_approvals === 1 ? 'is' : 'are'} <span className="text-red-500">{stats?.pending_approvals || 0}</span> driver application{stats?.pending_approvals !== 1 ? 's' : ''} awaiting background verification review.
                  </p>
                  <button 
                   onClick={() => navigate('/admin/pending')} 
                   className="w-full sm:w-auto px-10 py-5 bg-red-500 text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] hover:bg-red-600 transition-all shadow-glow-red hover:scale-105 active:scale-95"
                 >
-                  REVIEW MISSION FILES →
+                  REVIEW APPLICATIONS →
                 </button>
               </div>
            </div>
@@ -299,10 +299,10 @@ const AdminDashboard = () => {
                  <ShieldCheck size={44} />
               </div>
               <div className="flex-1 text-center sm:text-left">
-                 <p className="text-[11px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-3 italic leading-none">Systems Status: Nominal</p>
+                 <p className="text-[11px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-3 italic leading-none">System Status: Online</p>
                  <h4 className="text-3xl font-display font-black text-slate-900 dark:text-white mb-3 italic uppercase tracking-tight">Infrastructure Health</h4>
                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-10 font-bold leading-relaxed uppercase tracking-widest text-[10px]">
-                   All regional nodes operating at 99.9% uptime. Real-time socket relays stable across Srinagar sector.
+                   All regional databases operating at 99.9% uptime. Real-time web connections stable across Srinagar.
                  </p>
                  <div className="flex gap-3 justify-center sm:justify-start">
                     {[1,2,3,4,5,6,7,8].map(i => (

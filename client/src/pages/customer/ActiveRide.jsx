@@ -168,10 +168,10 @@ const ActiveRide = () => {
     
     socketRef.current.on('booking_status_updated', (data) => {
       if (data.status === 'cancelled') {
-        addToast("Mission Aborted", "The pilot cancelled the deployment.", "error");
+        addToast("Ride Cancelled", "The driver cancelled the ride request.", "error");
         navigate('/customer/rides');
       } else if (data.status === 'completed') {
-        addToast("Mission Accomplished", "You have reached your target.", "success");
+        addToast("Ride Completed", "You have successfully reached your destination.", "success");
         navigate('/customer/rides');
       } else {
         fetchRideDetails();
@@ -192,11 +192,11 @@ const ActiveRide = () => {
   }, [id, addToast, navigate, fetchRideDetails, user?.id]);
 
   const cancelRide = async () => {
-    if (!window.confirm('Are you sure you want to abort this mission?')) return;
+    if (!window.confirm('Are you sure you want to cancel this ride?')) return;
     setCancelling(true);
     try {
       await api.post('/customer/cancel-ride', { bookingId: id });
-      addToast("Mission Aborted", "Ride has been cancelled successfully.", "success");
+      addToast("Ride Cancelled", "Ride has been cancelled successfully.", "success");
       navigate('/customer/rides');
     } catch (err) {
       addToast("Error", err.response?.data?.message || "Failed to cancel", "error");
@@ -211,7 +211,7 @@ const ActiveRide = () => {
          <div className="w-20 h-20 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
          <Signal className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={24} />
       </div>
-      <p className="text-xs font-black uppercase tracking-[0.4em] text-slate-500 animate-pulse italic">Syncing Telemetry...</p>
+      <p className="text-xs font-black uppercase tracking-[0.4em] text-slate-500 animate-pulse italic">Syncing status...</p>
     </div>
   );
 
@@ -280,7 +280,7 @@ const ActiveRide = () => {
            </div>
            <div className="min-w-0 flex-1">
               <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic">
-                {ride.status === 'started' ? 'MISSION IN TRANSIT' : 'EN ROUTE TO PICKUP'}
+                {ride.status === 'started' ? 'RIDE IN PROGRESS' : 'DRIVING TO PICKUP'}
               </p>
               <h4 className="text-lg font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate">
                 {ride.driver_name}
@@ -345,7 +345,7 @@ const ActiveRide = () => {
                      <div className="flex items-center gap-5 sm:gap-8 flex-1 w-full">
                         <div className="relative shrink-0">
                            <div className="w-20 h-20 sm:w-32 sm:h-32 bg-slate-100 dark:bg-white/5 rounded-[2rem] sm:rounded-[2.5rem] border-4 border-primary/20 overflow-hidden shadow-2xl group">
-                              <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${ride.driver_name}`} alt="Pilot" className="w-full h-full scale-110 group-hover:scale-125 transition-transform duration-500" />
+                              <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${ride.driver_name}`} alt="Driver" className="w-full h-full scale-110 group-hover:scale-125 transition-transform duration-500" />
                            </div>
                            <div className="absolute -bottom-2 -right-2 bg-primary text-obsidian p-2.5 rounded-2xl shadow-glow-saffron border-4 border-white dark:border-obsidian">
                               <ShieldCheck size={20} fill="currentColor" />
@@ -356,7 +356,7 @@ const ActiveRide = () => {
                               <h3 className="text-2xl sm:text-4xl font-display font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate">{ride.driver_name}</h3>
                               <div className="flex gap-2">
                                  <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-widest rounded-full italic">TOP RATED</span>
-                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-black uppercase tracking-widest rounded-full italic">VERIFIED PILOT</span>
+                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-black uppercase tracking-widest rounded-full italic">VERIFIED DRIVER</span>
                               </div>
                            </div>
                            <div className="flex flex-wrap items-center gap-3 sm:gap-6">
@@ -379,7 +379,7 @@ const ActiveRide = () => {
                           className="w-full sm:w-auto px-10 h-20 bg-slate-100 dark:bg-white/5 hover:bg-primary hover:text-obsidian rounded-[1.8rem] border border-slate-200 dark:border-white/10 flex items-center justify-center gap-4 transition-all group/btn shadow-xl"
                         >
                            <Phone size={20} className="group-hover:rotate-12 transition-transform" />
-                           <span className="text-[11px] font-black uppercase tracking-[0.3em]">CALL PILOT</span>
+                           <span className="text-[11px] font-black uppercase tracking-[0.3em]">CALL DRIVER</span>
                         </a>
                         <div className="w-full sm:w-auto px-10 h-20 bg-gradient-to-br from-primary to-saffron-light rounded-[1.8rem] flex flex-col items-center justify-center shadow-glow-saffron shrink-0">
                            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-obsidian/40 leading-none mb-1">ESTIMATED FARE</span>
@@ -404,17 +404,17 @@ const ActiveRide = () => {
                      <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/5 flex items-center justify-center text-primary shadow-sm border border-white/10">
                         <ShieldCheck size={20} />
                      </div>
-                     <div>
-                        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic">SECURITY PROTOCOL</p>
-                        <p className="text-sm font-black text-emerald-500 uppercase tracking-tight italic">ENCRYPTED PATH ACTIVE</p>
-                     </div>
+                      <div>
+                         <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic">SECURITY STATUS</p>
+                         <p className="text-sm font-black text-emerald-500 uppercase tracking-tight italic">SECURE RIDE ACTIVE</p>
+                      </div>
                   </div>
                   <button 
                     onClick={cancelRide}
                     disabled={cancelling || ride.status === 'started'}
                     className="px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] text-red-500/50 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all disabled:opacity-30 disabled:grayscale"
                   >
-                    ABORT MISSION
+                    CANCEL RIDE
                   </button>
                </div>
             </div>

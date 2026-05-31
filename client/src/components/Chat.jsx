@@ -103,14 +103,14 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
         <div className="flex items-center gap-3 sm:gap-5 min-w-0">
           <div className="relative">
             <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/5 border border-white/10 text-primary rounded-2xl flex items-center justify-center font-black italic text-xl shadow-2xl">
-              {receiverName?.charAt(0) || 'P'}
+              {receiverName?.charAt(0) || 'D'}
             </div>
           </div>
           <div className="min-w-0">
-            <h3 className="text-sm sm:text-base font-black italic uppercase leading-none tracking-widest text-white truncate">{receiverName || 'Pilot'}</h3>
+            <h3 className="text-sm sm:text-base font-black italic uppercase leading-none tracking-widest text-white truncate">{receiverName || 'Driver'}</h3>
             <div className="flex items-center gap-2 mt-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40">COMM-LINK ACTIVE</p>
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40">CONNECTION ACTIVE</p>
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
             <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-6 opacity-20">
               <MessageSquare size={32} className="text-primary" />
             </div>
-            <p className="font-black italic uppercase tracking-[0.3em] text-[10px] text-white/20 leading-relaxed">No transmission logs detected.<br/>Initiate communication protocol.</p>
+            <p className="font-black italic uppercase tracking-[0.3em] text-[10px] text-white/20 leading-relaxed">No messages yet.<br/>Start a conversation.</p>
           </div>
         ) : (
           messages.map((msg, i) => {
@@ -182,8 +182,8 @@ const Chat = ({ bookingId, receiverName, receiverPhone, socketRef, onClose }) =>
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-            placeholder="TYPE SECURE MESSAGE..." 
-            className="flex-1 bg-transparent border-none outline-none px-4 font-black uppercase tracking-widest text-[11px] text-white placeholder:text-white/10"
+            placeholder="TYPE A MESSAGE..." 
+            className="flex-1 bg-transparent border-none outline-none px-4 font-black uppercase tracking-widest text-[11px] text-white placeholder:text-white/20"
           />
           <button 
             onClick={sendMessage}

@@ -57,7 +57,7 @@ const RideHistory = () => {
     const content = `
       <html>
         <head>
-          <title>KashmirMove Official Manifest #${ride.id}</title>
+          <title>KashmirMove Official Receipt #${ride.id}</title>
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
             body { font-family: 'Outfit', sans-serif; padding: 60px; color: #0f172a; background: #fff; line-height: 1.5; }
@@ -89,41 +89,41 @@ const RideHistory = () => {
         <body>
           <div class="header">
             <div class="brand">
-              <div class="logo">KASHMIRMOVE PILOT</div>
-              <div class="tagline">Official Sector Deployment Record</div>
+              <div class="logo">KASHMIRMOVE DRIVER</div>
+              <div class="tagline">Official Ride Earning Record</div>
             </div>
             <div class="manifest-meta">
-              <h1 class="manifest-title">MANIFEST</h1>
-              <div class="manifest-id">ARCHIVE: PILOT-LOG-${ride.id} / ${new Date(ride.created_at).getFullYear()}</div>
+              <h1 class="manifest-title">EARNING RECEIPT</h1>
+              <div class="manifest-id">ARCHIVE: DRIVER-LOG-${ride.id} / ${new Date(ride.created_at).getFullYear()}</div>
             </div>
           </div>
 
           <div class="grid">
             <div class="section">
-              <div class="section-title">Operational Sectors</div>
-              <div class="data-item"><div class="label">Pickup Hub</div><div class="value">${ride.pickup_location}</div></div>
-              <div class="data-item"><div class="label">Target Terminal</div><div class="value">${ride.drop_location}</div></div>
-              <div class="data-item"><div class="label">Operation Timestamp</div><div class="value">${new Date(ride.created_at).toLocaleString()}</div></div>
+              <div class="section-title">Ride Route</div>
+              <div class="data-item"><div class="label">Pickup Location</div><div class="value">${ride.pickup_location}</div></div>
+              <div class="data-item"><div class="label">Drop-off Location</div><div class="value">${ride.drop_location}</div></div>
+              <div class="data-item"><div class="label">Ride Date & Time</div><div class="value">${new Date(ride.created_at).toLocaleString()}</div></div>
             </div>
             <div class="section">
-              <div class="section-title">Client Intelligence</div>
-              <div class="data-item"><div class="label">Identified Client</div><div class="value">${ride.customer_name || 'Generic Client'}</div></div>
-              <div class="data-item"><div class="label">Verified Contact</div><div class="value">${ride.customer_phone || 'N/A'}</div></div>
-              <div class="data-item"><div class="label">Status Protocol</div><div class="value" style="color: ${ride.status === 'completed' ? '#10b981' : '#f59e0b'}">${ride.status.toUpperCase()}</div></div>
+              <div class="section-title">Customer Profile</div>
+              <div class="data-item"><div class="label">Customer Name</div><div class="value">${ride.customer_name || 'Customer'}</div></div>
+              <div class="data-item"><div class="label">Customer Contact</div><div class="value">${ride.customer_phone || 'N/A'}</div></div>
+              <div class="data-item"><div class="label">Ride Status</div><div class="value" style="color: ${ride.status === 'completed' ? '#10b981' : '#f59e0b'}">${ride.status.toUpperCase()}</div></div>
             </div>
           </div>
 
           <div class="revenue-box">
             <div>
-              <div class="revenue-label">Mission Revenue Allotted</div>
-              <div style="font-size: 11px; color: #94a3b8; margin-top: 4px; font-weight: 700;">CREDITED TO PILOT LEDGER</div>
+              <div class="revenue-label">Earning Amount</div>
+              <div style="font-size: 11px; color: #94a3b8; margin-top: 4px; font-weight: 700;">CREDITED TO DRIVER EARNINGS</div>
             </div>
             <div class="revenue-amount">₹${Math.round(ride.fare)}</div>
           </div>
 
           <div class="footer">
-            <p>This document serves as the official operational record for the Pilot. All data is verified and synced with the KashmirMove Network.</p>
-            <div class="seal">VERIFIED OPERATION</div>
+            <p>This document serves as the official record of earnings for the Driver. All data is verified by the KashmirMove Network.</p>
+            <div class="seal">VERIFIED EARNING</div>
           </div>
         </body>
       </html>
@@ -140,18 +140,18 @@ const RideHistory = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
-             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Deployment Archives</span>
+             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Ride Earnings History</span>
           </div>
           <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
-            SECTOR <span className="text-primary">LOGS</span>
+            RIDE <span className="text-primary">HISTORY</span>
           </h2>
-          <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Logbook of your verified field operations.</p>
+          <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Your completed rides and earnings.</p>
         </div>
         
         {!loading && rides.length > 0 && (
            <div className="bg-white dark:bg-white/5 px-6 sm:px-8 py-5 rounded-[2rem] border border-white/10 flex items-center justify-between gap-6 sm:gap-8 shadow-2xl w-full md:w-auto">
               <div className="text-right">
-                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic">Total Missions</p>
+                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic">Total Rides</p>
                  <p className="text-4xl font-display font-black text-slate-900 dark:text-white leading-none tracking-tighter">{rides.length}</p>
               </div>
               <div className="w-px h-12 bg-white/10"></div>
@@ -174,7 +174,7 @@ const RideHistory = () => {
         ) : rides.length === 0 ? (
           <div className="py-24 sm:py-40 px-4 text-center bg-slate-50 dark:bg-white/5 rounded-[2rem] sm:rounded-[4rem] border border-dashed border-slate-200 dark:border-white/10">
             <Activity size={64} className="mx-auto mb-8 text-slate-300 opacity-20" />
-            <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-xs italic">Archives Empty</p>
+            <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-xs italic">No Rides Found</p>
           </div>
         ) : (
           rides.map((ride) => (
@@ -206,7 +206,7 @@ const RideHistory = () => {
                     </div>
                     <div className="flex items-center gap-3 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                        <User size={10} />
-                       <span className="text-slate-900 dark:text-white/80">{ride.customer_name || 'Generic Client'}</span>
+                       <span className="text-slate-900 dark:text-white/80">{ride.customer_name || 'Customer'}</span>
                        <span className="text-slate-700 dark:text-white/20">•</span>
                        <span className="text-primary/70">#{ride.id}</span>
                     </div>
@@ -231,7 +231,7 @@ const RideHistory = () => {
                 {/* Revenue & Status */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-10 w-full lg:w-auto shrink-0">
                   <div className="text-right">
-                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Mission Allotment</p>
+                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Earnings</p>
                     <p className="text-4xl font-display font-black italic text-emerald-500 tracking-tighter">₹{Math.round(ride.fare)}</p>
                   </div>
                   <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
@@ -253,7 +253,7 @@ const RideHistory = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <Briefcase size={14} className="text-primary" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Client Profile</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Customer</p>
                       </div>
                       <div className="p-6 bg-white dark:bg-white/5 rounded-[2rem] border border-white/5 space-y-4 shadow-xl">
                         <div className="flex items-center gap-4">
@@ -261,10 +261,10 @@ const RideHistory = () => {
                              <User size={24} />
                            </div>
                            <div>
-                             <p className="text-sm font-black text-slate-900 dark:text-white uppercase italic leading-none">{ride.customer_name || 'Generic Client'}</p>
+                             <p className="text-sm font-black text-slate-900 dark:text-white uppercase italic leading-none">{ride.customer_name || 'Customer'}</p>
                              <div className="flex items-center gap-2 mt-2 text-slate-500">
                                 <Phone size={10} />
-                                <span className="text-[9px] font-bold tracking-[0.2em]">{ride.customer_phone || 'NODATA'}</span>
+                                <span className="text-[9px] font-bold tracking-[0.2em]">{ride.customer_phone || 'N/A'}</span>
                              </div>
                            </div>
                         </div>
@@ -275,17 +275,17 @@ const RideHistory = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <Navigation size={14} className="text-emerald-500" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Sector Manifest</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Ride Route</p>
                       </div>
                       <div className="p-6 bg-white dark:bg-white/5 rounded-[2rem] border border-white/5 space-y-6 shadow-xl">
                         <div>
-                          <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 italic">Origin Hub</p>
-                          <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.pickup_location}</p>
+                           <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 italic">Pickup Location</p>
+                           <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.pickup_location}</p>
                         </div>
                         <div className="h-px bg-white/5 border-dashed border-b"></div>
                         <div>
-                          <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-2 italic">Target Terminal</p>
-                          <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.drop_location}</p>
+                           <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-2 italic">Drop-off Location</p>
+                           <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.drop_location}</p>
                         </div>
                       </div>
                     </div>
@@ -294,18 +294,18 @@ const RideHistory = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <Activity size={14} className="text-electric-cyan" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Pilot Commands</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Driver Actions</p>
                       </div>
                       <div className="space-y-4">
                         <button 
                           onClick={() => handleDownloadInvoice(ride)}
                           className="w-full py-5 bg-white dark:bg-white/5 hover:bg-emerald-500 hover:text-white hover:shadow-glow-emerald border border-slate-200 dark:border-white/10 rounded-2xl flex items-center justify-center gap-4 text-slate-900 dark:text-white text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-lg active:scale-95 group/btn"
                         >
-                          <Download size={16} className="group-hover/btn:animate-bounce" /> DOWNLOAD MANIFEST
+                          <Download size={16} className="group-hover/btn:animate-bounce" /> DOWNLOAD RECEIPT
                         </button>
                         <div className="p-5 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl text-center">
-                           <p className="text-[9px] font-black text-emerald-500 uppercase tracking-[0.3em] italic">Revenue Status</p>
-                           <p className="text-xl font-display font-black text-slate-900 dark:text-white mt-2 italic tracking-tighter">₹{Math.round(ride.fare)} ALLOTTED</p>
+                           <p className="text-[9px] font-black text-emerald-500 uppercase tracking-[0.3em] italic">Earning Status</p>
+                           <p className="text-xl font-display font-black text-slate-900 dark:text-white mt-2 italic tracking-tighter">₹{Math.round(ride.fare)} CREDITED</p>
                         </div>
                       </div>
                     </div>

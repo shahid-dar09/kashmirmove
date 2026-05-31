@@ -77,7 +77,7 @@ const RegisterDriver = () => {
         }
       });
       if (res.data.success) {
-        addToast("Application Received", "Your Pilot profile is now in queue for admin verification.", "success");
+        addToast("Application Received", "Your Driver profile is now in queue for admin verification.", "success");
         navigate('/login');
       }
     } catch (err) {
@@ -112,10 +112,10 @@ const RegisterDriver = () => {
 
             <div>
                <h1 className="text-[3.5rem] font-black italic uppercase tracking-tighter leading-[0.9] mb-8">
-                 PILOT <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">ENROLLMENT</span>
+                 DRIVER <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">REGISTRATION</span>
                </h1>
                <p className="text-slate-400 font-medium italic text-lg leading-relaxed max-w-md">
-                 Join the valley's elite transport guild. <br className="hidden lg:block"/> High performance, zero compromise.
+                 Register as a professional driver and start earning. <br className="hidden lg:block"/> High performance, zero compromise.
                </p>
             </div>
           </div>
@@ -141,7 +141,7 @@ const RegisterDriver = () => {
               <Link to="/login" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">LOGIN</Link>
               <Link to="/register" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">RIDER</Link>
               <div className="relative px-4 sm:px-6 py-2 bg-electric-purple/10 border border-electric-purple/20 rounded-full">
-                 <span className="text-[10px] font-black uppercase tracking-widest text-electric-purple shadow-[0_0_15px_rgba(139,92,246,0.2)]">PILOT</span>
+                 <span className="text-[10px] font-black uppercase tracking-widest text-electric-purple shadow-[0_0_15px_rgba(139,92,246,0.2)]">DRIVER</span>
                  <div className="absolute inset-0 rounded-full bg-electric-purple/5 animate-pulse"></div>
               </div>
            </div>
@@ -151,9 +151,9 @@ const RegisterDriver = () => {
         <div className="w-full max-w-[650px] m-auto py-8 sm:py-12 relative z-10">
            <div className="text-center mb-10 sm:mb-16">
               <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
-                PILOT <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">ENROLLMENT</span>
+                DRIVER <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">REGISTRATION</span>
               </h1>
-              <p className="text-slate-400 font-medium italic text-base mt-4">Elevate your status. Command the roads.</p>
+              <p className="text-slate-400 font-medium italic text-base mt-4">Drive with KashmirMove and earn at the best rates.</p>
            </div>
 
            {/* Form Container */}
@@ -168,7 +168,7 @@ const RegisterDriver = () => {
                    PHASE <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan px-1">{step === 1 ? '01' : '02'}</span>
                  </h3>
                  <p className="text-slate-500 font-medium italic text-sm">
-                   {step === 1 ? 'Personal Identity Information' : 'Vehicle & Fleet Details'}
+                   {step === 1 ? 'Personal Identity Information' : 'Vehicle & Driving Details'}
                  </p>
               </div>
 
@@ -351,7 +351,7 @@ const RegisterDriver = () => {
                       <RefreshCcw className="animate-spin" size={18} />
                     ) : (
                       <>
-                        {step === 1 ? 'INITIALIZE ENROLLMENT' : 'FINALIZE PILOT ACCESS'}
+                        {step === 1 ? 'START REGISTRATION' : 'FINALIZE REGISTRATION'}
                         <ArrowLeft size={16} className="rotate-180" />
                       </>
                     )}

@@ -74,10 +74,10 @@ const RegisterCustomer = () => {
            </div>
 
            <div>
-              <h2 className="text-[32px] font-black italic uppercase leading-none tracking-tight text-white pr-3">
+              <h2 className="text-[32px] font-black italic uppercase leading-none tracking-tight text-white pr-8">
                 TRAVEL WITH
               </h2>
-              <h2 className="text-[32px] font-black italic uppercase leading-none tracking-tight text-primary mb-4 pr-3">
+              <h2 className="text-[32px] font-black italic uppercase leading-none tracking-tight text-primary mb-4 pr-8">
                 CONFIDENCE
               </h2>
               <p className="text-slate-400 font-medium italic text-base leading-relaxed max-w-[280px]">
@@ -134,8 +134,8 @@ const RegisterCustomer = () => {
         {/* Content Body */}
         <div className="w-full max-w-[600px] m-auto py-8 sm:py-12 relative z-10">
            <div className="text-left mb-8 sm:mb-10">
-              <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3 pr-2">
-                REGISTER AS<br/><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">RIDER</span>
+              <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3 pr-8">
+                REGISTER AS<br/><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary pr-2">RIDER</span>
               </h1>
               <p className="text-slate-400 font-medium italic text-base">Begin your journey with the valley's premium transport network.</p>
            </div>

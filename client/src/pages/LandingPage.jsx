@@ -690,7 +690,7 @@ const LandingPage = () => {
                          {d.status}
                       </span>
                       <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-                         Active: <span className="text-white font-mono">{d.activePilots} Units</span>
+                         Active: <span className="text-white font-mono">{d.activePilots} Drivers</span>
                       </p>
                    </div>
                 </div>

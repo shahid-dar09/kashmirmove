@@ -173,4 +173,62 @@ const uploadAvatar = async (req, res) => {
     }
 };
 
-module.exports = { registerCustomer, login, updateProfile, getProfile, uploadAvatar };
+const getPublicStats = async (req, res) => {
+    try {
+        // 1. Get approved drivers count grouped by area
+        const [driverCounts] = await pool.query(
+            "SELECT area, COUNT(*) as count FROM drivers WHERE status = 'approved' GROUP BY area"
+        );
+        
+        // Convert to an object: { 'Srinagar': 5, 'Budgam': 2 }
+        const driversByArea = {};
+        driverCounts.forEach(row => {
+            if (row.area) {
+                // Ensure proper case-insensitive matching or exact string key match
+                driversByArea[row.area] = row.count;
+            }
+        });
+
+        // 2. Get total completed bookings count
+        const [bookingCountResult] = await pool.query(
+            "SELECT COUNT(*) as total FROM bookings WHERE status = 'completed'"
+        );
+        const completedBookings = bookingCountResult[0].total;
+
+        // 3. Get total approved drivers count
+        const [totalDriversResult] = await pool.query(
+            "SELECT COUNT(*) as total FROM drivers WHERE status = 'approved'"
+        );
+        const totalApprovedDrivers = totalDriversResult[0].total;
+
+        // 4. Get average rating of approved drivers
+        const [avgRatingResult] = await pool.query(
+            "SELECT AVG(rating) as avgRating FROM drivers WHERE status = 'approved' AND rating > 0"
+        );
+        const avgRating = avgRatingResult[0].avgRating ? parseFloat(avgRatingResult[0].avgRating).toFixed(2) : null;
+
+        res.status(200).json({
+            success: true,
+            stats: {
+                driversByArea,
+                completedBookings,
+                totalApprovedDrivers,
+                avgRating
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching public stats:', error);
+        res.status(200).json({
+            success: false,
+            message: 'Failed to fetch database stats, using offline defaults',
+            stats: {
+                driversByArea: {},
+                completedBookings: 0,
+                totalApprovedDrivers: 0,
+                avgRating: null
+            }
+        });
+    }
+};
+
+module.exports = { registerCustomer, login, updateProfile, getProfile, uploadAvatar, getPublicStats };

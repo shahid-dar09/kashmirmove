@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import api from '../services/api';
 import { 
   ChevronRight, 
   Shield, 
@@ -17,7 +19,8 @@ import {
   Calculator,
   Compass,
   MapPin,
-  TrendingUp
+  TrendingUp,
+  Mail
 } from 'lucide-react';
 
 const KASHMIR_DISTRICTS = [
@@ -53,6 +56,54 @@ const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [heroMode, setHeroMode] = useState('passenger'); // 'passenger' | 'pilot'
   
+  // Dynamic stats & districts state
+  const [districts, setDistricts] = useState(KASHMIR_DISTRICTS);
+  const [globalStats, setGlobalStats] = useState({
+    missionsCompleted: 2850,
+    verifiedPilots: 182,
+    averageRating: '4.92/5'
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        let response;
+        try {
+          // Attempt to query local dev backend
+          response = await api.get('/auth/stats');
+        } catch (localError) {
+          console.warn('Local Express server is offline (MySQL down). Attempting to fetch live telemetry from Railway production backend...');
+          response = await axios.get('https://kashmirmove-production.up.railway.app/api/auth/stats');
+        }
+
+        if (response && response.data && response.data.success) {
+          const { driversByArea, completedBookings, totalApprovedDrivers, avgRating } = response.data.stats;
+          
+          // Map to exact database driver counts per district to keep it 100% dynamic
+          const updatedDistricts = KASHMIR_DISTRICTS.map(d => {
+            // Find key case-insensitively or exact match
+            const dbCount = driversByArea[d.name] || 0;
+            return {
+              ...d,
+              activePilots: dbCount // Show actual driver count from DB dynamically!
+            };
+          });
+          setDistricts(updatedDistricts);
+
+          // Update global stats dynamically with exact database metrics
+          setGlobalStats({
+            missionsCompleted: completedBookings || 0,
+            verifiedPilots: totalApprovedDrivers || 0,
+            averageRating: avgRating ? `${avgRating}/5` : '0/5'
+          });
+        }
+      } catch (error) {
+        console.error('Could not load dynamic telemetry stats from both environments. Using offline demo presets.', error);
+      }
+    };
+    fetchStats();
+  }, []);
+
   // Calculator State
   const [pickup, setPickup] = useState('Srinagar');
   const [drop, setDrop] = useState('Anantnag');
@@ -79,8 +130,8 @@ const LandingPage = () => {
     }
     
     const dist = getSimulatedDistance(pickup, drop);
-    const fromDistrict = KASHMIR_DISTRICTS.find(d => d.name === pickup) || { rateFactor: 1.0 };
-    const toDistrict = KASHMIR_DISTRICTS.find(d => d.name === drop) || { rateFactor: 1.0 };
+    const fromDistrict = districts.find(d => d.name === pickup) || { rateFactor: 1.0 };
+    const toDistrict = districts.find(d => d.name === drop) || { rateFactor: 1.0 };
     
     if (dist === 0) {
       setEstimatedFare(0);
@@ -109,41 +160,41 @@ const LandingPage = () => {
   const features = [
     {
       icon: <Zap className="text-primary" size={28} />,
-      title: "Real-time Telemetry",
-      description: "Watch your pilot approach in real-time with high-precision district GPS tracking."
+      title: "Live Ride Tracking",
+      description: "Track your driver's real-time approach with precise live GPS valley tracking."
     },
     {
       icon: <Shield className="text-secondary" size={28} />,
-      title: "Secure Clearances",
-      description: "Every pilot is verified via our strict Document Vault before taking duty in the valley."
+      title: "Verified Drivers",
+      description: "Every driver undergoes strict background checks and document verification for your safety."
     },
     {
       icon: <Star className="text-primary" size={28} />,
-      title: "Saffron-Grade Quality",
-      description: "Our fleet maintains a rigorous 4.8+ rating threshold to deliver top-tier hospitality."
+      title: "Top-Rated Quality",
+      description: "We maintain a high 4.8+ rating threshold to deliver a polite and comfortable experience."
     },
     {
       icon: <CreditCard className="text-primary" size={28} />,
-      title: "Cashless Ledger",
-      description: "Fast digital wallet credits ensure transparent cashless settlements after every trip."
+      title: "Flexible Payments",
+      description: "Pay easily using digital wallets, cash, or UPI directly to the driver after your journey."
     }
   ];
 
   const steps = [
     {
       number: "01",
-      title: "Uplink Coordinates",
-      description: "Input your valley origin and destination districts inside the console."
+      title: "Set Destination",
+      description: "Choose your pickup and drop-off districts inside our simple fare calculator."
     },
     {
       number: "02",
-      title: "Fleet Dispatch",
-      description: "Our matching engine instantly secures the closest verified pilot."
+      title: "Get Matched",
+      description: "Our system instantly connects you with the closest verified local driver."
     },
     {
       number: "03",
-      title: "Arrive in Comfort",
-      description: "Secure your ride with security OTP codes and enjoy a serene valley commute."
+      title: "Enjoy Your Journey",
+      description: "Confirm your ride using a secure security OTP and enjoy a serene valley commute."
     }
   ];
 
@@ -171,10 +222,10 @@ const LandingPage = () => {
           <div className="hidden md:flex items-center gap-10">
             <a href="#calculator" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Estimate</a>
             <a href="#features" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Features</a>
-            <a href="#how-it-works" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Protocol</a>
+            <a href="#how-it-works" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors">How It Works</a>
             <Link to="/login" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Sign In</Link>
             <button onClick={() => navigate('/login')} className="btn-modern-primary py-2.5 px-8 text-[10px] uppercase tracking-widest">
-              LAUNCH TERMINAL
+              BOOK A RIDE
             </button>
           </div>
 
@@ -188,9 +239,9 @@ const LandingPage = () => {
           <div className="absolute top-full left-0 w-full bg-midnight/95 backdrop-blur-2xl border-b border-white/10 p-6 flex flex-col gap-6 md:hidden animate-fade-in">
             <a href="#calculator" onClick={() => setMobileMenuOpen(false)} className="text-base font-black uppercase tracking-widest">Estimate</a>
             <a href="#features" onClick={() => setMobileMenuOpen(false)} className="text-base font-black uppercase tracking-widest">Features</a>
-            <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="text-base font-black uppercase tracking-widest">Protocol</a>
+            <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="text-base font-black uppercase tracking-widest">How It Works</a>
             <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-base font-black uppercase tracking-widest">Sign In</Link>
-            <button onClick={() => { setMobileMenuOpen(false); navigate('/login'); }} className="btn-modern-primary w-full py-4 uppercase tracking-widest font-black text-xs">LAUNCH TERMINAL</button>
+            <button onClick={() => { setMobileMenuOpen(false); navigate('/login'); }} className="btn-modern-primary w-full py-4 uppercase tracking-widest font-black text-xs">BOOK A RIDE</button>
           </div>
         )}
       </nav>
@@ -234,7 +285,7 @@ const LandingPage = () => {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  I am a Pilot
+                  I am a Driver
                 </button>
               </div>
             </div>
@@ -245,20 +296,20 @@ const LandingPage = () => {
                 <div className="space-y-6 animate-fade-in">
                   <h1 className="text-5xl sm:text-7xl md:text-8xl font-display font-black leading-[0.95] sm:leading-[0.85] tracking-tighter uppercase italic">
                     TRAVEL THE VALLEY <br />
-                    IN <span className="text-gradient">SOVEREIGN</span> COMFORT
+                    IN <span className="text-gradient pr-4">SUPREME</span> COMFORT
                   </h1>
                   <p className="text-slate-400 text-base sm:text-xl font-bold max-w-2xl mx-auto leading-relaxed">
-                    Secure, high-precision dispatch connecting you with premium Kashmiri transport units. Built for the valleys, the cities, and the highways.
+                    Safe, quick, and reliable rides connecting you with premium local drivers. Built for the beautiful roads, towns, and cities of Kashmir.
                   </p>
                 </div>
               ) : (
                 <div className="space-y-6 animate-fade-in">
                   <h1 className="text-5xl sm:text-7xl md:text-8xl font-display font-black leading-[0.95] sm:leading-[0.85] tracking-tighter uppercase italic">
                     OWN YOUR ROUTE. <br />
-                    EARN AT <span className="text-gradient-saffron">SAFFRON</span> RATES
+                    EARN AT <span className="text-gradient-saffron pr-4">SAFFRON</span> RATES
                   </h1>
                   <p className="text-slate-400 text-base sm:text-xl font-bold max-w-2xl mx-auto leading-relaxed">
-                    Upload credentials to our secure Document Vault and establish direct operational control. Fast clearances, premium client base, direct payouts.
+                    Register as a driver and start earning at the best rates in Kashmir. Quick verification, weekly payouts, and total control over your schedule.
                   </p>
                 </div>
               )}
@@ -271,7 +322,7 @@ const LandingPage = () => {
                   heroMode === 'passenger' ? 'btn-modern-primary' : 'btn-modern-secondary'
                 }`}
               >
-                {heroMode === 'passenger' ? 'SECURE PASSAGE' : 'COMMISSION VEHICLE'}
+                {heroMode === 'passenger' ? 'BOOK A RIDE' : 'START DRIVING'}
                 <ChevronRight size={16} />
               </button>
               <a 
@@ -302,7 +353,7 @@ const LandingPage = () => {
                      </div>
                      <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-xl border border-white/10 backdrop-blur-xl">
                         <Activity className="text-primary animate-pulse" size={14} />
-                        <span className="text-[8px] sm:text-[9px] font-mono font-black uppercase tracking-widest text-primary">Live Valley Grid Signal: SECURE</span>
+                        <span className="text-[8px] sm:text-[9px] font-mono font-black uppercase tracking-widest text-primary">Live Valley Dispatch: Active & Safe</span>
                      </div>
                   </div>
 
@@ -313,20 +364,20 @@ const LandingPage = () => {
                      <div className="hidden md:block w-72 space-y-4 shrink-0 relative z-10">
                         
                         <div className="p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
-                           <p className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest mb-2">ACTIVE VEHICLE</p>
+                           <p className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest mb-2">YOUR DRIVER</p>
                            <div className="flex items-center gap-3">
                               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
                                  <Car size={20} />
                               </div>
                               <div>
-                                 <p className="text-xs font-black uppercase">PILOT ALPHA-02</p>
-                                 <p className="text-[9px] font-bold text-slate-400 uppercase">Srinagar District</p>
+                                 <p className="text-xs font-black uppercase">Sajad Ahmad</p>
+                                 <p className="text-[9px] font-bold text-slate-400 uppercase">Srinagar, Kashmir</p>
                               </div>
                            </div>
                         </div>
 
                         <div className="p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
-                           <p className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest mb-1.5">TELEMETRY Dossier</p>
+                           <p className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest mb-1.5">Trip Details</p>
                            <div className="space-y-2">
                               <div className="flex justify-between">
                                  <span className="text-[9px] font-bold text-slate-400">Route Distance</span>
@@ -340,9 +391,9 @@ const LandingPage = () => {
                         </div>
 
                         <div className="p-5 bg-gradient-to-br from-primary/15 to-transparent rounded-2xl border-2 border-primary/30 text-center relative overflow-hidden">
-                           <p className="text-[9px] font-black uppercase tracking-widest text-primary mb-1">PROPOSED FARE</p>
+                           <p className="text-[9px] font-black uppercase tracking-widest text-primary mb-1">Estimated Fare</p>
                            <p className="text-3xl font-display font-black italic">₹380.00</p>
-                           <p className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1.5">Standard Fleet Carrier</p>
+                           <p className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1.5">Standard Cab Class</p>
                         </div>
                      </div>
 
@@ -400,8 +451,8 @@ const LandingPage = () => {
 
                         {/* Top-Right Floating Status */}
                         <div className="absolute top-4 right-4 bg-obsidian/85 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-xl">
-                           <p className="text-[7px] font-mono text-slate-500 uppercase tracking-widest leading-none mb-1">GPS LINK STATUS</p>
-                           <p className="text-[10px] font-black uppercase text-emerald-400 tracking-wider">ONLINE TRACKING</p>
+                           <p className="text-[7px] font-mono text-slate-500 uppercase tracking-widest leading-none mb-1">GPS LOCATION</p>
+                           <p className="text-[10px] font-black uppercase text-emerald-400 tracking-wider">LIVE TRACKING</p>
                         </div>
                      </div>
                   </div>
@@ -414,29 +465,29 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ── Stats Telemetry Strip ── */}
+      {/* ── Stats Strip ── */}
       <section className="py-12 border-y border-white/5 bg-white/[0.01]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
-            <h4 className="text-4xl sm:text-5xl font-display font-black text-primary mb-1">2,850+</h4>
-            <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Missions Completed</p>
+            <h4 className="text-4xl sm:text-5xl font-display font-black text-primary mb-1">{globalStats.missionsCompleted.toLocaleString()}+</h4>
+            <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Rides Completed</p>
           </div>
           <div className="text-center">
-            <h4 className="text-4xl sm:text-5xl font-display font-black text-secondary mb-1">182+</h4>
-            <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Verified Fleet Pilots</p>
+            <h4 className="text-4xl sm:text-5xl font-display font-black text-secondary mb-1">{globalStats.verifiedPilots}+</h4>
+            <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Verified Drivers</p>
           </div>
           <div className="text-center">
             <h4 className="text-4xl sm:text-5xl font-display font-black text-primary mb-1">10</h4>
             <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Kashmiri Districts</p>
           </div>
           <div className="text-center">
-            <h4 className="text-4xl sm:text-5xl font-display font-black text-secondary mb-1">4.92/5</h4>
-            <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Average Review Dossier</p>
+            <h4 className="text-4xl sm:text-5xl font-display font-black text-secondary mb-1">{globalStats.averageRating}</h4>
+            <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Average Rating</p>
           </div>
         </div>
       </section>
 
-      {/* ── Pricing Estimate Terminal (Calculator Widget) ── */}
+      {/* ── Pricing Estimate Section (Calculator Widget) ── */}
       <section id="calculator" className="py-24 sm:py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -446,19 +497,19 @@ const LandingPage = () => {
             <div className="lg:col-span-5 space-y-6">
               <div className="flex items-center gap-3">
                  <div className="w-10 h-1 bg-primary rounded-full"></div>
-                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary italic">Tariff Protocol</span>
+                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary italic">Clear Fares</span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-display font-black italic uppercase tracking-tighter leading-none">
                 PREDICTIVE <br />
-                <span className="text-gradient">PRICE</span> CONSOLE
+                <span className="text-gradient pr-2">FARE</span> CALCULATOR
               </h2>
               <p className="text-slate-400 font-bold text-base leading-relaxed">
-                Enter your exact pickup and drop districts inside the terminal simulator. Select your transport carrier class to receive transparent estimated fares, factored dynamically by regional demand metrics.
+                Select your pick-up and drop-off districts. Choose your ride type to get an instant, transparent fare estimate with no hidden charges.
               </p>
               <div className="flex gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
                  <Calculator className="text-primary shrink-0" size={24} />
                  <p className="text-xs text-slate-400 font-semibold leading-relaxed">
-                   *Estimates are calculated using a baseline algorithm. In-trip tariffs might vary slightly depending on extreme weather conditions or high-demand signals.
+                   *Estimates are based on normal route traffic. Actual fares may vary slightly due to road detours or high demand.
                  </p>
               </div>
             </div>
@@ -472,13 +523,13 @@ const LandingPage = () => {
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Origin selector */}
                     <div>
-                       <label className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest block mb-2">ORIGIN DISTRICT</label>
+                       <label className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest block mb-2">PICK-UP DISTRICT</label>
                        <select 
                          value={pickup}
                          onChange={(e) => setPickup(e.target.value)}
                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-primary text-sm font-black uppercase tracking-wider transition-colors"
                        >
-                          {KASHMIR_DISTRICTS.map(d => (
+                          {districts.map(d => (
                             <option key={d.name} value={d.name} className="bg-obsidian-card text-white uppercase">{d.name}</option>
                           ))}
                        </select>
@@ -486,13 +537,13 @@ const LandingPage = () => {
 
                     {/* Destination selector */}
                     <div>
-                       <label className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest block mb-2">TARGET DESTINATION</label>
+                       <label className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest block mb-2">DROP-OFF DISTRICT</label>
                        <select 
                          value={drop}
                          onChange={(e) => setDrop(e.target.value)}
                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-primary text-sm font-black uppercase tracking-wider transition-colors"
                        >
-                          {KASHMIR_DISTRICTS.map(d => (
+                          {districts.map(d => (
                             <option key={d.name} value={d.name} className="bg-obsidian-card text-white uppercase">{d.name}</option>
                           ))}
                        </select>
@@ -501,7 +552,7 @@ const LandingPage = () => {
 
                  {/* Vehicle Class Segmented Selector */}
                  <div>
-                    <label className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest block mb-3">VEHICLE CARRIER CLASS</label>
+                    <label className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest block mb-3">SELECT VEHICLE TYPE</label>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                        {VEHICLE_CLASSES.map(v => (
                           <button
@@ -527,14 +578,14 @@ const LandingPage = () => {
                     </div>
                     
                     <div className="text-center sm:text-left relative z-10 max-w-full sm:max-w-xs">
-                       <p className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-[0.2em] mb-1">PROPOSED ALLOTMENT</p>
+                       <p className="text-[8px] font-mono font-black text-slate-500 uppercase tracking-[0.2em] mb-1">ESTIMATED FARE</p>
                        {isRickshawRestricted ? (
                          <>
                            <p className="text-3xl font-display font-black italic text-rose leading-none">
                              RESTRICTED
                            </p>
                            <p className="text-[9px] font-bold text-rose/80 mt-2 uppercase tracking-wide leading-normal">
-                             E-Rickshaws cannot perform cross-district transit. Choose a Sedan or Premium Cruiser.
+                             E-Rickshaws are only for local rides. Please choose standard or premium.
                            </p>
                          </>
                        ) : (
@@ -558,7 +609,7 @@ const LandingPage = () => {
                           : 'bg-primary text-white shadow-glow-primary hover:scale-105 active:scale-95'
                       }`}
                     >
-                       {isRickshawRestricted ? 'LOCKED' : 'SECURE BOOKING'}
+                       {isRickshawRestricted ? 'LOCKED' : 'BOOK RIDE NOW'}
                     </button>
                  </div>
 
@@ -577,11 +628,11 @@ const LandingPage = () => {
           <div className="text-center max-w-xl mx-auto mb-20">
              <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="w-6 h-0.5 bg-primary rounded-full"></div>
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary italic">Valley Specifications</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary italic">Premium Features</span>
                 <div className="w-6 h-0.5 bg-primary rounded-full"></div>
              </div>
-             <h2 className="text-4xl sm:text-5xl font-display font-black uppercase italic tracking-tight">PREMIUM UTILITIES</h2>
-             <p className="text-slate-500 font-bold uppercase tracking-widest text-[9px] mt-2">Engineered with precision protocols optimized for local terrain.</p>
+             <h2 className="text-4xl sm:text-5xl font-display font-black uppercase italic tracking-tight">WHY CHOOSE US</h2>
+             <p className="text-slate-500 font-bold uppercase tracking-widest text-[9px] mt-2">Providing safe, smooth, and pleasant journeys across the valley.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -613,19 +664,19 @@ const LandingPage = () => {
           <div className="text-center max-w-xl mx-auto mb-20">
              <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="w-6 h-0.5 bg-secondary rounded-full"></div>
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary italic">Active Sectors</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary italic">Service Areas</span>
                 <div className="w-6 h-0.5 bg-secondary rounded-full"></div>
              </div>
-             <h2 className="text-4xl sm:text-5xl font-display font-black uppercase italic tracking-tight">TERRITORY OF OPERATION</h2>
-             <p className="text-slate-500 font-bold uppercase tracking-widest text-[9px] mt-2">Active coverage and dispatch networks spanning 10 key districts.</p>
+             <h2 className="text-4xl sm:text-5xl font-display font-black uppercase italic tracking-tight">OUR SERVICE DISTRICTS</h2>
+             <p className="text-slate-500 font-bold uppercase tracking-widest text-[9px] mt-2">Providing reliable ride coverage spanning 10 key districts of Kashmir.</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
-             {KASHMIR_DISTRICTS.map((d, i) => (
+             {districts.map((d, i) => (
                 <div key={i} className="bg-white/5 p-6 rounded-[24px] border border-white/5 hover:border-primary/20 transition-all flex flex-col justify-between gap-6 group">
                    <div>
                       <div className="flex items-center justify-between mb-3">
-                         <span className="text-[9px] font-mono text-slate-500 uppercase font-black">SECTOR #{i+1}</span>
+                         <span className="text-[9px] font-mono text-slate-500 uppercase font-black">DISTRICT #{i+1}</span>
                          <MapPin size={12} className="text-slate-600 group-hover:text-primary transition-colors" />
                       </div>
                       <h4 className="text-lg font-display font-black uppercase tracking-tight text-white">{d.name}</h4>
@@ -654,8 +705,8 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="text-center max-w-xl mx-auto mb-20">
-            <h2 className="text-4xl sm:text-5xl font-display font-black uppercase italic tracking-tight">OPERATIONAL PROTOCOL</h2>
-            <p className="text-slate-500 font-bold uppercase tracking-widest text-[9px] mt-2">Three seamless steps to initialize secure, fast valley transit.</p>
+            <h2 className="text-4xl sm:text-5xl font-display font-black uppercase italic tracking-tight">HOW IT WORKS</h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-[9px] mt-2">Three simple steps to book a safe, comfortable ride in the valley.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12 relative">
@@ -689,17 +740,17 @@ const LandingPage = () => {
              <div className="relative z-10 max-w-3xl mx-auto">
                 <h2 className="text-4xl sm:text-6xl font-display font-black uppercase italic mb-6 tracking-tighter">
                    Ready to Start <br />
-                   Your Valley <span className="text-gradient">Commute?</span>
+                   Your Valley <span className="text-gradient pr-2">Journey?</span>
                 </h2>
                 <p className="text-slate-400 font-bold text-base sm:text-lg mb-12 max-w-xl mx-auto leading-relaxed">
-                   Establish connection, secure your fleet partner, and experience the finest ride-sharing network built for the valleys of Kashmir.
+                   Get connected with trusted local drivers and experience the most reliable ride-sharing network built for Kashmir.
                 </p>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6">
                   <button onClick={() => navigate('/login')} className="btn-modern-primary px-12 py-5 text-xs font-black uppercase tracking-widest">
-                     LAUNCH CONSOLE
+                     BOOK A RIDE NOW
                   </button>
                   <button onClick={() => navigate('/login')} className="btn-ghost border-white/10 text-white hover:bg-white/5 px-12 py-5 text-xs font-black uppercase tracking-widest">
-                     JOIN AS PARTNER PILOT
+                     BECOME A DRIVER
                   </button>
                 </div>
              </div>
@@ -725,12 +776,24 @@ const LandingPage = () => {
             </span>
           </div>
 
-          <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.25em]">© 2026 KashmirMove. Developed specifically for the valley.</p>
+          <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.25em]">
+            © 2026 KashmirMove. Crafted with Precision by <a href="https://github.com/shahid-dar09" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">Shahid Dar</a>.
+          </p>
           
-          <div className="flex gap-6">
-             <Globe className="text-slate-500 hover:text-white cursor-pointer transition-colors" size={18} />
-             <Users className="text-slate-500 hover:text-white cursor-pointer transition-colors" size={18} />
-             <Star className="text-slate-500 hover:text-white cursor-pointer transition-colors" size={18} />
+          <div className="flex items-center gap-6">
+             <a href="mailto:darshahid45ds@gmail.com" className="text-slate-500 hover:text-primary transition-all duration-300 hover:scale-110" title="Contact Email">
+                <Mail size={18} />
+             </a>
+             <a href="https://github.com/shahid-dar09" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-primary transition-all duration-300 hover:scale-110" title="GitHub Profile">
+                <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                </svg>
+             </a>
+             <a href="https://www.linkedin.com/in/dar-shahid-739571370/" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-secondary transition-all duration-300 hover:scale-110" title="LinkedIn Profile">
+                <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+             </a>
           </div>
         </div>
       </footer>

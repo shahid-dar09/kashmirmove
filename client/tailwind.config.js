@@ -19,8 +19,8 @@ export default {
           50: '#0F172A',
           100: '#1E293B',
         },
-        primary: '#F59E0B', // Chinar Saffron
-        secondary: '#10B981', // Emerald Valley
+        primary: '#DC2626', // Chinar Crimson Red
+        secondary: '#F59E0B', // Burnished Saffron Gold
         saffron: {
           DEFAULT: '#F59E0B',
           light: '#FBBF24',
@@ -31,7 +31,7 @@ export default {
           light: '#22D3EE',
           dark: '#0891B2',
         },
-        rose: '#F43F5E',
+        rose: '#EF4444',
         electric: {
           cyan: '#00F5FF',
           blue: '#3B82F6',
@@ -66,8 +66,8 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         glowPulse: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(245, 158, 11, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(220, 38, 38, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(220, 38, 38, 0.6)' },
         },
         shimmer: {
           '0%': { backgroundPosition: '-1000px 0' },
@@ -83,10 +83,11 @@ export default {
         }
       },
       boxShadow: {
+        'glow-primary': '0 0 30px rgba(220, 38, 38, 0.4)',
         'glow-saffron': '0 0 30px rgba(245, 158, 11, 0.4)',
-        'glow-emerald': '0 0 30px rgba(16, 185, 129, 0.4)',
+        'glow-emerald': '0 0 30px rgba(245, 158, 11, 0.4)',
         'glow-cyan': '0 0 30px rgba(6, 182, 212, 0.4)',
-        'glow-red': '0 0 30px rgba(239, 68, 68, 0.35)',
+        'glow-red': '0 0 30px rgba(220, 38, 38, 0.35)',
         'glow-amber': '0 0 30px rgba(245, 158, 11, 0.35)',
         'premium': '0 32px 64px -12px rgba(0, 0, 0, 0.5)',
       },

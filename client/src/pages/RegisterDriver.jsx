@@ -91,9 +91,9 @@ const RegisterDriver = () => {
     <div className="min-h-screen lg:h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-y-auto lg:overflow-hidden font-display">
       
       {/* Sidebar Info Panel */}
-      <div className="hidden lg:flex flex-col justify-between p-12 pr-20 bg-obsidian border-r border-white/5 h-full select-none relative">
+      <div className="hidden lg:flex flex-col justify-between p-12 pr-20 bg-obsidian border-r border-white/5 h-full select-none relative overflow-hidden">
         <div className="relative z-10">
-          <Link to="/" className="flex items-center gap-4 group mb-24">
+          <Link to="/" className="flex items-center gap-4 group mb-10">
             <div className="relative w-14 h-14 bg-primary rounded-[1.25rem] flex items-center justify-center shadow-[0_0_20px_rgba(220,38,38,0.3)] group-hover:scale-105 transition-transform overflow-visible">
                <div className="relative flex items-center justify-center w-full">
                   <Car className="text-white absolute transition-all duration-500 translate-x-[-4px] group-hover:translate-x-[-14px] group-hover:scale-110" size={24} />
@@ -105,25 +105,27 @@ const RegisterDriver = () => {
             </span>
           </Link>
 
-          <div className="mt-20">
-            <div className="w-16 h-16 rounded-2xl border border-primary/20 flex items-center justify-center mb-12 bg-primary/5 backdrop-blur-xl">
-               <Users className="text-primary" size={32} />
+          <div className="mt-8">
+            <div className="w-16 h-16 rounded-2xl border border-primary/20 flex items-center justify-center mb-6 bg-primary/5 backdrop-blur-xl">
+               <Users className="text-primary" size={28} />
             </div>
 
             <div>
-               <h1 className="text-[3.5rem] font-black italic uppercase tracking-tighter leading-[0.9] mb-8 pr-3">
+               <h1 className="text-[2.5rem] font-black italic uppercase tracking-tighter leading-[1.0] mb-4 pr-3">
                  DRIVER <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">REGISTRATION</span>
                </h1>
-               <p className="text-slate-400 font-medium italic text-lg leading-relaxed max-w-md">
+               <p className="text-slate-400 font-medium italic text-base leading-relaxed max-w-[280px]">
                  Register as a professional driver and start earning. <br className="hidden lg:block"/> High performance, zero compromise.
                </p>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 w-full pt-8 border-t border-white/5 flex flex-col gap-6">
-           <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed">
-             © 2026 KashmirMove. Crafted with Precision by <a href="https://github.com/shahid-dar09" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">Shahid Dar</a>.
+        <div className="relative z-10 w-full pt-6 border-t border-white/5 flex flex-col gap-4">
+           <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wider leading-relaxed">
+             © 2026 KASHMIRMOVE.
+             <br />
+             Crafted by <a href="https://github.com/shahid-dar09" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors font-extrabold">Shahid Dar</a>.
            </p>
            
            <div className="flex items-center gap-4">

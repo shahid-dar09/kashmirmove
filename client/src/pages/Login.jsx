@@ -61,7 +61,7 @@ const Login = () => {
       {/* Sidebar Info Panel */}
       <div className="hidden lg:flex flex-col justify-between p-12 bg-obsidian border-r border-white/5 h-full overflow-hidden select-none">
         <div className="relative z-10">
-          <Link to="/" className="flex items-center gap-4 group mb-24">
+          <Link to="/" className="flex items-center gap-4 group mb-10">
             <div className="relative w-14 h-14 bg-primary rounded-[1.25rem] flex items-center justify-center shadow-[0_0_20px_rgba(220,38,38,0.3)] group-hover:scale-105 transition-transform overflow-visible">
                <div className="relative flex items-center justify-center w-full">
                   <Car className="text-white absolute transition-all duration-500 translate-x-[-4px] group-hover:translate-x-[-14px] group-hover:scale-110" size={24} />
@@ -73,29 +73,31 @@ const Login = () => {
             </span>
           </Link>
 
-          <div className="mt-20">
-            <div className="w-20 h-20 bg-primary/10 rounded-[1.75rem] border border-primary/20 flex items-center justify-center mb-8">
-               <ShieldCheck size={36} className="text-primary" />
+          <div className="mt-8">
+            <div className="w-16 h-16 bg-primary/10 rounded-[1.25rem] border border-primary/20 flex items-center justify-center mb-6">
+               <ShieldCheck size={28} className="text-primary" />
             </div>
             
             <div className="space-y-1">
-              <h2 className="text-[40px] font-black italic uppercase leading-none tracking-tight text-white pr-3">
+              <h2 className="text-[32px] font-black italic uppercase leading-none tracking-tight text-white pr-3">
                 SECURED
               </h2>
-              <h2 className="text-[40px] font-black italic uppercase leading-none tracking-tight text-primary pr-3">
+              <h2 className="text-[32px] font-black italic uppercase leading-none tracking-tight text-primary pr-3">
                 RIDE-SHARING
               </h2>
             </div>
             
-            <p className="text-slate-400 text-lg font-medium italic leading-relaxed max-w-[320px] mt-8">
+            <p className="text-slate-400 text-base font-medium italic leading-relaxed max-w-[280px] mt-4">
               Your safety and data privacy are our highest priorities. Travel safely across the valley.
             </p>
           </div>
         </div>
 
-        <div className="relative z-10 w-full pt-8 border-t border-white/5 flex flex-col gap-6">
-           <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed">
-             © 2026 KashmirMove. Crafted with Precision by <a href="https://github.com/shahid-dar09" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">Shahid Dar</a>.
+        <div className="relative z-10 w-full pt-6 border-t border-white/5 flex flex-col gap-4">
+           <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wider leading-relaxed">
+             © 2026 KASHMIRMOVE.
+             <br />
+             Crafted by <a href="https://github.com/shahid-dar09" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors font-extrabold">Shahid Dar</a>.
            </p>
            
            <div className="flex items-center gap-4">

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../config/db');
+const { uploadToCloudinary } = require('../utils/cloudinary');
 
 const generateToken = (id, role) => {
     return jwt.sign({ id, role }, process.env.JWT_SECRET, {
@@ -153,7 +154,13 @@ const uploadAvatar = async (req, res) => {
             return res.status(400).json({ success: false, message: 'No image provided' });
         }
 
-        const avatarUrl = `/uploads/${req.file.filename}`;
+        let avatarUrl = `/uploads/${req.file.filename}`;
+
+        // Upload to Cloudinary if configured
+        const cloudinaryUrl = await uploadToCloudinary(req.file.path, 'avatars');
+        if (cloudinaryUrl) {
+            avatarUrl = cloudinaryUrl;
+        }
 
         await pool.query('UPDATE users SET avatar_url = ? WHERE id = ?', [avatarUrl, userId]);
 

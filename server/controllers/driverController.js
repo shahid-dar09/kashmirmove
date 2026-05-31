@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const pool = require('../config/db');
+const { uploadToCloudinary } = require('../utils/cloudinary');
 
 const registerDriver = async (req, res) => {
     let connection;
@@ -23,8 +24,15 @@ const registerDriver = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Profile photo and ID proof are required' });
         }
 
-        const profilePhotoPath = req.files['profilePhoto'][0].filename;
-        const idProofPath = req.files['idProof'][0].filename;
+        let profilePhotoPath = `/uploads/${req.files['profilePhoto'][0].filename}`;
+        let idProofPath = `/uploads/${req.files['idProof'][0].filename}`;
+
+        // Upload to Cloudinary if configured
+        const profilePhotoCloudUrl = await uploadToCloudinary(req.files['profilePhoto'][0].path, 'drivers');
+        const idProofCloudUrl = await uploadToCloudinary(req.files['idProof'][0].path, 'driver_proofs');
+        
+        if (profilePhotoCloudUrl) profilePhotoPath = profilePhotoCloudUrl;
+        if (idProofCloudUrl) idProofPath = idProofCloudUrl;
 
         const [existingUser] = await connection.query('SELECT * FROM users WHERE email = ?', [email]);
         if (existingUser.length > 0) {

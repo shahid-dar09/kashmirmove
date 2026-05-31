@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const path = require('path');
 const fs = require('fs');
+const { uploadToCloudinary } = require('../utils/cloudinary');
 
 // Upload a document
 exports.uploadDocument = async (req, res) => {
@@ -23,7 +24,13 @@ exports.uploadDocument = async (req, res) => {
         }
 
         const driverId = drivers[0].id;
-        const fileUrl = `/uploads/documents/${req.file.filename}`;
+        let fileUrl = `/uploads/documents/${req.file.filename}`;
+
+        // Upload to Cloudinary if configured
+        const cloudinaryUrl = await uploadToCloudinary(req.file.path, 'documents');
+        if (cloudinaryUrl) {
+            fileUrl = cloudinaryUrl;
+        }
 
         // 2. Insert or Update document
         // We allow updating if same type exists

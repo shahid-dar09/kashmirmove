@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import api from '../../services/api';
+import api, { getFileUrl } from '../../services/api';
 import { RefreshCcw, ShieldCheck, Phone, Car, Target, X, Check, Activity, Shield, FileText, CreditCard, ExternalLink } from 'lucide-react';
 import { useToast } from '../../context/ToastContextShared';
 
@@ -72,12 +72,7 @@ const PendingDrivers = () => {
     }
   };
 
-  const getFileUrl = (fileUrl) => {
-    // Use same backend base as api.js (VITE_API_URL is the Railway backend root, no /api)
-    const base = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`;
-    // Strip any accidental /api prefix from base, then append file path
-    return `${base.replace(/\/api$/, '')}${fileUrl}`;
-  };
+
 
   return (
     <div className="max-w-7xl mx-auto space-y-16 animate-fade-in pb-20 pt-6 px-4 sm:px-0">

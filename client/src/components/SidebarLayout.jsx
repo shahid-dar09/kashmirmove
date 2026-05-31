@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { AuthContext } from "../context/AuthContextValue";
 import { io } from "socket.io-client";
-import api from "../services/api";
+import api, { getFileUrl } from "../services/api";
 
 // Professional Audio Assets (CDN URLs)
 const SOUNDS = {
@@ -475,7 +475,7 @@ const SidebarLayout = () => {
               <Link to="/profile" className="group relative">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-[14px] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-black text-sm group-hover:scale-105 transition-all overflow-hidden">
                   {user?.avatar_url ? (
-                    <img src={`${import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`}${user.avatar_url}`} alt="P" className="w-full h-full object-cover" />
+                    <img src={getFileUrl(user.avatar_url)} alt="P" className="w-full h-full object-cover" />
                   ) : (
                     user?.name?.charAt(0).toUpperCase()
                   )}
@@ -580,7 +580,7 @@ const SidebarLayout = () => {
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-[14px] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-black overflow-hidden shrink-0">
                   {user?.avatar_url ? (
-                    <img src={`${import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`}${user.avatar_url}`} alt="Profile" className="w-full h-full object-cover" />
+                    <img src={getFileUrl(user.avatar_url)} alt="Profile" className="w-full h-full object-cover" />
                   ) : (
                     user?.name?.charAt(0).toUpperCase()
                   )}

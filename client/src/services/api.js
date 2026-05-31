@@ -1,8 +1,21 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : `http://${window.location.hostname}:5000/api`;
+export const API_ROOT_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`;
+
+export const getFileUrl = (fileUrl) => {
+  if (!fileUrl) return '';
+  if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) return fileUrl;
+  
+  // Ensure the file path starts with a slash
+  const cleanPath = fileUrl.startsWith('/') ? fileUrl : `/${fileUrl}`;
+  
+  // Strip any trailing slash or /api from API_ROOT_URL
+  const cleanRoot = API_ROOT_URL.replace(/\/api$/, '').replace(/\/$/, '');
+  
+  return `${cleanRoot}${cleanPath}`;
+};
+
+const API_BASE_URL = `${API_ROOT_URL}/api`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -17,3 +30,4 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
+

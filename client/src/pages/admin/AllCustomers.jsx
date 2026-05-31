@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import api from '../../services/api';
+import api, { getFileUrl } from '../../services/api';
 import { 
   Search, RefreshCcw, Mail, Phone, 
   Calendar, ShieldAlert, ShieldCheck, User, Filter, X
@@ -155,9 +155,9 @@ const AllCustomers = () => {
                <div className="mb-6">
                   <div className="flex items-center gap-4 sm:gap-5 mb-6">
                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20 shadow-inner group-hover:scale-110 transition-transform shrink-0">
-                       {customer.avatar_url ? (
-                         <img src={`http://${window.location.hostname}:5000${customer.avatar_url}`} alt={customer.name} className="w-full h-full object-cover" />
-                       ) : (
+                        {customer.avatar_url ? (
+                          <img src={getFileUrl(customer.avatar_url)} alt={customer.name} className="w-full h-full object-cover" />
+                        ) : (
                          <User size={24} className="text-primary" />
                        )}
                      </div>

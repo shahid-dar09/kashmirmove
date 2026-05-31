@@ -73,8 +73,10 @@ const PendingDrivers = () => {
   };
 
   const getFileUrl = (fileUrl) => {
+    // Use same backend base as api.js (VITE_API_URL is the Railway backend root, no /api)
     const base = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`;
-    return `${base}${fileUrl}`;
+    // Strip any accidental /api prefix from base, then append file path
+    return `${base.replace(/\/api$/, '')}${fileUrl}`;
   };
 
   return (

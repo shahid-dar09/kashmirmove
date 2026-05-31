@@ -79,7 +79,6 @@ const LandingPage = () => {
     }
     
     const dist = getSimulatedDistance(pickup, drop);
-    const vClass = VEHICLE_CLASSES.find(v => v.id === vehicleClass) || VEHICLE_CLASSES[1];
     const fromDistrict = KASHMIR_DISTRICTS.find(d => d.name === pickup) || { rateFactor: 1.0 };
     const toDistrict = KASHMIR_DISTRICTS.find(d => d.name === drop) || { rateFactor: 1.0 };
     
@@ -88,7 +87,20 @@ const LandingPage = () => {
       setEstimatedDistance(0);
     } else {
       const avgFactor = (fromDistrict.rateFactor + toDistrict.rateFactor) / 2;
-      const rawFare = vClass.baseFare + (dist * vClass.perKm);
+      
+      // Highly realistic local Kashmiri custom tariff formula
+      let rawFare = 0;
+      if (vehicleClass === 'rickshaw') {
+        // E-Rickshaw: ₹15 flat for the first 3 KM, then ₹5 per KM thereafter
+        rawFare = dist <= 3 ? 15 : 15 + ((dist - 3) * 5);
+      } else if (vehicleClass === 'standard') {
+        // Standard Cab: ₹50 flat for the first 3 KM, then ₹10 per KM thereafter
+        rawFare = dist <= 3 ? 50 : 50 + ((dist - 3) * 10);
+      } else if (vehicleClass === 'premium') {
+        // Premium Cab: ₹80 flat for the first 3 KM, then ₹15 per KM thereafter
+        rawFare = dist <= 3 ? 80 : 80 + ((dist - 3) * 15);
+      }
+
       setEstimatedFare(Math.round(rawFare * avgFactor));
       setEstimatedDistance(Math.round(dist * 10) / 10);
     }

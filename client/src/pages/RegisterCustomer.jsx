@@ -54,10 +54,10 @@ const RegisterCustomer = () => {
     <div className="min-h-screen lg:h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-y-auto lg:overflow-hidden font-display">
       
       {/* Sidebar Info Panel */}
-      <div className="hidden lg:flex flex-col justify-between p-12 bg-[#0B0C14] border-r border-white/5 h-full overflow-hidden select-none">
+      <div className="hidden lg:flex flex-col justify-between p-12 bg-obsidian border-r border-white/5 h-full overflow-hidden select-none">
         <div className="relative z-10">
           <Link to="/" className="flex items-center gap-4 group mb-24">
-            <div className="relative w-14 h-14 bg-primary rounded-[1.25rem] flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.3)] group-hover:scale-105 transition-transform overflow-visible">
+            <div className="relative w-14 h-14 bg-primary rounded-[1.25rem] flex items-center justify-center shadow-[0_0_20px_rgba(220,38,38,0.3)] group-hover:scale-105 transition-transform overflow-visible">
                <div className="relative flex items-center justify-center w-full">
                   <Car className="text-white absolute transition-all duration-500 translate-x-[-4px] group-hover:translate-x-[-14px] group-hover:scale-110" size={24} />
                   <Truck className="text-white absolute transition-all duration-500 translate-x-[6px] group-hover:translate-x-[14px] group-hover:scale-110" size={24} />
@@ -69,16 +69,16 @@ const RegisterCustomer = () => {
           </Link>
 
           <div className="mt-20">
-           <div className="w-16 h-16 rounded-2xl border border-amber-500/20 flex items-center justify-center mb-12 bg-amber-500/5 backdrop-blur-xl">
-              <ShieldCheck className="text-amber-500" size={32} />
+           <div className="w-16 h-16 rounded-2xl border border-primary/20 flex items-center justify-center mb-12 bg-primary/5 backdrop-blur-xl">
+              <ShieldCheck className="text-primary" size={32} />
            </div>
 
            <div>
               <h2 className="text-[40px] font-black italic uppercase leading-none tracking-tight text-white">
-                JOIN THE
+                TRAVEL WITH
               </h2>
-              <h2 className="text-[40px] font-black italic uppercase leading-none tracking-tight text-amber-500 mb-8">
-                ELITE FORCE
+              <h2 className="text-[40px] font-black italic uppercase leading-none tracking-tight text-primary mb-8">
+                CONFIDENCE
               </h2>
               <p className="text-slate-400 font-medium italic text-lg leading-relaxed max-w-md">
                 Experience the valley's most reliable and secure transport network. Built for Kashmir, by Kashmir.
@@ -89,13 +89,13 @@ const RegisterCustomer = () => {
 
         <div className="relative z-10 w-full pt-8 border-t border-white/5">
            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
-             © 2026 KASHMIRMOVE LOGISTICS
+             © 2026 KASHMIRMOVE
            </p>
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
+      <div className="flex-1 flex flex-col p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0A0A0F] via-midnight to-[#1A0A0A] relative">
         
         {/* Top Navigation */}
         <div className="flex justify-between items-center gap-4 mb-8 sm:mb-16 relative z-10">
@@ -105,11 +105,11 @@ const RegisterCustomer = () => {
            
            <div className="flex items-center justify-end gap-3 sm:gap-8 flex-wrap">
               <Link to="/login" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">LOGIN</Link>
-              <div className="relative px-4 sm:px-6 py-2 bg-electric-cyan/10 border border-electric-cyan/20 rounded-full">
-                 <span className="text-[10px] font-black uppercase tracking-widest text-electric-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]">RIDER</span>
-                 <div className="absolute inset-0 rounded-full bg-electric-cyan/5 animate-pulse"></div>
+              <div className="relative px-4 sm:px-6 py-2 bg-primary/10 border border-primary/20 rounded-full">
+                 <span className="text-[10px] font-black uppercase tracking-widest text-primary shadow-[0_0_15px_rgba(220,38,38,0.2)]">RIDER</span>
+                 <div className="absolute inset-0 rounded-full bg-primary/5 animate-pulse"></div>
               </div>
-              <Link to="/register-driver" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">PILOT</Link>
+              <Link to="/register-driver" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">DRIVER</Link>
            </div>
         </div>
 
@@ -117,7 +117,7 @@ const RegisterCustomer = () => {
         <div className="w-full max-w-[600px] m-auto py-8 sm:py-12 relative z-10">
            <div className="text-left mb-8 sm:mb-10">
               <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
-                ENROLL AS<br/><span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">RIDER</span>
+                REGISTER AS<br/><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">RIDER</span>
               </h1>
               <p className="text-slate-400 font-medium italic text-base">Begin your journey with the valley's premium transport network.</p>
            </div>
@@ -130,12 +130,12 @@ const RegisterCustomer = () => {
                     <div className="space-y-2">
                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">FULL NAME</label>
                        <div className="relative group/field">
-                          <User className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-cyan transition-colors" size={18} />
+                          <User className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={18} />
                           <input 
                             type="text"
                             value={formData.name}
                             onChange={(e) => setFormData({...formData, name: e.target.value})}
-                            className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-4 pl-14 pr-8 font-bold focus:border-electric-cyan/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 text-white"
+                            className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-4 pl-14 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 text-white"
                             placeholder="Enter your name"
                             autoComplete="off"
                             required
@@ -147,12 +147,12 @@ const RegisterCustomer = () => {
                        <div className="space-y-3">
                           <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-4 opacity-60">EMAIL ADDRESS</label>
                           <div className="relative group/field">
-                             <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-cyan transition-colors" size={18} />
+                             <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={18} />
                              <input 
                                type="email"
                                value={formData.email}
                                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-cyan/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 text-white"
+                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 text-white"
                                placeholder="Enter your email"
                                autoComplete="off"
                                required
@@ -163,12 +163,12 @@ const RegisterCustomer = () => {
                        <div className="space-y-3">
                           <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-4 opacity-60">PHONE NUMBER</label>
                           <div className="relative group/field">
-                             <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-cyan transition-colors" size={18} />
+                             <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={18} />
                              <input 
                                type="tel"
                                value={formData.phone}
                                onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-cyan/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 text-white"
+                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 text-white"
                                placeholder="Enter your phone"
                                autoComplete="off"
                                required
@@ -181,12 +181,12 @@ const RegisterCustomer = () => {
                        <div className="space-y-2">
                           <label className="text-[9px] font-black uppercase tracking-widest text-slate-500 ml-2">PASSWORD</label>
                           <div className="relative group/field">
-                             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-cyan transition-colors" size={16} />
+                             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={16} />
                              <input 
                                type="password"
                                value={formData.password}
                                onChange={(e) => setFormData({...formData, password: e.target.value})}
-                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-4 pl-10 pr-4 font-bold focus:border-electric-cyan/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 tracking-widest text-white"
+                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-4 pl-10 pr-4 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 tracking-widest text-white"
                                placeholder="••••••••"
                                autoComplete="new-password"
                                required
@@ -196,12 +196,12 @@ const RegisterCustomer = () => {
                        <div className="space-y-2">
                           <label className="text-[9px] font-black uppercase tracking-widest text-slate-500 ml-2">CONFIRM PASSWORD</label>
                           <div className="relative group/field">
-                             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-cyan transition-colors" size={16} />
+                             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={16} />
                              <input 
                                type="password"
                                value={formData.confirmPassword}
                                onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-4 pl-10 pr-4 font-bold focus:border-electric-cyan/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 tracking-widest text-white"
+                               className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-4 pl-10 pr-4 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-600 tracking-widest text-white"
                                placeholder="••••••••"
                                autoComplete="new-password"
                                required
@@ -212,19 +212,19 @@ const RegisterCustomer = () => {
                  </div>
 
                  <div className="mt-6 flex items-center gap-3 ml-2">
-                    <input type="checkbox" id="terms" required className="w-4 h-4 rounded border-white/10 bg-white/5 accent-electric-cyan" />
-                    <label htmlFor="terms" className="text-xs font-medium text-slate-400">I agree to terms and protocols</label>
+                    <input type="checkbox" id="terms" required className="w-4 h-4 rounded border-white/10 bg-white/5 accent-primary" />
+                    <label htmlFor="terms" className="text-xs font-medium text-slate-400">I agree to terms and conditions</label>
                  </div>
 
                  <button 
                   type="submit" 
                   disabled={loading}
-                  className="w-full mt-8 py-5 bg-electric-cyan rounded-[1rem] font-black uppercase tracking-[0.15em] text-xs text-black shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:bg-[#06B6D4] transition-all flex items-center justify-center gap-3"
+                  className="w-full mt-8 py-5 bg-primary rounded-[1rem] font-black uppercase tracking-[0.15em] text-xs text-white shadow-glow-primary hover:bg-[#B91C1C] transition-all flex items-center justify-center gap-3"
                  >
                     {loading ? (
                       <RefreshCcw className="animate-spin" size={18} />
                     ) : (
-                      <>INITIALIZE RIDER ACCOUNT <ArrowRight size={18} /></>
+                      <>CREATE ACCOUNT <ArrowRight size={18} /></>
                     )}
                  </button>
               </form>
@@ -232,17 +232,17 @@ const RegisterCustomer = () => {
               <div className="mt-10">
                     <div className="flex items-center gap-3 sm:gap-4 mb-8">
                     <div className="h-px bg-white/5 flex-1"></div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">NEXUS GATE</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">SECURE GATEWAY</span>
                     <div className="h-px bg-white/5 flex-1"></div>
                  </div>
                  
                  <div className="text-center space-y-6">
                     <p className="text-[13px] font-medium text-slate-400">
-                      Already have an account? <Link to="/login" className="text-electric-cyan font-bold ml-1 hover:underline">Secure Login</Link>
+                      Already have an account? <Link to="/login" className="text-primary font-bold ml-1 hover:underline">Secure Login</Link>
                     </p>
                     
                     <Link to="/register-driver" className="flex items-center justify-center w-full py-4 bg-transparent border border-white/5 rounded-[1rem] text-[10px] font-black uppercase tracking-widest text-slate-300 hover:bg-white/5 hover:text-white transition-all">
-                       ENROLL AS A FLEET PILOT
+                       APPLY TO DRIVE
                     </Link>
                  </div>
               </div>

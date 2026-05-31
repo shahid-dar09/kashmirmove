@@ -91,10 +91,10 @@ const RegisterDriver = () => {
     <div className="min-h-screen lg:h-screen grid grid-cols-1 lg:grid-cols-[440px_1fr] bg-obsidian text-white overflow-y-auto lg:overflow-hidden font-display">
       
       {/* Sidebar Info Panel */}
-      <div className="hidden lg:flex flex-col justify-between p-12 pr-20 bg-[#0B0C14] border-r border-white/5 h-full select-none relative">
+      <div className="hidden lg:flex flex-col justify-between p-12 pr-20 bg-obsidian border-r border-white/5 h-full select-none relative">
         <div className="relative z-10">
           <Link to="/" className="flex items-center gap-4 group mb-24">
-            <div className="relative w-14 h-14 bg-primary rounded-[1.25rem] flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.3)] group-hover:scale-105 transition-transform overflow-visible">
+            <div className="relative w-14 h-14 bg-primary rounded-[1.25rem] flex items-center justify-center shadow-[0_0_20px_rgba(220,38,38,0.3)] group-hover:scale-105 transition-transform overflow-visible">
                <div className="relative flex items-center justify-center w-full">
                   <Car className="text-white absolute transition-all duration-500 translate-x-[-4px] group-hover:translate-x-[-14px] group-hover:scale-110" size={24} />
                   <Truck className="text-white absolute transition-all duration-500 translate-x-[6px] group-hover:translate-x-[14px] group-hover:scale-110" size={24} />
@@ -106,13 +106,13 @@ const RegisterDriver = () => {
           </Link>
 
           <div className="mt-20">
-            <div className="w-16 h-16 rounded-2xl border border-electric-purple/20 flex items-center justify-center mb-12 bg-electric-purple/5 backdrop-blur-xl">
-               <Users className="text-electric-purple" size={32} />
+            <div className="w-16 h-16 rounded-2xl border border-primary/20 flex items-center justify-center mb-12 bg-primary/5 backdrop-blur-xl">
+               <Users className="text-primary" size={32} />
             </div>
 
             <div>
                <h1 className="text-[3.5rem] font-black italic uppercase tracking-tighter leading-[0.9] mb-8">
-                 DRIVER <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">REGISTRATION</span>
+                 DRIVER <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">REGISTRATION</span>
                </h1>
                <p className="text-slate-400 font-medium italic text-lg leading-relaxed max-w-md">
                  Register as a professional driver and start earning. <br className="hidden lg:block"/> High performance, zero compromise.
@@ -123,13 +123,13 @@ const RegisterDriver = () => {
 
         <div className="relative z-10 w-full pt-8 border-t border-white/5">
            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">
-             © 2026 KASHMIRMOVE LOGISTICS
+             © 2026 KASHMIRMOVE
            </p>
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0F172A] via-[#0A0B14] to-[#1E1B4B] relative">
+      <div className="flex-1 flex flex-col p-4 sm:p-6 lg:p-12 overflow-y-auto bg-gradient-to-br from-[#0A0A0F] via-midnight to-[#1A0A0A] relative">
         
         {/* Top Navigation */}
         <div className="flex justify-between items-center gap-4 mb-8 sm:mb-16 relative z-10">
@@ -140,9 +140,9 @@ const RegisterDriver = () => {
            <div className="flex items-center justify-end gap-3 sm:gap-8 flex-wrap">
               <Link to="/login" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">LOGIN</Link>
               <Link to="/register" className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">RIDER</Link>
-              <div className="relative px-4 sm:px-6 py-2 bg-electric-purple/10 border border-electric-purple/20 rounded-full">
-                 <span className="text-[10px] font-black uppercase tracking-widest text-electric-purple shadow-[0_0_15px_rgba(139,92,246,0.2)]">DRIVER</span>
-                 <div className="absolute inset-0 rounded-full bg-electric-purple/5 animate-pulse"></div>
+              <div className="relative px-4 sm:px-6 py-2 bg-primary/10 border border-primary/20 rounded-full">
+                 <span className="text-[10px] font-black uppercase tracking-widest text-primary shadow-[0_0_15px_rgba(220,38,38,0.2)]">DRIVER</span>
+                 <div className="absolute inset-0 rounded-full bg-primary/5 animate-pulse"></div>
               </div>
            </div>
         </div>
@@ -151,7 +151,7 @@ const RegisterDriver = () => {
         <div className="w-full max-w-[650px] m-auto py-8 sm:py-12 relative z-10">
            <div className="text-center mb-10 sm:mb-16">
               <h1 className="text-4xl sm:text-[52px] font-black italic uppercase tracking-tighter leading-none mb-3">
-                DRIVER <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan">REGISTRATION</span>
+                DRIVER <br/> <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">REGISTRATION</span>
               </h1>
               <p className="text-slate-400 font-medium italic text-base mt-4">Drive with KashmirMove and earn at the best rates.</p>
            </div>
@@ -159,13 +159,13 @@ const RegisterDriver = () => {
            {/* Form Container */}
            <div className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-[1.5rem] sm:rounded-[40px] p-5 sm:p-12 relative overflow-hidden">
               <div className="absolute top-6 right-6 sm:top-12 sm:right-12 flex gap-1">
-                 <div className={`w-8 h-1 ${step >= 1 ? 'bg-electric-purple' : 'bg-white/10'} rounded-full transition-colors`}></div>
-                 <div className={`w-8 h-1 ${step >= 2 ? 'bg-electric-cyan' : 'bg-white/10'} rounded-full transition-colors`}></div>
+                 <div className={`w-8 h-1 ${step >= 1 ? 'bg-primary' : 'bg-white/10'} rounded-full transition-colors`}></div>
+                 <div className={`w-8 h-1 ${step >= 2 ? 'bg-secondary' : 'bg-white/10'} rounded-full transition-colors`}></div>
               </div>
               
               <div className="relative z-10 mb-12">
                  <h3 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tighter mb-2">
-                   PHASE <span className="bg-clip-text text-transparent bg-gradient-to-r from-electric-purple to-electric-cyan px-1">{step === 1 ? '01' : '02'}</span>
+                   PHASE <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary px-1">{step === 1 ? '01' : '02'}</span>
                  </h3>
                  <p className="text-slate-500 font-medium italic text-sm">
                    {step === 1 ? 'Personal Identity Information' : 'Vehicle & Driving Details'}
@@ -179,12 +179,12 @@ const RegisterDriver = () => {
                       <div className="space-y-3">
                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4 opacity-60">FULL NAME</label>
                          <div className="relative group/field">
-                            <User className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-purple transition-colors" size={18} />
+                            <User className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={18} />
                             <input 
                               type="text"
                               value={formData.name}
                               onChange={(e) => setFormData({...formData, name: e.target.value})}
-                              className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-purple/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 text-white"
+                              className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 text-white"
                               placeholder="Enter your name"
                               autoComplete="off"
                               required
@@ -196,12 +196,12 @@ const RegisterDriver = () => {
                          <div className="space-y-3">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4 opacity-60">EMAIL ADDRESS</label>
                             <div className="relative group/field">
-                               <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-purple transition-colors" size={18} />
+                               <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={18} />
                                <input 
                                  type="email"
                                  value={formData.email}
                                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-purple/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 text-white"
+                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 text-white"
                                  placeholder="Enter your email"
                                  autoComplete="off"
                                  required
@@ -211,12 +211,12 @@ const RegisterDriver = () => {
                          <div className="space-y-3">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4 opacity-60">PHONE NUMBER</label>
                             <div className="relative group/field">
-                               <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-purple transition-colors" size={18} />
+                               <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={18} />
                                <input 
                                  type="tel"
                                  value={formData.phone}
                                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-purple/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 text-white"
+                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 text-white"
                                  placeholder="Enter your phone"
                                  autoComplete="off"
                                  required
@@ -228,12 +228,12 @@ const RegisterDriver = () => {
                       <div className="space-y-3 pt-4">
                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4 opacity-60">PASSWORD</label>
                          <div className="relative group/field">
-                            <Zap className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-electric-purple transition-colors" size={18} />
+                            <Zap className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={18} />
                             <input 
                               type="password"
                               value={formData.password}
                               onChange={(e) => setFormData({...formData, password: e.target.value})}
-                              className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-purple/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 tracking-widest text-white"
+                              className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all placeholder:text-slate-700 tracking-widest text-white"
                               placeholder="••••••••••••"
                               autoComplete="new-password"
                               required
@@ -252,7 +252,7 @@ const RegisterDriver = () => {
                                <select 
                                  value={formData.vehicleType}
                                  onChange={(e) => setFormData({...formData, vehicleType: e.target.value})}
-                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-cyan/50 focus:bg-[#16162A] outline-none transition-all appearance-none text-white px-16"
+                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all appearance-none text-white px-16"
                                >
                                   <option value="cab" className="bg-obsidian">Cab (Sedan/Hatch)</option>
                                   <option value="rickshaw" className="bg-obsidian">Rickshaw (3-Wheel)</option>
@@ -269,7 +269,7 @@ const RegisterDriver = () => {
                                  type="text"
                                  value={formData.model}
                                  onChange={(e) => setFormData({...formData, model: e.target.value})}
-                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-cyan/50 outline-none transition-all placeholder:text-slate-700 text-white"
+                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 outline-none transition-all placeholder:text-slate-700 text-white"
                                  placeholder="e.g. Alto, Swift"
                                  required
                                />
@@ -286,7 +286,7 @@ const RegisterDriver = () => {
                                  type="text"
                                  value={formData.vehicleNumber}
                                  onChange={(e) => setFormData({...formData, vehicleNumber: e.target.value})}
-                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-cyan/50 outline-none transition-all placeholder:text-slate-700 text-white"
+                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 outline-none transition-all placeholder:text-slate-700 text-white"
                                  placeholder="JK01-XXXX"
                                  required
                                />
@@ -300,7 +300,7 @@ const RegisterDriver = () => {
                                  type="text"
                                  value={formData.licenseNumber}
                                  onChange={(e) => setFormData({...formData, licenseNumber: e.target.value})}
-                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-electric-cyan/50 outline-none transition-all placeholder:text-slate-700 text-white"
+                                 className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 outline-none transition-all placeholder:text-slate-700 text-white"
                                  placeholder="DL-XXXXXXXXXXXXX"
                                  required
                                />
@@ -315,7 +315,7 @@ const RegisterDriver = () => {
                             <label className="flex items-center justify-center gap-3 w-full bg-white/5 border border-dashed border-white/10 rounded-2xl py-6 cursor-pointer hover:bg-white/10 transition-all group">
                                <input type="file" name="profilePhoto" onChange={handleFileChange} className="hidden" required />
                                {files.profilePhoto ? (
-                                 <span className="text-xs font-bold text-electric-cyan truncate px-4">{files.profilePhoto.name}</span>
+                                 <span className="text-xs font-bold text-secondary truncate px-4">{files.profilePhoto.name}</span>
                                ) : (
                                  <>
                                    <Upload size={18} className="text-slate-500 group-hover:text-white transition-colors" />
@@ -329,7 +329,7 @@ const RegisterDriver = () => {
                             <label className="flex items-center justify-center gap-3 w-full bg-white/5 border border-dashed border-white/10 rounded-2xl py-6 cursor-pointer hover:bg-white/10 transition-all group">
                                <input type="file" name="idProof" onChange={handleFileChange} className="hidden" required />
                                {files.idProof ? (
-                                 <span className="text-xs font-bold text-electric-cyan truncate px-4">{files.idProof.name}</span>
+                                 <span className="text-xs font-bold text-secondary truncate px-4">{files.idProof.name}</span>
                                ) : (
                                  <>
                                    <Upload size={18} className="text-slate-500 group-hover:text-white transition-colors" />
@@ -345,7 +345,7 @@ const RegisterDriver = () => {
                  <button 
                   type="submit" 
                   disabled={loading}
-                  className={`w-full py-6 mt-4 ${step === 1 ? 'bg-electric-purple shadow-[0_0_30px_rgba(139,92,246,0.3)]' : 'bg-gradient-to-r from-electric-purple to-electric-cyan shadow-[0_0_30px_rgba(6,182,212,0.3)]'} rounded-2xl font-black italic uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 text-white`}
+                  className={`w-full py-6 mt-4 ${step === 1 ? 'bg-primary shadow-glow-primary' : 'bg-gradient-to-r from-primary to-secondary shadow-glow-primary'} rounded-2xl font-black italic uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 text-white`}
                  >
                     {loading ? (
                       <RefreshCcw className="animate-spin" size={18} />

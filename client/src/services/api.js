@@ -1,6 +1,19 @@
 import axios from 'axios';
 
-export const API_ROOT_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000`;
+const getApiRoot = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  const hostname = window.location.hostname;
+  // If running locally, connect to the local server on port 5000
+  if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.')) {
+    return `http://${hostname}:5000`;
+  }
+  // Bulletproof fallback: Deployed production sites automatically use the Railway backend URL
+  return 'https://kashmirmove-production.up.railway.app';
+};
+
+export const API_ROOT_URL = getApiRoot();
 
 export const getFileUrl = (fileUrl) => {
   if (!fileUrl) return '';

@@ -53,7 +53,10 @@ const sendOTP = async (req, res) => {
 
     } catch (error) {
         console.error('sendOTP error:', error);
-        res.status(500).json({ success: false, message: 'Failed to send verification email. Please try again.' });
+        res.status(500).json({ 
+            success: false, 
+            message: error.message || 'Failed to send verification email. Please try again.' 
+        });
     }
 };
 

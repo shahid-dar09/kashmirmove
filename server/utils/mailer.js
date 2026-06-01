@@ -7,6 +7,9 @@ const transporter = nodemailer.createTransport({
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
+    connectionTimeout: 10000, // 10s connection timeout
+    greetingTimeout: 10000,   // 10s greeting timeout
+    socketTimeout: 10000,     // 10s socket timeout
 });
 
 // ─── Generate a 6-digit OTP ────────────────────────────────────────────────────
@@ -16,6 +19,10 @@ const generateOTP = () => {
 
 // ─── Send OTP Email ────────────────────────────────────────────────────────────
 const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables in your deployment dashboard.');
+    }
+
     const mailOptions = {
         from: `"KashmirMove" <${process.env.EMAIL_USER}>`,
         to: toEmail,

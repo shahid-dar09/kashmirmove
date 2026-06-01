@@ -275,7 +275,7 @@ const BookRide = () => {
              <div className="w-12 h-1 bg-primary rounded-full"></div>
              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Step {step} of 5</span>
           </div>
-          <h1 className="text-4xl sm:text-7xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85]">
+          <h1 className="text-4xl sm:text-7xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85] pr-4">
             BOOK <span className="text-primary">RIDE</span>
           </h1>
         </div>
@@ -286,13 +286,13 @@ const BookRide = () => {
                key={s} 
                className={`h-12 px-4 flex items-center justify-center rounded-[1.5rem] transition-all duration-500 text-[9px] font-black uppercase tracking-[0.2em] ${
                  step === s 
-                   ? 'bg-primary text-obsidian shadow-glow-saffron' 
+                   ? 'bg-primary text-obsidian shadow-glow-saffron font-extrabold animate-pulse' 
                    : step > s 
                      ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
                      : 'text-slate-400 opacity-50'
                }`}
              >
-                {s}
+                 {s}
              </div>
            ))}
         </div>
@@ -302,10 +302,10 @@ const BookRide = () => {
       {step === 1 && (
         <div className="space-y-12 animate-slide-up">
            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
                 <MapPin size={22} />
               </div>
-              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">SELECT <span className="text-primary">DISTRICT</span></h3>
+              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white pr-4">SELECT <span className="text-primary">DISTRICT</span></h3>
            </div>
 
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -313,10 +313,10 @@ const BookRide = () => {
                 <button 
                   key={district.id}
                   onClick={() => handleDistrictSelect(district)}
-                  className="card-modern p-8 text-center rounded-[2.5rem] transition-all duration-500 border bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/30 hover:shadow-lg"
+                  className="card-modern p-8 text-center rounded-[2.5rem] transition-all duration-500 border bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/50 hover:shadow-[0_20px_40px_-15px_rgba(220,38,38,0.12)] hover:-translate-y-2 hover:scale-[1.02] group"
                 >
-                  <MapPin className="mx-auto mb-4 text-primary" size={32} />
-                  <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">{district.name}</h4>
+                  <MapPin className="mx-auto mb-4 text-primary group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300" size={32} />
+                  <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2 pr-2">{district.name}</h4>
                   <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest">District</p>
                 </button>
               ))}
@@ -328,10 +328,10 @@ const BookRide = () => {
       {step === 2 && (
         <div className="space-y-12 animate-slide-up">
            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
                 <Box size={22} />
               </div>
-              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">SELECT <span className="text-primary">VEHICLE</span></h3>
+              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white pr-4">SELECT <span className="text-primary">VEHICLE</span></h3>
            </div>
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -339,15 +339,15 @@ const BookRide = () => {
                 <button 
                   key={type}
                   onClick={() => handleVehicleSelect(type)}
-                  className="card-modern p-8 sm:p-10 flex flex-col items-center text-center rounded-[2rem] sm:rounded-[3rem] transition-all duration-500 border bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/30"
+                  className="card-modern p-8 sm:p-10 flex flex-col items-center text-center rounded-[2rem] sm:rounded-[3rem] transition-all duration-500 border bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/50 hover:shadow-[0_20px_40px_-15px_rgba(220,38,38,0.12)] hover:-translate-y-2 hover:scale-[1.02] group"
                 >
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-center transition-all mb-8 sm:mb-10 bg-slate-50 dark:bg-white/10 text-slate-400">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-center transition-all mb-8 sm:mb-10 bg-slate-50 dark:bg-white/10 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary group-hover:rotate-6 duration-500 ease-out">
                     {vehicle.icon}
                   </div>
                   
                   <div className="space-y-3">
-                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 italic">{vehicle.name}</h4>
-                    <p className="text-5xl font-display font-black italic text-slate-900 dark:text-white">₹{vehicle.baseRate}</p>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 italic pr-2">{vehicle.name}</h4>
+                    <p className="text-5xl font-display font-black italic text-slate-900 dark:text-white pr-2">₹{vehicle.baseRate}</p>
                     <p className="text-[10px] text-slate-400 italic">Base fare</p>
                   </div>
                 </button>
@@ -366,167 +366,181 @@ const BookRide = () => {
       {step === 3 && (
         <div className="space-y-12 animate-slide-up">
            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
                 <Target size={22} />
               </div>
-              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">PICK <span className="text-primary">LOCATIONS</span></h3>
+              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white pr-4">PICK <span className="text-primary">LOCATIONS</span></h3>
            </div>
 
            {/* Mobile: map on top, form below. Desktop: side-by-side */}
            <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] gap-6 lg:gap-8 items-start w-full">
-             {/* MAP */}
-             <div className="w-full h-[300px] sm:h-[420px] lg:h-[600px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10">
-               <MapContainer center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }}>
-                 <TileLayer
-                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                   attribution='&copy; OpenStreetMap contributors'
-                 />
-                 <MapClickHandler onLocationSelect={handleMapClick} />
-                 {bookingData.pickup && (
-                   <Marker position={[bookingData.pickup.lat, bookingData.pickup.lng]} title="Pickup">
-                   </Marker>
-                 )}
-                 {bookingData.drop && (
-                   <Marker position={[bookingData.drop.lat, bookingData.drop.lng]} title="Drop">
-                   </Marker>
-                 )}
-                 {tempLocation && (
-                   <Marker position={[tempLocation.lat, tempLocation.lng]} title="Selected">
-                   </Marker>
-                 )}
-               </MapContainer>
-             </div>
-
-             {/* FORMS SIDEBAR */}
-             <div className="w-full space-y-8">
-                {/* Pickup Form */}
-                <div className={`group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${bookingData.pickup ? 'border-primary bg-primary/5 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.15)]' : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5'}`}>
-                  {bookingData.pickup && <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl" />}
-                  
-                  <div className="flex items-center justify-between mb-6">
-                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Pickup Node</p>
-                    {bookingData.pickup && <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-glow-saffron" />}
-                  </div>
-                  
-                  {bookingData.pickup ? (
-                    <div className="space-y-6 relative z-10">
-                      <div className="flex gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                           <MapPin size={18} />
-                        </div>
-                        <p className="text-sm font-black text-slate-900 dark:text-white leading-relaxed">{bookingData.pickupAddress}</p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setBookingData(prev => ({ ...prev, pickup: null, pickupAddress: '' }));
-                          setSelectingLocation('pickup');
-                        }}
-                        className="w-full py-4 bg-slate-900 dark:bg-white/10 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-obsidian transition-all border border-white/5"
-                      >
-                        RE-INITIALIZE
-                      </button>
-                    </div>
-                  ) : selectingLocation === 'pickup' && tempLocation ? (
-                    <div className="space-y-6">
-                      <div className="flex gap-4 min-h-[3rem]">
-                        <div className="w-10 h-10 rounded-xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 shrink-0">
-                          <Loader2 size={18} className={fetchingAddress ? "animate-spin" : ""} />
-                        </div>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
-                          {fetchingAddress ? "Resolving telemetry..." : tempAddress}
-                        </p>
-                      </div>
-                      <button
-                        onClick={confirmPickup}
-                        disabled={fetchingAddress}
-                        className="w-full py-5 bg-primary text-obsidian rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-95 transition-all shadow-glow-saffron disabled:opacity-50"
-                      >
-                        CONFIRM DEPLOYMENT
-                      </button>
-                    </div>
-                  ) : selectingLocation === 'pickup' ? (
-                    <div className="flex flex-col items-center py-4 text-center space-y-3">
-                       <div className="w-12 h-12 rounded-2xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 border border-dashed border-slate-300 dark:border-white/10">
-                          <Target size={20} />
-                       </div>
-                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Awaiting Map Input...</p>
-                    </div>
-                  ) : null}
-                </div>
-
-                {/* Drop Form */}
-                <div className={`group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${bookingData.drop ? 'border-electric-cyan bg-electric-cyan/5 shadow-[0_20px_50px_-12px_rgba(34,211,238,0.15)]' : bookingData.pickup ? 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5' : 'border-slate-100 dark:border-white/5 bg-slate-100 dark:bg-white/10 opacity-30 cursor-not-allowed'}`}>
-                  {bookingData.drop && <div className="absolute top-0 right-0 w-32 h-32 bg-electric-cyan/5 rounded-full -mr-16 -mt-16 blur-3xl" />}
-                  
-                  <div className="flex items-center justify-between mb-6">
-                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Target Node</p>
-                    {bookingData.drop && <div className="w-2 h-2 rounded-full bg-electric-cyan animate-pulse shadow-[0_0_10px_#22d3ee]" />}
-                  </div>
-                  
-                  {bookingData.drop ? (
-                    <div className="space-y-6 relative z-10">
-                      <div className="flex gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-electric-cyan/10 flex items-center justify-center text-electric-cyan shrink-0">
-                          <Target size={18} />
-                        </div>
-                        <p className="text-sm font-black text-slate-900 dark:text-white leading-relaxed">{bookingData.dropAddress}</p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setBookingData(prev => ({ ...prev, drop: null, dropAddress: '', fare: 0 }));
-                          setDistance(0);
-                          setSelectingLocation('drop');
-                        }}
-                        className="w-full py-4 bg-slate-900 dark:bg-white/10 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-obsidian transition-all border border-white/5"
-                      >
-                        RE-INITIALIZE
-                      </button>
-                    </div>
-                  ) : bookingData.pickup && selectingLocation === 'drop' && tempLocation ? (
-                    <div className="space-y-6">
-                      <div className="flex gap-4 min-h-[3rem]">
-                        <div className="w-10 h-10 rounded-xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 shrink-0">
-                          <Loader2 size={18} className={fetchingAddress ? "animate-spin" : ""} />
-                        </div>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
-                          {fetchingAddress ? "Resolving telemetry..." : tempAddress}
-                        </p>
-                      </div>
-                      <button
-                        onClick={confirmDrop}
-                        disabled={fetchingAddress}
-                        className="w-full py-5 bg-electric-cyan text-obsidian rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-95 transition-all shadow-[0_10px_30px_-10px_#22d3ee] disabled:opacity-50"
-                      >
-                        CONFIRM TARGET
-                      </button>
-                    </div>
-                  ) : bookingData.pickup && selectingLocation === 'drop' ? (
-                    <div className="flex flex-col items-center py-4 text-center space-y-3">
-                       <div className="w-12 h-12 rounded-2xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 border border-dashed border-slate-300 dark:border-white/10">
-                          <Navigation size={20} />
-                       </div>
-                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Awaiting Destination...</p>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center py-4 text-center">
-                       <p className="text-[10px] font-bold text-slate-300 dark:text-white/10 uppercase tracking-widest italic">Locked until pickup confirmed</p>
-                    </div>
+              {/* MAP */}
+              <div className="w-full h-[300px] sm:h-[420px] lg:h-[600px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 z-10">
+                <MapContainer center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }}>
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; OpenStreetMap contributors'
+                  />
+                  <MapClickHandler onLocationSelect={handleMapClick} />
+                  {bookingData.pickup && (
+                    <Marker position={[bookingData.pickup.lat, bookingData.pickup.lng]} title="Pickup">
+                    </Marker>
                   )}
-                </div>
+                  {bookingData.drop && (
+                    <Marker position={[bookingData.drop.lat, bookingData.drop.lng]} title="Drop">
+                    </Marker>
+                  )}
+                  {tempLocation && (
+                    <Marker position={[tempLocation.lat, tempLocation.lng]} title="Selected">
+                    </Marker>
+                  )}
+                </MapContainer>
+              </div>
 
-                {/* Manual Proceed Button */}
-                {bookingData.pickup && bookingData.drop && (
-                  <div className="pt-6 animate-fade-in">
-                    <button
-                      onClick={() => setStep(4)}
-                      className="w-full py-6 bg-emerald-500 text-white rounded-[2rem] font-black uppercase text-[11px] tracking-[0.4em] shadow-[0_20px_50px_-15px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-4"
-                    >
-                      PROCEED TO DRIVERS <Users size={20} />
-                    </button>
-                    <p className="text-center text-[10px] font-bold text-slate-400 mt-4 uppercase tracking-widest italic">Routing nodes finalized</p>
-                  </div>
-                )}
-             </div>
+              {/* FORMS SIDEBAR */}
+              <div className="w-full space-y-8">
+                 {/* Pickup Form */}
+                 <div className={`group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${
+                    bookingData.pickup 
+                      ? 'border-emerald-500 bg-emerald-500/[0.03] dark:bg-emerald-500/[0.05] shadow-[0_20px_50px_-12px_rgba(16,185,129,0.15)]' 
+                      : selectingLocation === 'pickup' && tempLocation
+                        ? 'border-primary bg-slate-50 dark:bg-white/5 animate-pulse'
+                        : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5'
+                 }`}>
+                   {bookingData.pickup && <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />}
+                   
+                   <div className="flex items-center justify-between mb-6">
+                     <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Pickup Node</p>
+                     {bookingData.pickup && <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-glow-emerald" />}
+                   </div>
+                   
+                   {bookingData.pickup ? (
+                     <div className="space-y-6 relative z-10">
+                       <div className="flex gap-4">
+                         <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 shrink-0">
+                            <MapPin size={18} />
+                         </div>
+                         <p className="text-sm font-black text-slate-900 dark:text-white leading-relaxed">{bookingData.pickupAddress}</p>
+                       </div>
+                       <button
+                         onClick={() => {
+                           setBookingData(prev => ({ ...prev, pickup: null, pickupAddress: '' }));
+                           setSelectingLocation('pickup');
+                         }}
+                         className="w-full py-4 bg-slate-900 dark:bg-white/10 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-obsidian transition-all border border-white/5"
+                       >
+                         RE-INITIALIZE
+                       </button>
+                     </div>
+                   ) : selectingLocation === 'pickup' && tempLocation ? (
+                     <div className="space-y-6">
+                       <div className="flex gap-4 min-h-[3rem]">
+                         <div className="w-10 h-10 rounded-xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 shrink-0">
+                           <Loader2 size={18} className={fetchingAddress ? "animate-spin" : ""} />
+                         </div>
+                         <p className="text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
+                           {fetchingAddress ? "Resolving telemetry..." : tempAddress}
+                         </p>
+                       </div>
+                       <button
+                         onClick={confirmPickup}
+                         disabled={fetchingAddress}
+                         className="w-full py-5 bg-emerald-500 text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-95 transition-all shadow-[0_10px_30px_-10px_rgba(16,185,129,0.4)] disabled:opacity-50"
+                       >
+                         CONFIRM DEPLOYMENT
+                       </button>
+                     </div>
+                   ) : selectingLocation === 'pickup' ? (
+                     <div className="flex flex-col items-center py-4 text-center space-y-3">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 border border-dashed border-slate-300 dark:border-white/10">
+                           <Target size={20} />
+                        </div>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Awaiting Map Input...</p>
+                     </div>
+                   ) : null}
+                 </div>
+
+                 {/* Drop Form */}
+                 <div className={`group p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-2 transition-all duration-500 relative overflow-hidden ${
+                    bookingData.drop 
+                      ? 'border-cyan-500 bg-cyan-500/[0.03] dark:bg-cyan-500/[0.05] shadow-[0_20px_50px_-12px_rgba(6,182,212,0.15)]' 
+                      : selectingLocation === 'drop' && tempLocation
+                        ? 'border-electric-cyan bg-slate-50 dark:bg-white/5 animate-pulse'
+                        : bookingData.pickup
+                          ? 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5' 
+                          : 'border-slate-100 dark:border-white/5 bg-slate-100 dark:bg-white/10 opacity-30 cursor-not-allowed'
+                 }`}>
+                   {bookingData.drop && <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />}
+                   
+                   <div className="flex items-center justify-between mb-6">
+                     <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Target Node</p>
+                     {bookingData.drop && <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse shadow-[0_0_10px_#06b6d4]" />}
+                   </div>
+                   
+                   {bookingData.drop ? (
+                     <div className="space-y-6 relative z-10">
+                       <div className="flex gap-4">
+                         <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-500 shrink-0">
+                           <Target size={18} />
+                         </div>
+                         <p className="text-sm font-black text-slate-900 dark:text-white leading-relaxed">{bookingData.dropAddress}</p>
+                       </div>
+                       <button
+                         onClick={() => {
+                           setBookingData(prev => ({ ...prev, drop: null, dropAddress: '', fare: 0 }));
+                           setDistance(0);
+                           setSelectingLocation('drop');
+                         }}
+                         className="w-full py-4 bg-slate-900 dark:bg-white/10 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-obsidian transition-all border border-white/5"
+                       >
+                         RE-INITIALIZE
+                       </button>
+                     </div>
+                   ) : bookingData.pickup && selectingLocation === 'drop' && tempLocation ? (
+                     <div className="space-y-6">
+                       <div className="flex gap-4 min-h-[3rem]">
+                         <div className="w-10 h-10 rounded-xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 shrink-0">
+                           <Loader2 size={18} className={fetchingAddress ? "animate-spin" : ""} />
+                         </div>
+                         <p className="text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
+                           {fetchingAddress ? "Resolving telemetry..." : tempAddress}
+                         </p>
+                       </div>
+                       <button
+                         onClick={confirmDrop}
+                         disabled={fetchingAddress}
+                         className="w-full py-5 bg-cyan-500 text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-95 transition-all shadow-[0_10px_30px_-10px_rgba(6,182,212,0.4)] disabled:opacity-50"
+                       >
+                         CONFIRM TARGET
+                       </button>
+                     </div>
+                   ) : bookingData.pickup && selectingLocation === 'drop' ? (
+                     <div className="flex flex-col items-center py-4 text-center space-y-3">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-400 border border-dashed border-slate-300 dark:border-white/10">
+                           <Navigation size={20} />
+                        </div>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Awaiting Destination...</p>
+                     </div>
+                   ) : (
+                     <div className="flex flex-col items-center py-4 text-center">
+                        <p className="text-[10px] font-bold text-slate-300 dark:text-white/10 uppercase tracking-widest italic">Locked until pickup confirmed</p>
+                     </div>
+                   )}
+                 </div>
+
+                 {/* Manual Proceed Button */}
+                 {bookingData.pickup && bookingData.drop && (
+                   <div className="pt-6 animate-fade-in">
+                     <button
+                       onClick={() => setStep(4)}
+                       className="w-full py-6 bg-emerald-500 hover:bg-emerald-600 text-white rounded-[2rem] font-black uppercase text-[11px] tracking-[0.4em] shadow-[0_20px_50px_-15px_rgba(16,185,129,0.35)] hover:shadow-[0_25px_60px_-10px_rgba(16,185,129,0.45)] hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center gap-4"
+                     >
+                       PROCEED TO DRIVERS <Users size={20} />
+                     </button>
+                     <p className="text-center text-[10px] font-bold text-slate-400 mt-4 uppercase tracking-widest italic">Routing nodes finalized</p>
+                   </div>
+                 )}
+              </div>
            </div>
 
            <div className="flex gap-8">
@@ -541,15 +555,15 @@ const BookRide = () => {
       {step === 4 && (
         <div className="space-y-12 animate-slide-up">
            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
                 <Users size={22} />
               </div>
-              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">SELECT <span className="text-primary">DRIVER</span></h3>
+              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white pr-4">SELECT <span className="text-primary">DRIVER</span></h3>
            </div>
             {drivers.filter(d => d.vehicle_type === bookingData.vehicleType).length === 0 ? (
-              <div className="text-center py-16 bg-slate-50 dark:bg-white/5 rounded-[2.5rem] border border-slate-200 dark:border-white/10">
-                <Car className="mx-auto mb-4 text-slate-300" size={48} />
-                <p className="text-slate-600 dark:text-slate-300 font-bold uppercase tracking-tight">No {VEHICLE_TYPES[bookingData.vehicleType]?.name}s available</p>
+              <div className="text-center py-20 bg-slate-50 dark:bg-white/5 rounded-[2.5rem] border border-slate-200 dark:border-white/10">
+                <Car className="mx-auto mb-4 text-slate-300 opacity-20" size={48} />
+                <p className="text-slate-600 dark:text-slate-300 font-bold uppercase tracking-tight pr-2">No {VEHICLE_TYPES[bookingData.vehicleType]?.name}s available</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 gap-6">
@@ -559,16 +573,23 @@ const BookRide = () => {
                   <button
                     key={driver.id}
                     onClick={() => handleSelectDriver(driver)}
-                    className="card-modern p-8 rounded-[2.5rem] border-2 transition-all bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/30 hover:shadow-lg"
+                    className="card-modern p-8 rounded-[2.5rem] border-2 transition-all bg-white dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-primary/50 hover:shadow-[0_20px_40px_-15px_rgba(220,38,38,0.12)] hover:-translate-y-1.5 hover:scale-[1.01] group text-left w-full"
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 text-center sm:text-left">
-                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+                      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary/20 group-hover:rotate-6 transition-all duration-300">
                         <Users size={32} />
                       </div>
-                      <div className="flex-1 text-center sm:text-left">
-                        <h4 className="text-lg font-black text-slate-900 dark:text-white mb-1">{driver.name}</h4>
-                        <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest mb-2">{driver.vehicle_type}</p>
-                        <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-black">⭐ {Number(driver.rating || 4.8).toFixed(1)} • {Number(driver.distance || 0).toFixed(1)} km away</p>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xl font-black text-slate-900 dark:text-white mb-1 pr-2">{driver.name}</h4>
+                        <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest mb-3">{driver.vehicle_type}</p>
+                        <div className="flex items-center gap-3">
+                           <div className="flex items-center gap-1.5 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-black text-xs">
+                              <Star size={12} className="fill-current" />
+                              <span>{Number(driver.rating || 4.8).toFixed(1)}</span>
+                           </div>
+                           <span className="text-slate-300 dark:text-white/10 text-xs">|</span>
+                           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{Number(driver.distance || 0).toFixed(1)} km away</span>
+                        </div>
                       </div>
                     </div>
                   </button>
@@ -588,29 +609,31 @@ const BookRide = () => {
       {step === 5 && (
         <div className="space-y-12 animate-slide-up">
            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
                 <ShieldCheck size={22} />
               </div>
-              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white">CONFIRM <span className="text-primary">BOOKING</span></h3>
+              <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white pr-4">CONFIRM <span className="text-primary">BOOKING</span></h3>
            </div>
 
-           <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[4rem] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 border border-white/10 p-6 sm:p-20 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.6)]">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+           <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[4rem] bg-gradient-to-br from-slate-900 via-obsidian to-slate-900 border border-white/10 p-6 sm:p-20 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.6)] group">
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+              <div className="absolute top-0 right-0 w-80 h-80 bg-primary/15 rounded-full blur-[120px] pointer-events-none group-hover:bg-primary/20 transition-all duration-1000"></div>
+              <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-electric-cyan/5 rounded-full blur-[120px] pointer-events-none"></div>
               
               <div className="relative z-10 space-y-10 sm:space-y-16">
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-10">
                      <div className="text-center sm:text-left">
                         <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/30 mb-4 italic">Total Fare</p>
-                        <h4 className="text-5xl sm:text-7xl font-display font-black italic tracking-tighter text-white leading-none">₹{bookingData.fare}</h4>
+                        <h4 className="text-5xl sm:text-7xl font-display font-black italic tracking-tighter text-white leading-none pr-2">₹{bookingData.fare}</h4>
                      </div>
                      <div className="text-center sm:text-right space-y-4">
-                        <div className="p-6 bg-white/5 rounded-[2rem] border border-white/10 space-y-4 min-w-[200px]">
+                        <div className="p-6 bg-white/5 rounded-[2rem] border border-white/10 space-y-4 min-w-[200px] backdrop-blur-md">
                            <div>
                               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-2 italic">Mission Distance</p>
-                              <p className="text-2xl font-display font-black text-white">{distance.toFixed(1)} KM</p>
+                              <p className="text-2xl font-display font-black text-white pr-2">{distance.toFixed(1)} KM</p>
                            </div>
                            <div className="inline-block px-8 py-3 bg-primary rounded-2xl shadow-glow-saffron">
-                              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-obsidian italic">Ready for Dispatch</span>
+                              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-obsidian italic pr-2">Ready for Dispatch</span>
                            </div>
                         </div>
                      </div>
@@ -618,22 +641,22 @@ const BookRide = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 pt-10 sm:pt-16 border-t border-white/5">
                      <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary shadow-2xl">
+                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary shadow-2xl shrink-0">
                            <Car size={32} />
                         </div>
                         <div>
                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-1 italic">Vehicle Identity</p>
-                           <p className="text-xl font-display font-black text-white uppercase italic tracking-tight leading-tight">{VEHICLE_TYPES[bookingData.vehicleType]?.name}</p>
+                           <p className="text-xl font-display font-black text-white uppercase italic tracking-tight leading-tight pr-2">{VEHICLE_TYPES[bookingData.vehicleType]?.name}</p>
                            <p className="text-[11px] font-bold text-white/50 tracking-[0.1em] mt-1">{selectedDriver?.vehicle_model} • <span className="text-primary/70">{selectedDriver?.vehicle_number}</span></p>
                         </div>
                      </div>
                      <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-500 shadow-2xl">
+                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-500 shadow-2xl shrink-0">
                            <Users size={32} />
                         </div>
                         <div>
                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-1 italic">Pilot Contact</p>
-                           <p className="text-xl font-display font-black text-emerald-500 uppercase italic tracking-tight leading-tight">{selectedDriver?.name}</p>
+                           <p className="text-xl font-display font-black text-emerald-500 uppercase italic tracking-tight leading-tight pr-2">{selectedDriver?.name}</p>
                            <div className="flex items-center gap-3 mt-1">
                               <p className="text-[11px] font-bold text-white/50 tracking-widest">{selectedDriver?.phone}</p>
                               <div className="px-2 py-0.5 bg-emerald-500/10 rounded text-[9px] font-black text-emerald-500">⭐ {Number(selectedDriver?.rating || 4.8).toFixed(1)}</div>
@@ -644,21 +667,21 @@ const BookRide = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 pt-10 sm:pt-16 border-t border-white/5">
                      <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-amber-500 shadow-2xl">
+                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-amber-500 shadow-2xl shrink-0">
                            <MapPin size={32} />
                         </div>
                         <div>
                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-2 italic">Pickup</p>
-                           <p className="text-sm font-display font-bold text-white italic tracking-tight">{bookingData.pickupAddress}</p>
+                           <p className="text-sm font-display font-bold text-white italic tracking-tight pr-2">{bookingData.pickupAddress}</p>
                         </div>
                      </div>
                      <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-electric-cyan shadow-2xl">
+                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-electric-cyan shadow-2xl shrink-0">
                            <Target size={32} />
                         </div>
                         <div>
                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-2 italic">Drop</p>
-                           <p className="text-sm font-display font-bold text-white italic tracking-tight">{bookingData.dropAddress}</p>
+                           <p className="text-sm font-display font-bold text-white italic tracking-tight pr-2">{bookingData.dropAddress}</p>
                         </div>
                      </div>
                   </div>

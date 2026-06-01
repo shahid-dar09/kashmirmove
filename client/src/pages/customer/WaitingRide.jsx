@@ -14,13 +14,13 @@ import {
 } from 'lucide-react';
 
 const statusMessages = [
-  'Locating closest drivers...',
-  'Checking Srinagar area...',
-  'Finding nearest available driver...',
-  'Connecting with nearby drivers...',
+  'Pinging driver profile...',
+  'Establishing secure connection...',
+  'Transmitting route telemetry...',
+  'Awaiting driver confirmation...',
   'Waiting for driver response...',
-  'Syncing with live maps...',
-  'Calculating best route...'
+  'Syncing valley maps...',
+  'Calculating ride fares...'
 ];
 
 const WaitingRide = () => {
@@ -185,11 +185,13 @@ const WaitingRide = () => {
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-4xl sm:text-8xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85] pr-4 sm:pr-8">
-              SEARCHING FOR <br/> <span className="text-primary">DRIVERS</span>
+            <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85] pr-4 sm:pr-8">
+              WAITING FOR <br/> 
+              <span className="text-primary">{booking.driver_name ? booking.driver_name.toUpperCase() : 'DRIVER'}</span> <br/>
+              <span className="text-sm sm:text-lg block mt-2 text-slate-500 font-black tracking-widest italic pr-2">TO ACCEPT YOUR REQUEST</span>
             </h2>
             <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 font-bold italic leading-relaxed max-w-lg mx-auto uppercase tracking-tighter opacity-80 pr-2">
-              Connecting you with available drivers in the area. Please wait a moment.
+              Sending ride dispatch telemetry to our valley partner. Please stand by.
             </p>
           </div>
 

@@ -111,6 +111,7 @@ const BookRide = () => {
   const [tempAddress, setTempAddress] = useState('');
   const [selectingLocation, setSelectingLocation] = useState('pickup');
   const [distance, setDistance] = useState(0);
+  const [loadingDrivers, setLoadingDrivers] = useState(false);
 
   // Calculate distance
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -234,6 +235,14 @@ const BookRide = () => {
       driverId: driver.id
     }));
     setStep(5);
+  };
+
+  const proceedToDrivers = () => {
+    setLoadingDrivers(true);
+    setStep(4);
+    setTimeout(() => {
+      setLoadingDrivers(false);
+    }, 1500);
   };
 
   // Confirm booking
@@ -533,7 +542,7 @@ const BookRide = () => {
                  {bookingData.pickup && bookingData.drop && (
                    <div className="pt-6 animate-fade-in">
                      <button
-                       onClick={() => setStep(4)}
+                       onClick={proceedToDrivers}
                        className="w-full py-6 bg-emerald-500 hover:bg-emerald-600 text-white rounded-[2rem] font-black uppercase text-[11px] tracking-[0.4em] shadow-[0_20px_50px_-15px_rgba(16,185,129,0.35)] hover:shadow-[0_25px_60px_-10px_rgba(16,185,129,0.45)] hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center gap-4"
                      >
                        PROCEED TO DRIVERS <Users size={20} />
@@ -561,7 +570,17 @@ const BookRide = () => {
               </div>
               <h3 className="text-2xl font-display font-black uppercase italic tracking-tight text-slate-900 dark:text-white pr-4">SELECT <span className="text-primary">DRIVER</span></h3>
            </div>
-            {drivers.filter(d => d.vehicle_type === bookingData.vehicleType).length === 0 ? (
+           
+           {loadingDrivers ? (
+             <div className="flex flex-col items-center justify-center py-20 font-display">
+                <div className="relative mb-8">
+                   <div className="w-20 h-20 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                   <Navigation className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary animate-pulse" size={24} />
+                </div>
+                <p className="text-xs font-black uppercase tracking-[0.5em] text-slate-500 animate-pulse italic pr-4">SEARCHING FOR DRIVERS...</p>
+                <p className="text-[10px] text-slate-400 mt-2 uppercase tracking-widest italic pr-2">Scanning current district grid...</p>
+             </div>
+           ) : drivers.filter(d => d.vehicle_type === bookingData.vehicleType).length === 0 ? (
               <div className="text-center py-20 bg-slate-50 dark:bg-white/5 rounded-[2.5rem] border border-slate-200 dark:border-white/10">
                 <Car className="mx-auto mb-4 text-slate-300 opacity-20" size={48} />
                 <p className="text-slate-600 dark:text-slate-300 font-bold uppercase tracking-tight pr-2">No {VEHICLE_TYPES[bookingData.vehicleType]?.name}s available</p>

@@ -188,9 +188,9 @@ const MyRides = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-4">
              <div className="w-12 h-1 bg-primary rounded-full"></div>
-             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Ride History</span>
+             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-500 italic pr-4">Ride History</span>
           </div>
-          <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white">
+          <h2 className="text-4xl sm:text-7xl font-display font-black italic uppercase leading-[0.9] sm:leading-[0.85] tracking-tighter text-slate-900 dark:text-white pr-4 sm:pr-8">
             YOUR <span className="text-primary">RIDES</span>
           </h2>
           <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Historical records of your valley bookings.</p>
@@ -199,12 +199,12 @@ const MyRides = () => {
         {!loading && rides.length > 0 && (
            <div className="bg-white dark:bg-white/5 px-6 sm:px-8 py-5 rounded-[2rem] border border-white/10 flex items-center justify-between gap-6 sm:gap-8 shadow-2xl w-full md:w-auto">
               <div className="text-right">
-                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic">Total Rides</p>
-                 <p className="text-4xl font-display font-black text-slate-900 dark:text-white leading-none tracking-tighter">{rides.length}</p>
+                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic pr-2">Total Rides</p>
+                 <p className="text-4xl font-display font-black text-slate-900 dark:text-white leading-none tracking-tighter pr-2">{rides.length}</p>
               </div>
               <div className="w-px h-12 bg-white/10"></div>
               <div className="text-right">
-                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic">Active Status</p>
+                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-1 italic pr-2">Active Status</p>
                  <div className="flex gap-2 mt-1">
                     <div className="w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center text-primary shadow-glow-saffron/20"><Zap size={14} /></div>
                     <div className="w-8 h-8 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-glow-emerald/20"><ShieldCheck size={14} /></div>
@@ -223,10 +223,10 @@ const MyRides = () => {
         ) : rides.length === 0 ? (
           <div className="py-24 sm:py-40 px-4 text-center bg-slate-50 dark:bg-white/5 rounded-[2rem] sm:rounded-[4rem] border border-dashed border-slate-200 dark:border-white/10">
             <Activity size={64} className="mx-auto mb-8 text-slate-300 opacity-20" />
-            <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-xs italic">No Rides Booked Yet</p>
+            <p className="text-slate-500 font-black uppercase tracking-[0.4em] text-xs italic pr-4">No Rides Booked Yet</p>
             <button 
               onClick={() => navigate('/customer/book')}
-              className="mt-8 px-12 py-5 bg-primary text-obsidian rounded-[2rem] font-black uppercase text-[11px] tracking-widest shadow-glow-saffron hover:scale-105 transition-all"
+              className="mt-8 px-12 py-5 bg-primary text-obsidian rounded-[2rem] font-black uppercase text-[11px] tracking-widest shadow-glow-saffron hover:scale-105 transition-all pr-2"
             >
               BOOK YOUR FIRST RIDE
             </button>
@@ -256,7 +256,7 @@ const MyRides = () => {
                   <div>
                     <div className="flex items-center gap-3 mb-1">
                       <Calendar size={12} className="text-slate-500" />
-                      <p className="text-lg font-display font-black text-slate-900 dark:text-white uppercase italic tracking-tight">
+                      <p className="text-lg font-display font-black text-slate-900 dark:text-white uppercase italic tracking-tight pr-2">
                         {new Date(ride.created_at).toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' })}
                       </p>
                     </div>
@@ -275,11 +275,11 @@ const MyRides = () => {
                       <div className="absolute left-[7px] top-3 bottom-3 w-px bg-slate-200 dark:bg-white/10 border-dashed border-l"></div>
                       <div className="flex items-center gap-4 group/loc">
                          <div className="w-4 h-4 rounded-full bg-slate-400 border-4 border-slate-100 dark:border-slate-800 z-10"></div>
-                         <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest truncate italic">{getCleanName(ride.pickup_location)}</p>
+                         <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest truncate italic pr-2">{getCleanName(ride.pickup_location)}</p>
                       </div>
                       <div className="flex items-center gap-4 group/loc">
                          <div className="w-4 h-4 rounded-full bg-primary border-4 border-slate-100 dark:border-slate-800 z-10 shadow-glow-saffron"></div>
-                         <p className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-widest truncate italic">{getCleanName(ride.drop_location)}</p>
+                         <p className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-widest truncate italic pr-2">{getCleanName(ride.drop_location)}</p>
                       </div>
                    </div>
                 </div>
@@ -287,8 +287,8 @@ const MyRides = () => {
                 {/* Price & Status */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-10 w-full lg:w-auto shrink-0">
                   <div className="text-right">
-                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Ride Fare</p>
-                    <p className="text-4xl font-display font-black italic text-primary tracking-tighter">₹{Math.round(ride.fare)}</p>
+                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic pr-2">Ride Fare</p>
+                    <p className="text-4xl font-display font-black italic text-primary tracking-tighter pr-2">₹{Math.round(ride.fare)}</p>
                   </div>
                   <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
                     <span className={`px-6 py-3 rounded-2xl text-[9px] font-black uppercase tracking-[0.3em] border shadow-xl ${getStatusStyle(ride.status)}`}>
@@ -302,7 +302,6 @@ const MyRides = () => {
                   </div>
                 </div>
               </div>
-
               {/* Expanded Section */}
               {expandedRideId === ride.id && (
                 <div className="p-5 sm:p-12 bg-slate-50 dark:bg-white/[0.02] border-t border-white/5 animate-slide-up">
@@ -311,7 +310,7 @@ const MyRides = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <User size={14} className="text-primary" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Driver Profile</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic pr-2">Driver Profile</p>
                       </div>
                       <div className="p-6 bg-white dark:bg-white/5 rounded-[2rem] border border-white/5 space-y-4 shadow-xl">
                         <div className="flex items-center gap-4">
@@ -319,7 +318,7 @@ const MyRides = () => {
                              <User size={24} />
                            </div>
                            <div>
-                             <p className="text-sm font-black text-slate-900 dark:text-white uppercase italic">{ride.driver_name || 'N/A'}</p>
+                             <p className="text-sm font-black text-slate-900 dark:text-white uppercase italic pr-2">{ride.driver_name || 'N/A'}</p>
                              <div className="flex items-center gap-2 mt-1.5 text-slate-500">
                                 <Phone size={10} />
                                 <span className="text-[9px] font-bold tracking-[0.2em]">{ride.driver_phone || 'NODATA'}</span>
@@ -331,7 +330,7 @@ const MyRides = () => {
                              <Car size={20} />
                            </div>
                            <div>
-                             <p className="text-[10px] font-black text-slate-400 uppercase italic">{ride.model || 'Standard Vehicle'}</p>
+                             <p className="text-[10px] font-black text-slate-400 uppercase italic pr-2">{ride.model || 'Standard Vehicle'}</p>
                              <p className="text-[9px] font-bold text-white/50 tracking-widest mt-1">{ride.vehicle_number || 'UNKNOWN'}</p>
                            </div>
                         </div>
@@ -342,16 +341,16 @@ const MyRides = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <MapPin size={14} className="text-emerald-500" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Ride Route</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic pr-2">Ride Route</p>
                       </div>
                       <div className="p-6 bg-white dark:bg-white/5 rounded-[2rem] border border-white/5 space-y-6 shadow-xl">
                         <div>
-                           <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 italic">Pickup Location</p>
+                           <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 italic pr-2">Pickup Location</p>
                            <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.pickup_location}</p>
                         </div>
                         <div className="h-px bg-white/5 border-dashed border-b"></div>
                         <div>
-                           <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-2 italic">Drop-off Location</p>
+                           <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-2 italic pr-2">Drop-off Location</p>
                            <p className="text-[11px] font-bold text-slate-900 dark:text-white/80 leading-relaxed">{ride.drop_location}</p>
                         </div>
                       </div>
@@ -361,19 +360,19 @@ const MyRides = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3">
                         <ShieldCheck size={14} className="text-electric-cyan" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Actions</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic pr-2">Actions</p>
                       </div>
                       <div className="space-y-4">
                         <button 
                           onClick={() => handleDownloadInvoice(ride)}
-                          className="w-full py-5 bg-white dark:bg-white/5 hover:bg-primary hover:text-obsidian hover:shadow-glow-saffron border border-slate-200 dark:border-white/10 rounded-2xl flex items-center justify-center gap-4 text-slate-900 dark:text-white text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-lg active:scale-95 group/btn"
+                          className="w-full py-5 bg-white dark:bg-white/5 hover:bg-primary hover:text-obsidian hover:shadow-glow-saffron border border-slate-200 dark:border-white/10 rounded-2xl flex items-center justify-center gap-4 text-slate-900 dark:text-white text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-lg active:scale-95 group/btn pr-2"
                         >
                           <Download size={16} className="group-hover/btn:animate-bounce" /> DOWNLOAD RECEIPT
                         </button>
                         {ride.status === 'completed' && (
                           ride.review_id ? (
                             <div className="w-full py-5 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex flex-col items-center justify-center gap-2 text-emerald-500 shadow-glow-emerald/5">
-                              <span className="text-[9px] font-black uppercase tracking-[0.3em] italic">FEEDBACK SUBMITTED</span>
+                              <span className="text-[9px] font-black uppercase tracking-[0.3em] italic pr-2">FEEDBACK SUBMITTED</span>
                               <div className="flex gap-1">
                                 {[1, 2, 3, 4, 5].map(v => (
                                   <Star 
@@ -388,7 +387,7 @@ const MyRides = () => {
                           ) : (
                             <button 
                               onClick={() => setRatingRide(ride)}
-                              className="w-full py-5 bg-primary text-obsidian rounded-2xl flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] shadow-glow-saffron transition-all hover:scale-[1.02] hover:shadow-2xl active:scale-95"
+                              className="w-full py-5 bg-primary text-obsidian rounded-2xl flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] shadow-glow-saffron transition-all hover:scale-[1.02] hover:shadow-2xl active:scale-95 pr-2"
                             >
                               <Star size={16} /> RATE RIDE
                             </button>
@@ -423,28 +422,28 @@ const MyRides = () => {
                  <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary mx-auto shadow-inner">
                     <Star size={28} className="drop-shadow-glow-saffron" />
                  </div>
-                 <h3 className="text-2xl font-display font-black italic uppercase tracking-tight text-white leading-none">RIDE <br/><span className="bg-gradient-to-r from-primary to-saffron bg-clip-text text-transparent text-3xl">FEEDBACK</span></h3>
+                 <h3 className="text-2xl font-display font-black italic uppercase tracking-tight text-white leading-none pr-4">RIDE <br/><span className="bg-gradient-to-r from-primary to-saffron bg-clip-text text-transparent text-3xl">FEEDBACK</span></h3>
                  <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-2">Ride ID #{ratingRide.id}</p>
               </div>
 
               <div className="flex justify-center gap-3 py-1 relative z-10">
                  {[1, 2, 3, 4, 5].map(v => (
-                   <button 
-                    key={v}
-                    onClick={() => setRatingValue(v)}
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                      ratingValue >= v 
-                      ? 'bg-gradient-to-br from-primary to-saffron text-obsidian shadow-glow-saffron scale-110' 
-                      : 'bg-white/5 text-slate-500 border border-white/10 hover:bg-white/10'
-                    }`}
-                   >
-                     <Star size={20} fill={ratingValue >= v ? 'currentColor' : 'none'} />
-                   </button>
+                    <button 
+                     key={v}
+                     onClick={() => setRatingValue(v)}
+                     className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                       ratingValue >= v 
+                       ? 'bg-gradient-to-br from-primary to-saffron text-obsidian shadow-glow-saffron scale-110' 
+                       : 'bg-white/5 text-slate-500 border border-white/10 hover:bg-white/10'
+                     }`}
+                    >
+                      <Star size={20} fill={ratingValue >= v ? 'currentColor' : 'none'} />
+                    </button>
                  ))}
               </div>
 
               <div className="space-y-2 relative z-10">
-                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 italic ml-2">Your Review</p>
+                 <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 italic ml-2 pr-2">Your Review</p>
                  <textarea 
                   value={ratingComment}
                   onChange={(e) => setRatingComment(e.target.value)}
@@ -463,7 +462,7 @@ const MyRides = () => {
                  <button 
                   onClick={submitRating}
                   disabled={submittingRating}
-                  className="flex-[2] py-4 bg-gradient-to-r from-primary to-saffron text-obsidian rounded-xl text-[9px] font-black uppercase tracking-widest shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
+                  className="flex-[2] py-4 bg-gradient-to-r from-primary to-saffron text-obsidian rounded-xl text-[9px] font-black uppercase tracking-widest shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 pr-2"
                  >
                    {submittingRating ? 'SENDING...' : 'SUBMIT FEEDBACK'}
                  </button>

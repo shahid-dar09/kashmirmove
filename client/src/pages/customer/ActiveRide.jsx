@@ -211,7 +211,7 @@ const ActiveRide = () => {
          <div className="w-20 h-20 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
          <Signal className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={24} />
       </div>
-      <p className="text-xs font-black uppercase tracking-[0.4em] text-slate-500 animate-pulse italic">Syncing status...</p>
+      <p className="text-xs font-black uppercase tracking-[0.4em] text-slate-500 animate-pulse italic pr-2">Syncing status...</p>
     </div>
   );
 
@@ -265,7 +265,7 @@ const ActiveRide = () => {
             hasCenteredRef.current = false;
             setDriverPos(prev => prev ? [...prev] : null);
           }}
-          className="w-16 h-16 bg-white dark:bg-obsidian rounded-3xl border-2 border-white/20 shadow-2xl flex items-center justify-center text-slate-600 dark:text-white hover:bg-primary hover:text-obsidian transition-all hover:scale-110 active:scale-95 group"
+          className="w-16 h-16 bg-white dark:bg-obsidian rounded-3xl border-2 border-white/20 shadow-2xl flex items-center justify-center text-slate-600 dark:text-white hover:bg-primary hover:text-obsidian hover:shadow-[0_0_35px_rgba(245,158,11,0.5)] transition-all hover:scale-110 active:scale-95 group"
           title="Recenter Radar"
         >
            <LocateFixed size={24} className="group-hover:rotate-12 transition-transform" />
@@ -279,10 +279,10 @@ const ActiveRide = () => {
               <Navigation size={24} />
            </div>
            <div className="min-w-0 flex-1">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic pr-2">
                 {ride.status === 'started' ? 'RIDE IN PROGRESS' : 'DRIVING TO PICKUP'}
               </p>
-              <h4 className="text-lg font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate">
+              <h4 className="text-lg font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate pr-4">
                 {ride.driver_name}
               </h4>
            </div>
@@ -353,10 +353,10 @@ const ActiveRide = () => {
                         </div>
                         <div className="min-w-0">
                            <div className="flex flex-wrap items-center gap-3 mb-3">
-                              <h3 className="text-2xl sm:text-4xl font-display font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate">{ride.driver_name}</h3>
+                              <h3 className="text-2xl sm:text-4xl font-display font-black uppercase italic tracking-tighter text-slate-900 dark:text-white truncate pr-4">{ride.driver_name}</h3>
                               <div className="flex gap-2">
-                                 <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-widest rounded-full italic">TOP RATED</span>
-                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-black uppercase tracking-widest rounded-full italic">VERIFIED DRIVER</span>
+                                 <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-widest rounded-full italic pr-2">TOP RATED</span>
+                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-black uppercase tracking-widest rounded-full italic pr-2">VERIFIED DRIVER</span>
                               </div>
                            </div>
                            <div className="flex flex-wrap items-center gap-3 sm:gap-6">
@@ -379,11 +379,11 @@ const ActiveRide = () => {
                           className="w-full sm:w-auto px-10 h-20 bg-slate-100 dark:bg-white/5 hover:bg-primary hover:text-obsidian rounded-[1.8rem] border border-slate-200 dark:border-white/10 flex items-center justify-center gap-4 transition-all group/btn shadow-xl"
                         >
                            <Phone size={20} className="group-hover:rotate-12 transition-transform" />
-                           <span className="text-[11px] font-black uppercase tracking-[0.3em]">CALL DRIVER</span>
+                           <span className="text-[11px] font-black uppercase tracking-[0.3em] pr-2">CALL DRIVER</span>
                         </a>
                         <div className="w-full sm:w-auto px-10 h-20 bg-gradient-to-br from-primary to-saffron-light rounded-[1.8rem] flex flex-col items-center justify-center shadow-glow-saffron shrink-0">
-                           <span className="text-[9px] font-black uppercase tracking-[0.2em] text-obsidian/40 leading-none mb-1">ESTIMATED FARE</span>
-                           <span className="text-3xl font-display font-black italic text-obsidian leading-none">₹{ride.fare}</span>
+                           <span className="text-[9px] font-black uppercase tracking-[0.2em] text-obsidian/40 leading-none mb-1 pr-2">ESTIMATED FARE</span>
+                           <span className="text-3xl font-display font-black italic text-obsidian leading-none pr-2">₹{ride.fare}</span>
                         </div>
                      </div>
                   </div>
@@ -396,7 +396,7 @@ const ActiveRide = () => {
                         <LocateFixed size={20} />
                      </div>
                      <div>
-                        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic">EST. WAIT TIME</p>
+                        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic pr-2">EST. WAIT TIME</p>
                         <p className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">~4 MINUTES</p>
                      </div>
                   </div>
@@ -405,14 +405,14 @@ const ActiveRide = () => {
                         <ShieldCheck size={20} />
                      </div>
                       <div>
-                         <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic">SECURITY STATUS</p>
-                         <p className="text-sm font-black text-emerald-500 uppercase tracking-tight italic">SECURE RIDE ACTIVE</p>
+                         <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-0.5 italic pr-2">SECURITY STATUS</p>
+                         <p className="text-sm font-black text-emerald-500 uppercase tracking-tight italic pr-2">SECURE RIDE ACTIVE</p>
                       </div>
                   </div>
                   <button 
                     onClick={cancelRide}
                     disabled={cancelling || ride.status === 'started'}
-                    className="px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] text-red-500/50 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all disabled:opacity-30 disabled:grayscale"
+                    className="px-8 py-3 text-[10px] font-black uppercase tracking-[0.3em] text-red-500/50 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all disabled:opacity-30 disabled:grayscale pr-2"
                   >
                     CANCEL RIDE
                   </button>

@@ -118,7 +118,7 @@ const WaitingRide = () => {
          <div className="w-24 h-24 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
          <Signal className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={32} />
       </div>
-      <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 animate-pulse italic">Connecting to service...</p>
+      <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 animate-pulse italic pr-4">Connecting to service...</p>
     </div>
   );
 
@@ -146,7 +146,7 @@ const WaitingRide = () => {
           <div className="absolute inset-20 border border-primary/30 rounded-full animate-ping opacity-10" style={{ animationDelay: '1.5s' }}></div>
           
           <div className="relative z-10">
-             <div className="w-32 h-32 sm:w-44 sm:h-44 bg-gradient-to-br from-slate-900 to-obsidian rounded-[3rem] flex items-center justify-center shadow-[0_0_80px_rgba(245,158,11,0.4)] border-4 border-white/10 relative group overflow-hidden">
+             <div className="w-32 h-32 sm:w-44 sm:h-44 bg-gradient-to-br from-slate-900 to-obsidian rounded-[3rem] flex items-center justify-center shadow-[0_0_80px_rgba(239,68,68,0.25),0_0_40px_rgba(245,158,11,0.2)] border-4 border-white/10 relative group overflow-hidden">
                 <div className="absolute inset-0 bg-primary/10 animate-pulse"></div>
                 <div className="relative z-10 flex flex-col items-center gap-3">
                    <Radar size={56} className="text-primary animate-pulse" />
@@ -162,13 +162,13 @@ const WaitingRide = () => {
              <div className="absolute -top-8 right-0 sm:-top-6 sm:-right-16 animate-float">
                 <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 px-5 py-2 rounded-2xl backdrop-blur-xl shadow-2xl">
                    <Target className="text-emerald-500 shadow-glow-emerald/50" size={16} />
-                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 italic">Driver Located</span>
+                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 italic pr-2">Driver Located</span>
                 </div>
              </div>
              <div className="absolute -bottom-12 left-0 sm:-bottom-10 sm:-left-20 animate-float" style={{ animationDelay: '2s' }}>
                 <div className="flex items-center gap-3 bg-primary/10 border border-primary/20 px-5 py-2 rounded-2xl backdrop-blur-xl shadow-2xl">
                    <Activity className="text-primary shadow-glow-saffron/50" size={16} />
-                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary italic">Connecting...</span>
+                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary italic pr-2">Connecting...</span>
                 </div>
              </div>
           </div>
@@ -178,17 +178,17 @@ const WaitingRide = () => {
        <div className="relative z-10 max-w-2xl space-y-8 sm:space-y-10">
           <div className="flex items-center justify-center gap-3 sm:gap-4">
              <div className="w-10 h-1 bg-primary/20 rounded-full"></div>
-             <p className="text-[11px] font-black uppercase tracking-[0.5em] text-primary italic animate-pulse">
+             <p className="text-[11px] font-black uppercase tracking-[0.5em] text-primary italic animate-pulse pr-4">
                 {statusText}
               </p>
              <div className="w-10 h-1 bg-primary/20 rounded-full"></div>
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-4xl sm:text-8xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85]">
+            <h2 className="text-4xl sm:text-8xl font-display font-black italic uppercase tracking-tighter text-slate-900 dark:text-white leading-[0.9] sm:leading-[0.85] pr-4 sm:pr-8">
               SEARCHING FOR <br/> <span className="text-primary">DRIVERS</span>
             </h2>
-            <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 font-bold italic leading-relaxed max-w-lg mx-auto uppercase tracking-tighter opacity-80">
+            <p className="text-base sm:text-xl text-slate-500 dark:text-slate-400 font-bold italic leading-relaxed max-w-lg mx-auto uppercase tracking-tighter opacity-80 pr-2">
               Connecting you with available drivers in the area. Please wait a moment.
             </p>
           </div>
@@ -199,8 +199,8 @@ const WaitingRide = () => {
                    <MapPin size={24} />
                 </div>
                 <div className="min-w-0">
-                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Pickup Location</p>
-                   <p className="font-black italic text-slate-900 dark:text-white truncate text-lg tracking-tight uppercase leading-none">{booking.pickup_location.split('|||')[0]}</p>
+                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic pr-2">Pickup Location</p>
+                   <p className="font-black italic text-slate-900 dark:text-white truncate text-lg tracking-tight uppercase leading-none pr-2">{booking.pickup_location.split('|||')[0]}</p>
                 </div>
              </div>
              <div className="card-modern p-8 flex items-center gap-6 text-left bg-white dark:bg-white/5 border-white/5 group rounded-[2.5rem] shadow-xl">
@@ -208,8 +208,8 @@ const WaitingRide = () => {
                    <Target size={24} />
                 </div>
                 <div className="min-w-0">
-                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic">Drop-off Location</p>
-                   <p className="font-black italic text-slate-900 dark:text-white truncate text-lg tracking-tight uppercase leading-none">{booking.drop_location.split('|||')[0]}</p>
+                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1 italic pr-2">Drop-off Location</p>
+                   <p className="font-black italic text-slate-900 dark:text-white truncate text-lg tracking-tight uppercase leading-none pr-2">{booking.drop_location.split('|||')[0]}</p>
                 </div>
              </div>
           </div>
@@ -218,7 +218,7 @@ const WaitingRide = () => {
              <button 
                onClick={cancelRequest}
                disabled={cancelling}
-               className="group flex w-full sm:w-auto items-center justify-center gap-4 sm:gap-6 px-6 sm:px-12 py-5 sm:py-6 rounded-[1.5rem] sm:rounded-[2.5rem] bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 font-black uppercase tracking-[0.3em] text-[10px] hover:bg-red-500 hover:text-white dark:hover:bg-red-500 transition-all shadow-2xl border border-white/5"
+               className="group flex w-full sm:w-auto items-center justify-center gap-4 sm:gap-6 px-6 sm:px-12 py-5 sm:py-6 rounded-[1.5rem] sm:rounded-[2.5rem] bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 font-black uppercase tracking-[0.3em] text-[10px] hover:bg-red-500 hover:text-white dark:hover:bg-red-500 transition-all shadow-2xl border border-white/5 pr-2"
              >
                {cancelling ? <Loader2 size={20} className="animate-spin" /> : <X size={20} className="group-hover:rotate-90 transition-transform" />}
                CANCEL RIDE REQUEST
@@ -226,7 +226,7 @@ const WaitingRide = () => {
              
              <div className="flex items-center gap-4">
                 <div className="w-4 h-4 rounded-full bg-emerald-500 animate-pulse shadow-glow-emerald"></div>
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Secure Connection Active</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic pr-2">Secure Connection Active</span>
              </div>
           </div>
        </div>

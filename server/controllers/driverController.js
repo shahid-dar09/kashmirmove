@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const pool = require('../config/db');
 const { uploadToCloudinary } = require('../utils/cloudinary');
+const { generateOTP, sendOTPEmail } = require('../utils/mailer');
 
 const registerDriver = async (req, res) => {
     let connection;
@@ -10,13 +11,45 @@ const registerDriver = async (req, res) => {
         connection = await pool.getConnection();
         await connection.beginTransaction();
 
-        const { name, email, phone, password, vehicleType, vehicleNumber, model, capacity, licenseNumber } = req.body;
+        const { name, email, phone, password, vehicleType, vehicleNumber, model, capacity, licenseNumber, otp } = req.body;
 
         // Validation
         if (!name || !email || !password || !vehicleType || !vehicleNumber || !licenseNumber) {
             await connection.rollback();
             return res.status(400).json({ success: false, message: 'Please provide all required fields' });
         }
+
+        // ─── Verify Email OTP ──────────────────────────────────────────────────
+        if (!otp) {
+            await connection.rollback();
+            return res.status(400).json({ success: false, message: 'Email verification code is required' });
+        }
+
+        const [otpRecords] = await connection.query(
+            'SELECT * FROM verification_otps WHERE email = ? ORDER BY created_at DESC LIMIT 1',
+            [email]
+        );
+
+        if (otpRecords.length === 0) {
+            await connection.rollback();
+            return res.status(400).json({ success: false, message: 'No verification code found for this email. Please request a new one.' });
+        }
+
+        const otpRecord = otpRecords[0];
+
+        if (new Date() > new Date(otpRecord.expires_at)) {
+            await connection.query('DELETE FROM verification_otps WHERE email = ?', [email]);
+            await connection.rollback();
+            return res.status(400).json({ success: false, message: 'Verification code has expired. Please request a new one.' });
+        }
+
+        if (otpRecord.otp !== otp.trim()) {
+            await connection.rollback();
+            return res.status(400).json({ success: false, message: 'Incorrect verification code. Please try again.' });
+        }
+
+        // OTP valid — clean it up
+        await connection.query('DELETE FROM verification_otps WHERE email = ?', [email]);
 
         // Check files
         if (!req.files || !req.files['profilePhoto'] || !req.files['idProof']) {

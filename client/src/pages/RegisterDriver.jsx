@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useToast } from '../context/ToastContextShared';
 import api from '../services/api';
@@ -14,12 +14,17 @@ import {
   LayoutGrid,
   FileText,
   Upload,
-  CheckCircle2
+  CheckCircle2,
+  KeyRound,
+  RefreshCw
 } from 'lucide-react';
 
 const RegisterDriver = () => {
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(1);
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [step, setStep] = useState(1); // 1 = identity, 2 = vehicle, 3 = OTP
+  const [otp, setOtp] = useState('');
+  const [countdown, setCountdown] = useState(0);
   const { addToast } = useToast();
   const navigate = useNavigate();
 
@@ -41,6 +46,13 @@ const RegisterDriver = () => {
     idProof: null
   });
 
+  // Countdown timer for OTP resend
+  useEffect(() => {
+    if (countdown <= 0) return;
+    const timer = setTimeout(() => setCountdown(c => c - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [countdown]);
+
   const handleFileChange = (e) => {
     const { name, files: selectedFiles } = e.target;
     setFiles(prev => ({
@@ -57,31 +69,72 @@ const RegisterDriver = () => {
     setStep(2);
   };
 
-  const handleSubmit = async (e) => {
+  // Step 2 → 3: Send OTP before final submit
+  const handleSendOTP = async (e) => {
     e.preventDefault();
+    setOtpLoading(true);
+    try {
+      const res = await api.post('/auth/send-otp', {
+        email: formData.email,
+        name: formData.name
+      });
+      if (res.data.success) {
+        setStep(3);
+        setCountdown(60);
+        addToast("Code Sent!", `Verification code sent to ${formData.email}`, "success");
+      }
+    } catch (err) {
+      addToast("Failed to Send Code", err.response?.data?.message || "Please check your email and try again.", "error");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  // Resend OTP
+  const handleResendOTP = async () => {
+    if (countdown > 0) return;
+    setOtpLoading(true);
+    try {
+      const res = await api.post('/auth/send-otp', {
+        email: formData.email,
+        name: formData.name
+      });
+      if (res.data.success) {
+        setCountdown(60);
+        setOtp('');
+        addToast("New Code Sent!", `Fresh verification code sent to ${formData.email}`, "success");
+      }
+    } catch (err) {
+      addToast("Failed to Resend", err.response?.data?.message || "Please try again.", "error");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  // Step 3: Verify OTP + create driver account
+  const handleVerifyAndRegister = async (e) => {
+    e.preventDefault();
+    if (!otp || otp.length !== 6) {
+      return addToast("Invalid Code", "Please enter the 6-digit verification code.", "error");
+    }
     setLoading(true);
 
     const data = new FormData();
-    // Append text fields
-    Object.keys(formData).forEach(key => {
-      data.append(key, formData[key]);
-    });
-    // Append files
+    Object.keys(formData).forEach(key => data.append(key, formData[key]));
+    data.append('otp', otp);
     if (files.profilePhoto) data.append('profilePhoto', files.profilePhoto);
     if (files.idProof) data.append('idProof', files.idProof);
 
     try {
       const res = await api.post('/driver/register', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
       if (res.data.success) {
-        addToast("Application Received", "Your Driver profile is now in queue for admin verification.", "success");
+        addToast("Application Received!", "Email verified. Your driver profile is queued for admin approval.", "success");
         navigate('/login');
       }
     } catch (err) {
-      addToast("Enrollment Failed", err.response?.data?.message || "Please verify your credentials and documents.", "error");
+      addToast("Registration Failed", err.response?.data?.message || "Please verify your code and try again.", "error");
     } finally {
       setLoading(false);
     }
@@ -151,8 +204,8 @@ const RegisterDriver = () => {
         
         {/* Top Navigation */}
         <div className="flex justify-between items-center gap-4 mb-8 sm:mb-16 relative z-10">
-           <button onClick={() => step === 2 ? setStep(1) : navigate('/')} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors group">
-              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> {step === 2 ? 'BACK' : 'EXIT'}
+           <button onClick={() => step > 1 ? setStep(s => s - 1) : navigate('/')} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors group">
+              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> {step > 1 ? 'BACK' : 'EXIT'}
            </button>
            
            <div className="flex items-center justify-end gap-3 sm:gap-8 flex-wrap">
@@ -179,18 +232,19 @@ const RegisterDriver = () => {
               <div className="absolute top-6 right-6 sm:top-12 sm:right-12 flex gap-1">
                  <div className={`w-8 h-1 ${step >= 1 ? 'bg-primary' : 'bg-white/10'} rounded-full transition-colors`}></div>
                  <div className={`w-8 h-1 ${step >= 2 ? 'bg-secondary' : 'bg-white/10'} rounded-full transition-colors`}></div>
+                 <div className={`w-8 h-1 ${step >= 3 ? 'bg-green-500' : 'bg-white/10'} rounded-full transition-colors`}></div>
               </div>
               
               <div className="relative z-10 mb-12">
                  <h3 className="text-2xl sm:text-3xl font-black italic uppercase tracking-tighter mb-2 pr-2">
-                   PHASE <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary px-1">{step === 1 ? '01' : '02'}</span>
+                   PHASE <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary px-1">{step === 1 ? '01' : step === 2 ? '02' : '03'}</span>
                  </h3>
                  <p className="text-slate-500 font-medium italic text-sm">
-                   {step === 1 ? 'Personal Identity Information' : 'Vehicle & Driving Details'}
+                   {step === 1 ? 'Personal Identity Information' : step === 2 ? 'Vehicle & Driving Details' : 'Email Verification'}
                  </p>
               </div>
 
-              <form onSubmit={step === 1 ? handleNext : handleSubmit} className="relative z-10 space-y-8">
+              <form onSubmit={step === 1 ? handleNext : step === 2 ? handleSendOTP : handleVerifyAndRegister} className="relative z-10 space-y-8">
                  {step === 1 ? (
                    /* STEP 1: IDENTITY */
                    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
@@ -259,7 +313,7 @@ const RegisterDriver = () => {
                          </div>
                       </div>
                    </div>
-                 ) : (
+                 ) : step === 2 ? (
                    /* STEP 2: VEHICLE & DOCS */
                    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -358,18 +412,69 @@ const RegisterDriver = () => {
                          </div>
                       </div>
                    </div>
+                 ) : (
+                   /* ── STEP 3: OTP Verification ── */
+                   <div className="space-y-8 animate-in fade-in duration-500">
+                     <div className="flex flex-col items-center text-center">
+                       <div className="w-16 h-16 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(220,38,38,0.15)]">
+                         <Mail className="text-primary" size={28} />
+                       </div>
+                       <h2 className="text-xl font-black uppercase tracking-tight text-white mb-2">Check Your Inbox</h2>
+                       <p className="text-sm text-slate-400 font-medium leading-relaxed max-w-xs">
+                         We sent a 6-digit verification code to<br />
+                         <span className="text-white font-bold">{formData.email}</span>
+                       </p>
+                     </div>
+
+                     <div className="space-y-3">
+                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">VERIFICATION CODE</label>
+                       <div className="relative group/field">
+                         <KeyRound className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within/field:text-primary transition-colors" size={20} />
+                         <input
+                           type="text"
+                           inputMode="numeric"
+                           maxLength={6}
+                           value={otp}
+                           onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                           className="w-full bg-[#16162A]/80 border-2 border-primary/30 focus:border-primary rounded-2xl py-5 pl-14 pr-8 font-black text-2xl tracking-[0.5em] text-center focus:bg-[#16162A] outline-none transition-all text-white placeholder:text-slate-700 placeholder:tracking-normal placeholder:text-sm"
+                           placeholder="• • • • • •"
+                           autoFocus
+                           required
+                         />
+                       </div>
+                     </div>
+
+                     <div className="flex items-center justify-between px-1">
+                       <button
+                         type="button"
+                         onClick={handleResendOTP}
+                         disabled={countdown > 0 || otpLoading}
+                         className="flex items-center gap-2 text-[11px] font-bold text-slate-400 hover:text-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                       >
+                         <RefreshCw size={13} className={otpLoading ? 'animate-spin' : ''} />
+                         {countdown > 0 ? `Resend in ${countdown}s` : 'Resend Code'}
+                       </button>
+                       <button
+                         type="button"
+                         onClick={() => { setStep(2); setOtp(''); }}
+                         className="text-[11px] font-bold text-slate-500 hover:text-white transition-colors"
+                       >
+                         ← Go Back
+                       </button>
+                     </div>
+                   </div>
                  )}
 
                  <button 
                   type="submit" 
-                  disabled={loading}
-                  className={`w-full py-6 mt-4 ${step === 1 ? 'bg-primary shadow-glow-primary' : 'bg-gradient-to-r from-primary to-secondary shadow-glow-primary'} rounded-2xl font-black italic uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 text-white`}
+                  disabled={loading || otpLoading || (step === 3 && otp.length !== 6)}
+                  className={`w-full py-6 mt-4 ${step === 1 ? 'bg-primary shadow-glow-primary' : 'bg-gradient-to-r from-primary to-secondary shadow-glow-primary'} rounded-2xl font-black italic uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 text-white disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100`}
                  >
-                    {loading ? (
-                      <RefreshCcw className="animate-spin" size={18} />
+                    {loading || otpLoading ? (
+                      <RefreshCw className="animate-spin" size={18} />
                     ) : (
                       <>
-                        {step === 1 ? 'START REGISTRATION' : 'FINALIZE REGISTRATION'}
+                        {step === 1 ? 'START REGISTRATION' : step === 2 ? 'SEND VERIFICATION CODE' : 'VERIFY & COMPLETE REGISTRATION'}
                         <ArrowLeft size={16} className="rotate-180" />
                       </>
                     )}

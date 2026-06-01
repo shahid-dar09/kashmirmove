@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { registerCustomer, login, updateProfile, getProfile, uploadAvatar, getPublicStats } = require('../controllers/authController');
+const { sendOTP, registerCustomer, login, updateProfile, getProfile, uploadAvatar, getPublicStats } = require('../controllers/authController');
 const { protect } = require('../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
 
+router.post('/send-otp', sendOTP);
 router.post('/register', registerCustomer);
 router.post('/login', login);
 router.put('/profile', protect, updateProfile);

@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const pool = require('../config/db');
 const { uploadToCloudinary } = require('../utils/cloudinary');
+const { generateOTP, sendOTPEmail } = require('../utils/mailer');
 
 const generateToken = (id, role) => {
     return jwt.sign({ id, role }, process.env.JWT_SECRET, {
@@ -9,14 +10,87 @@ const generateToken = (id, role) => {
     });
 };
 
-const registerCustomer = async (req, res) => {
+// ─── Send Email OTP ───────────────────────────────────────────────────────────
+const sendOTP = async (req, res) => {
     try {
-        const { name, email, phone, password } = req.body;
+        const { email, name } = req.body;
 
-        if (!name || !email || !phone || !password) {
-            return res.status(400).json({ success: false, message: 'Please provide all required fields' });
+        if (!email) {
+            return res.status(400).json({ success: false, message: 'Email is required' });
         }
 
+        // Basic email format check
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ success: false, message: 'Please enter a valid email address' });
+        }
+
+        // Check if email already registered
+        const [existingUser] = await pool.query('SELECT id FROM users WHERE email = ?', [email]);
+        if (existingUser.length > 0) {
+            return res.status(400).json({ success: false, message: 'An account with this email already exists. Please log in.' });
+        }
+
+        // Delete any previous OTPs for this email
+        await pool.query('DELETE FROM verification_otps WHERE email = ?', [email]);
+
+        // Generate OTP and set 10-minute expiry
+        const otp = generateOTP();
+        const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+        await pool.query(
+            'INSERT INTO verification_otps (email, otp, expires_at) VALUES (?, ?, ?)',
+            [email, otp, expiresAt]
+        );
+
+        // Send email
+        await sendOTPEmail(email, otp, name || 'Valued User');
+
+        res.status(200).json({
+            success: true,
+            message: `Verification code sent to ${email}. Please check your inbox.`
+        });
+
+    } catch (error) {
+        console.error('sendOTP error:', error);
+        res.status(500).json({ success: false, message: 'Failed to send verification email. Please try again.' });
+    }
+};
+
+// ─── Register Customer (with OTP verification) ────────────────────────────────
+const registerCustomer = async (req, res) => {
+    try {
+        const { name, email, phone, password, otp } = req.body;
+
+        if (!name || !email || !phone || !password || !otp) {
+            return res.status(400).json({ success: false, message: 'Please provide all required fields including the verification code' });
+        }
+
+        // Verify OTP
+        const [otpRecords] = await pool.query(
+            'SELECT * FROM verification_otps WHERE email = ? ORDER BY created_at DESC LIMIT 1',
+            [email]
+        );
+
+        if (otpRecords.length === 0) {
+            return res.status(400).json({ success: false, message: 'No verification code found for this email. Please request a new one.' });
+        }
+
+        const otpRecord = otpRecords[0];
+
+        if (new Date() > new Date(otpRecord.expires_at)) {
+            await pool.query('DELETE FROM verification_otps WHERE email = ?', [email]);
+            return res.status(400).json({ success: false, message: 'Verification code has expired. Please request a new one.' });
+        }
+
+        if (otpRecord.otp !== otp.trim()) {
+            return res.status(400).json({ success: false, message: 'Incorrect verification code. Please try again.' });
+        }
+
+        // OTP is valid — clean it up
+        await pool.query('DELETE FROM verification_otps WHERE email = ?', [email]);
+
+        // Check email not taken (race condition guard)
         const [existingUser] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
         if (existingUser.length > 0) {
             return res.status(400).json({ success: false, message: 'User already exists' });
@@ -34,7 +108,7 @@ const registerCustomer = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: 'Customer registered successfully',
+            message: 'Account created successfully! Welcome to KashmirMove.',
             token,
             user: {
                 id: result.insertId,
@@ -48,6 +122,7 @@ const registerCustomer = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error: ' + error.message });
     }
 };
+
 
 const login = async (req, res) => {
     try {
@@ -231,4 +306,4 @@ const getPublicStats = async (req, res) => {
     }
 };
 
-module.exports = { registerCustomer, login, updateProfile, getProfile, uploadAvatar, getPublicStats };
+module.exports = { sendOTP, registerCustomer, login, updateProfile, getProfile, uploadAvatar, getPublicStats };

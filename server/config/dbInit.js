@@ -80,6 +80,18 @@ async function initializeDatabase() {
         // 5. Ensure Support Tables Exist
         console.log('[DB Initialization] Verifying support tables...');
 
+        // verification_otps Table
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS verification_otps (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                email VARCHAR(100) NOT NULL,
+                otp VARCHAR(6) NOT NULL,
+                expires_at TIMESTAMP NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                INDEX idx_email (email)
+            )
+        `);
+
         // emergency_contacts Table
         await pool.query(`
             CREATE TABLE IF NOT EXISTS emergency_contacts (

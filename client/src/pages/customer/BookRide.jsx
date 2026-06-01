@@ -11,7 +11,8 @@ import {
   Users,
   Activity,
   MapPin,
-  Loader2
+  Loader2,
+  Star
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, useMapEvent } from 'react-leaflet';
 import L from 'leaflet';

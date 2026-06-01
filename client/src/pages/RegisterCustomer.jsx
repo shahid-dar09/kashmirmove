@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useToast } from '../context/ToastContextShared';
 import api from '../services/api';
@@ -57,7 +57,7 @@ const RegisterCustomer = () => {
       if (res.data.success) {
         setOtpSent(true);
         setCountdown(60);
-        addToast("Code Sent!", `Verification code sent to ${formData.email}`, "success");
+        addToast("Code Sent!", res.data.message || `Verification code sent to ${formData.email}`, "success");
       }
     } catch (err) {
       addToast("Failed to Send Code", err.response?.data?.message || "Please check your email and try again.", "error");
@@ -78,7 +78,7 @@ const RegisterCustomer = () => {
       if (res.data.success) {
         setCountdown(60);
         setOtp('');
-        addToast("New Code Sent!", `A fresh verification code has been sent to ${formData.email}`, "success");
+        addToast("New Code Sent!", res.data.message || `A fresh verification code has been sent to ${formData.email}`, "success");
       }
     } catch (err) {
       addToast("Failed to Resend", err.response?.data?.message || "Please try again.", "error");

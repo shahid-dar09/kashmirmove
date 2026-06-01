@@ -350,22 +350,22 @@ const Profile = () => {
       <div className="max-w-6xl mx-auto space-y-8 sm:space-y-10 animate-fade-in px-4 sm:px-0">
       {/* Page Title */}
       <div>
-        <h2 className="text-3xl sm:text-4xl font-display font-black tracking-tight mb-2 uppercase italic">
-          Account <span className="text-primary">Command</span>
+        <h2 className="text-3xl sm:text-4xl font-display font-black tracking-tight mb-2 uppercase italic pr-4">
+          YOUR <span className="text-primary">PROFILE</span>
         </h2>
         <p className="text-slate-500 font-medium">
           Manage your personal profile and security settings.
         </p>
       </div>
 
-      {/* Phase 3: Pilot Intelligence (Analytics) */}
+      {/* Phase 3: Driver Intelligence (Analytics) */}
       {user?.role === 'driver' && analytics && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 card-modern p-5 sm:p-8 flex flex-col min-h-[400px]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
               <div>
-                <h4 className="text-2xl font-display font-black uppercase italic">Financial <span className="text-primary">Pulse</span></h4>
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">7-Day Earnings Trend</p>
+                <h4 className="text-2xl font-display font-black uppercase italic pr-4">Financial <span className="text-primary">Pulse</span></h4>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 pr-2">7-Day Earnings Trend</p>
               </div>
               <div className="p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center gap-3 w-full sm:w-auto justify-center">
                 <TrendingUp size={20} />
@@ -428,7 +428,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <p className="text-2xl font-black">{analytics.summary?.rating || '5.00'}</p>
-                    <p className="text-[10px] font-black uppercase text-slate-400">Pilot Rating</p>
+                    <p className="text-[10px] font-black uppercase text-slate-400 pr-2">Driver Rating</p>
                   </div>
                </div>
                <ChevronRight size={20} className="text-slate-300" />
@@ -450,8 +450,8 @@ const Profile = () => {
             <div className="card-modern p-6 bg-primary text-white border-none shadow-glow-indigo overflow-hidden relative">
                <div className="relative z-10 flex flex-col h-full justify-between">
                   <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest opacity-80 mb-1">Available for Payout</p>
-                    <p className="text-4xl font-display font-black italic">₹{user?.wallet_balance || '0.00'}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest opacity-80 mb-1 pr-2">Available for Payout</p>
+                    <p className="text-4xl font-display font-black italic pr-4">₹{user?.wallet_balance || '0.00'}</p>
                   </div>
                   <button className="mt-6 w-full py-3 bg-white text-primary rounded-xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-transform">
                     Request Payout
@@ -492,11 +492,11 @@ const Profile = () => {
                   </div>
                 </label>
               </div>
-              <h3 className="text-2xl font-display font-black tracking-tight">
+              <h3 className="text-2xl font-display font-black tracking-tight mb-1 pr-4">
                 {user?.name}
               </h3>
-              <p className="text-xs font-black uppercase tracking-widest text-primary mt-1 italic">
-                {user?.role}
+              <p className="text-xs font-black uppercase tracking-widest text-primary mt-1 italic pr-2">
+                {user?.role === 'driver' ? 'Driver Partner' : 'Customer Account'}
               </p>
             </div>
 
@@ -504,7 +504,7 @@ const Profile = () => {
               {isEditing ? (
                 <form onSubmit={handleUpdateProfile} className="space-y-4">
                   <div>
-                    <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block">
+                    <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block pr-2">
                       Full Name
                     </label>
                     <input
@@ -517,7 +517,7 @@ const Profile = () => {
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block">
+                    <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block pr-2">
                       Phone Number
                     </label>
                     <input
@@ -532,7 +532,7 @@ const Profile = () => {
                   {user.role === "driver" && (
                     <>
                       <div>
-                        <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block">
+                        <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block pr-2">
                           Vehicle Model
                         </label>
                         <input
@@ -548,7 +548,7 @@ const Profile = () => {
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block">
+                        <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block pr-2">
                           License Plate
                         </label>
                         <input
@@ -566,7 +566,7 @@ const Profile = () => {
                     </>
                   )}
                   <div>
-                    <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block">
+                    <label className="text-[10px] font-black uppercase text-slate-400 mb-1 block pr-2">
                       New Password (Optional)
                     </label>
                     <input
@@ -675,20 +675,20 @@ const Profile = () => {
             <div className="card-modern p-5 sm:p-8 flex flex-col h-full border-primary/20">
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h4 className="text-2xl font-display font-black uppercase italic">Safety <span className="text-secondary">Network</span></h4>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Emergency SOS Contacts</p>
+                  <h4 className="text-2xl font-display font-black uppercase italic pr-4">Safety <span className="text-secondary">Network</span></h4>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 pr-2">Emergency SOS Contacts</p>
                 </div>
                 <button 
                   onClick={() => setIsAddingContact(!isAddingContact)}
-                  className="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                  className="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-md"
                 >
-                  <Plus size={24} className={isAddingContact ? 'rotate-45' : ''} />
+                  <Plus size={24} className={isAddingContact ? 'rotate-45 transition-transform' : 'transition-transform'} />
                 </button>
               </div>
 
               <div className="flex-1 space-y-6">
                 {isAddingContact && (
-                  <form onSubmit={handleAddContact} className="p-4 sm:p-6 bg-slate-50 dark:bg-white/5 rounded-[24px] sm:rounded-[32px] border border-primary/20 animate-slide-up space-y-4">
+                  <form onSubmit={handleAddContact} className="p-4 sm:p-6 bg-slate-50 dark:bg-white/5 rounded-[24px] sm:rounded-[32px] border border-primary/20 animate-slide-up space-y-4 shadow-xl">
                     <input 
                       type="text" placeholder="Contact Name" 
                       className="w-full bg-white dark:bg-obsidian border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3 text-sm font-bold shadow-inner"
@@ -707,8 +707,8 @@ const Profile = () => {
                       value={contactForm.relationship}
                       onChange={(e) => setContactForm({...contactForm, relationship: e.target.value})}
                     />
-                    <button type="submit" className="w-full py-4 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-[1.02] transition-transform">
-                      Authorize Contact
+                    <button type="submit" className="w-full py-4 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-[1.02] transition-transform shadow-glow-saffron pr-2">
+                      Save Contact
                     </button>
                   </form>
                 )}
@@ -718,22 +718,22 @@ const Profile = () => {
                     <div className="flex flex-col items-center justify-center py-12 text-slate-300">
                       <ShieldCheck size={48} className="mb-4 opacity-20" />
                       <p className="text-sm font-bold italic">Your network is empty.</p>
-                      <p className="text-[10px] uppercase font-black tracking-widest mt-1 opacity-50">Add emergency contacts for pilot safety</p>
+                      <p className="text-[10px] uppercase font-black tracking-widest mt-1 opacity-50 pr-2">Add emergency contacts for driver safety</p>
                     </div>
                   ) : (
                     emergencyContacts.map(contact => (
                       <div 
                         key={contact.id} 
-                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 sm:p-5 bg-slate-50 dark:bg-white/5 rounded-[24px] sm:rounded-[32px] group hover:border-primary border border-transparent transition-all cursor-pointer"
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 sm:p-5 bg-slate-50 dark:bg-white/5 rounded-[24px] sm:rounded-[32px] group hover:border-primary border border-transparent transition-all cursor-pointer shadow-md hover:shadow-xl"
                         onClick={() => window.location.href = `tel:${contact.phone}`}
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center justify-center">
+                          <div className="w-12 h-12 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center justify-center shrink-0 shadow-inner">
                             <Phone size={20} />
                           </div>
                           <div>
                             <p className="text-base font-bold">{contact.name}</p>
-                            <p className="text-[10px] text-slate-500 font-black uppercase tracking-wider">
+                            <p className="text-[10px] text-slate-500 font-black uppercase tracking-wider pr-2">
                               {contact.relationship || 'Contact'} • {contact.phone}
                             </p>
                           </div>
@@ -756,7 +756,7 @@ const Profile = () => {
               <div className="mt-auto pt-8 border-t border-dashed border-slate-200 dark:border-white/10">
                  <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-2xl border border-primary/20">
                     <Zap size={16} className="text-primary" />
-                    <p className="text-[10px] font-bold text-primary dark:text-primary/80 uppercase italic">Your safety network is private and used only for emergency SOS triggers.</p>
+                    <p className="text-[10px] font-bold text-primary dark:text-primary/80 uppercase italic pr-2">Your safety network is private and used only for emergency SOS triggers.</p>
                  </div>
               </div>
             </div>
@@ -772,7 +772,7 @@ const Profile = () => {
             <div className="w-full lg:w-80 shrink-0">
               <div className="card-modern p-6 space-y-6 h-full flex flex-col">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-black text-sm uppercase tracking-widest text-slate-400">Saved Destinations</h3>
+                  <h3 className="font-black text-sm uppercase tracking-widest text-slate-400 pr-2">Saved Destinations</h3>
                   <button 
                     onClick={() => setIsAddingLocation(!isAddingLocation)}
                     className="p-2 bg-slate-100 dark:bg-white/5 rounded-lg text-primary hover:bg-primary hover:text-white transition-colors"
@@ -817,15 +817,15 @@ const Profile = () => {
                     savedLocations.map(loc => (
                       <div 
                         key={loc.id} 
-                      className="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-white/5 group cursor-pointer hover:border-primary border border-transparent transition-all"
+                      className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-white dark:bg-white/5 group cursor-pointer hover:border-primary hover:shadow-[0_10px_30px_-10px_rgba(245,158,11,0.15)] border border-slate-200 dark:border-white/10 transition-all"
                         onClick={() => navigate('/customer/book', { state: { prefilledDestination: loc } })}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
                             <MapPin size={14} />
                           </div>
-                          <div className="text-left">
-                            <p className="text-xs font-bold">{loc.name}</p>
+                          <div className="text-left min-w-0">
+                            <p className="text-xs font-bold truncate">{loc.name}</p>
                             <p className="text-[10px] text-slate-500 truncate max-w-[120px]">{loc.address}</p>
                           </div>
                         </div>
@@ -839,7 +839,7 @@ const Profile = () => {
                               console.error(err);
                             }
                           }}
-                        className="text-[10px] font-bold text-red-500 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity uppercase tracking-widest shrink-0"
+                        className="text-[10px] font-bold text-red-500 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity uppercase tracking-widest shrink-0 pr-2"
                         >
                           Remove
                         </button>
@@ -855,7 +855,7 @@ const Profile = () => {
       {/* Phase 2: Safety & Personalization */}
       {user?.role === 'customer' && (
         <div className="space-y-6">
-          <h3 className="text-xl font-display font-black uppercase italic tracking-tight flex items-center gap-3">
+          <h3 className="text-xl font-display font-black uppercase italic tracking-tight flex items-center gap-3 pr-4">
             <ShieldCheck className="text-emerald-500" /> Safety & <span className="text-electric-cyan">Personalization</span>
           </h3>
 
@@ -864,20 +864,20 @@ const Profile = () => {
             <div className="card-premium h-full flex flex-col">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h4 className="text-lg font-display font-black uppercase italic">Safety Network</h4>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Emergency SOS Contacts</p>
+                  <h4 className="text-lg font-display font-black uppercase italic pr-4">Safety Network</h4>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 pr-2">Emergency SOS Contacts</p>
                 </div>
                 <button 
                   onClick={() => setIsAddingContact(!isAddingContact)}
-                  className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                  className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-md"
                 >
-                  <Plus size={20} className={isAddingContact ? 'rotate-45' : ''} />
+                  <Plus size={20} className={isAddingContact ? 'rotate-45 transition-transform' : 'transition-transform'} />
                 </button>
               </div>
 
               <div className="flex-1 space-y-4">
                 {isAddingContact && (
-                  <form onSubmit={handleAddContact} className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-primary/20 animate-slide-up space-y-3">
+                  <form onSubmit={handleAddContact} className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-primary/20 animate-slide-up space-y-3 shadow-xl">
                     <input 
                       type="text" placeholder="Contact Name" 
                       className="w-full bg-white dark:bg-obsidian border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2 text-xs font-bold"
@@ -896,7 +896,7 @@ const Profile = () => {
                       value={contactForm.relationship}
                       onChange={(e) => setContactForm({...contactForm, relationship: e.target.value})}
                     />
-                    <button type="submit" className="w-full py-2 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-glow-indigo">
+                    <button type="submit" className="w-full py-2 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-glow-saffron pr-2">
                       Add to Network
                     </button>
                   </form>
@@ -918,7 +918,7 @@ const Profile = () => {
                           </div>
                           <div>
                             <p className="text-sm font-bold">{contact.name}</p>
-                            <p className="text-[10px] text-slate-500 font-black uppercase">
+                            <p className="text-[10px] text-slate-500 font-black uppercase pr-2">
                               {contact.relationship || 'Contact'} • {contact.phone}
                             </p>
                           </div>
@@ -942,24 +942,24 @@ const Profile = () => {
             {/* Ride Preferences */}
             <div className="card-premium h-full">
               <div className="mb-8">
-                <h4 className="text-lg font-display font-black uppercase italic">Travel Style</h4>
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Personalize your journey</p>
+                <h4 className="text-lg font-display font-black uppercase italic pr-4">Travel Style</h4>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 pr-2">Personalize your journey</p>
               </div>
 
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${preferences.silent_ride ? 'bg-primary/10 text-primary' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${preferences.silent_ride ? 'bg-secondary/10 text-secondary shadow-[0_0_12px_rgba(245,158,11,0.15)]' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
                       <Zap size={20} />
                     </div>
                     <div>
-                      <p className="text-sm font-bold italic uppercase">Silent Ride</p>
-                      <p className="text-[10px] text-slate-500 font-medium italic">No unnecessary conversation</p>
+                      <p className="text-sm font-bold italic uppercase pr-2">Silent Ride</p>
+                      <p className="text-[10px] text-slate-500 font-medium italic pr-2">No unnecessary conversation</p>
                     </div>
                   </div>
                   <button 
                     onClick={() => updatePreferences({...preferences, silent_ride: !preferences.silent_ride})}
-                    className={`w-12 h-6 rounded-full transition-all relative ${preferences.silent_ride ? 'bg-primary' : 'bg-slate-200 dark:bg-white/10'}`}
+                    className={`w-12 h-6 rounded-full transition-all relative ${preferences.silent_ride ? 'bg-secondary shadow-[0_0_15px_rgba(245,158,11,0.65)]' : 'bg-slate-200 dark:bg-white/10'}`}
                   >
                     <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${preferences.silent_ride ? 'right-1' : 'left-1'}`} />
                   </button>
@@ -967,17 +967,17 @@ const Profile = () => {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${preferences.ac_needed ? 'bg-emerald-500/10 text-emerald-500' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${preferences.ac_needed ? 'bg-emerald-500/10 text-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.15)]' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
                       <Settings size={20} />
                     </div>
                     <div>
-                      <p className="text-sm font-bold italic uppercase">Climate Control</p>
-                      <p className="text-[10px] text-slate-500 font-medium italic">Prefer AC/Heating on</p>
+                      <p className="text-sm font-bold italic uppercase pr-2">Climate Control</p>
+                      <p className="text-[10px] text-slate-500 font-medium italic pr-2">Prefer AC/Heating on</p>
                     </div>
                   </div>
                   <button 
                     onClick={() => updatePreferences({...preferences, ac_needed: !preferences.ac_needed})}
-                    className={`w-12 h-6 rounded-full transition-all relative ${preferences.ac_needed ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-white/10'}`}
+                    className={`w-12 h-6 rounded-full transition-all relative ${preferences.ac_needed ? 'bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.65)]' : 'bg-slate-200 dark:bg-white/10'}`}
                   >
                     <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${preferences.ac_needed ? 'right-1' : 'left-1'}`} />
                   </button>
@@ -985,17 +985,17 @@ const Profile = () => {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${preferences.music_allowed ? 'bg-amber-500/10 text-amber-500' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${preferences.music_allowed ? 'bg-amber-500/10 text-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.15)]' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
                       <Star size={20} />
                     </div>
                     <div>
-                      <p className="text-sm font-bold italic uppercase">Audio Ambiance</p>
-                      <p className="text-[10px] text-slate-500 font-medium italic">Music during the trip</p>
+                      <p className="text-sm font-bold italic uppercase pr-2">Audio Ambiance</p>
+                      <p className="text-[10px] text-slate-500 font-medium italic pr-2">Music during the trip</p>
                     </div>
                   </div>
                   <button 
                     onClick={() => updatePreferences({...preferences, music_allowed: !preferences.music_allowed})}
-                    className={`w-12 h-6 rounded-full transition-all relative ${preferences.music_allowed ? 'bg-amber-500' : 'bg-slate-200 dark:bg-white/10'}`}
+                    className={`w-12 h-6 rounded-full transition-all relative ${preferences.music_allowed ? 'bg-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.65)]' : 'bg-slate-200 dark:bg-white/10'}`}
                   >
                     <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${preferences.music_allowed ? 'right-1' : 'left-1'}`} />
                   </button>
@@ -1003,7 +1003,7 @@ const Profile = () => {
               </div>
 
               <div className="mt-8 p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-dashed border-slate-200 dark:border-white/10 text-center">
-                <p className="text-[10px] font-black uppercase text-slate-400 tracking-tighter">Your preferences are shared with pilots upon booking</p>
+                <p className="text-[10px] font-black uppercase text-slate-400 tracking-tighter pr-2">Your preferences are shared with drivers upon booking</p>
               </div>
             </div>
           </div>
@@ -1073,13 +1073,13 @@ const Profile = () => {
       {/* Image Crop Modal */}
       {imageToCrop && (
         <div className="fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-10 animate-fade-in">
-          <div className="w-full max-w-2xl bg-white dark:bg-obsidian-card rounded-[40px] overflow-hidden shadow-2xl flex flex-col h-[80vh]">
+          <div className="w-full max-w-2xl bg-white dark:bg-obsidian/95 border border-slate-200 dark:border-white/10 rounded-[40px] overflow-hidden shadow-2xl flex flex-col h-[80vh] backdrop-blur-md">
             <div className="p-8 border-b border-slate-100 dark:border-white/5 flex items-center justify-between">
               <div>
-                <h3 className="text-2xl font-display font-black uppercase italic">Crop <span className="text-electric-cyan">Avatar</span></h3>
-                <p className="text-xs text-slate-500 font-medium">Position your photo within the frame.</p>
+                <h3 className="text-2xl font-display font-black uppercase italic pr-4">Crop <span className="text-electric-cyan">Avatar</span></h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium pr-2">Position your photo within the frame.</p>
               </div>
-              <button onClick={() => setImageToCrop(null)} className="p-3 bg-slate-100 dark:bg-white/5 rounded-2xl hover:scale-110 transition-transform">
+              <button onClick={() => setImageToCrop(null)} className="p-3 bg-slate-100 dark:bg-white/5 rounded-2xl hover:scale-110 transition-transform dark:text-white dark:hover:bg-white/10">
                  <Plus size={20} className="rotate-45" />
               </button>
             </div>
@@ -1098,7 +1098,7 @@ const Profile = () => {
             
             <div className="p-8 space-y-6">
               <div className="space-y-2">
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Zoom Control</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 pr-2">Zoom Control</p>
                 <input
                   type="range"
                   value={zoom}
@@ -1121,7 +1121,7 @@ const Profile = () => {
                 </button>
                 <button
                   onClick={() => setImageToCrop(null)}
-                  className="px-8 bg-slate-100 dark:bg-white/5 rounded-2xl font-black uppercase text-[10px] tracking-widest"
+                  className="px-8 bg-slate-100 dark:bg-white/5 dark:text-white hover:bg-slate-200 dark:hover:bg-white/10 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-colors"
                 >
                   Cancel
                 </button>
@@ -1133,11 +1133,11 @@ const Profile = () => {
 
       {/* Public View Modal */}
       {showPublicView && (
-        <div className="fixed inset-0 z-[100] bg-obsidian/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
-          <div className="w-full max-w-sm bg-white dark:bg-obsidian-card rounded-[40px] overflow-hidden shadow-2xl relative animate-scale-in">
+        <div className="fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-xl flex items-center justify-center p-4 animate-fade-in">
+          <div className="w-full max-w-sm bg-white dark:bg-obsidian/95 border border-slate-200 dark:border-white/10 rounded-[40px] overflow-hidden shadow-2xl relative animate-scale-in backdrop-blur-md">
             <button 
               onClick={() => setShowPublicView(false)}
-              className="absolute top-6 right-6 p-2 bg-slate-100 dark:bg-white/5 rounded-xl z-10"
+              className="absolute top-6 right-6 p-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-500 dark:text-white rounded-xl z-10 transition-colors"
             >
               <Plus size={16} className="rotate-45" />
             </button>
@@ -1156,26 +1156,28 @@ const Profile = () => {
             
             <div className="pt-16 pb-10 px-8 text-center space-y-6">
               <div>
-                <h4 className="text-2xl font-display font-black italic uppercase">{user?.name}</h4>
-                <p className="text-[10px] font-black uppercase text-primary tracking-[0.2em] mt-1">{user?.role} Pilot</p>
+                <h4 className="text-2xl font-display font-black italic uppercase pr-4">{user?.name}</h4>
+                <p className="text-[10px] font-black uppercase text-primary tracking-[0.2em] mt-1 pr-2">
+                  {user?.role === 'driver' ? 'Driver Partner' : 'Customer Account'}
+                </p>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl">
-                  <p className="text-[9px] font-black text-slate-400 uppercase mb-1">Status</p>
-                  <p className="text-xs font-bold text-emerald-500">Active</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5">
+                  <p className="text-[9px] font-black text-slate-400 uppercase mb-1 pr-2">Status</p>
+                  <p className="text-xs font-bold text-emerald-500 pr-2">Active</p>
                 </div>
-                <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl">
-                  <p className="text-[9px] font-black text-slate-400 uppercase mb-1">Rating</p>
-                  <p className="text-xs font-bold">5.0 ⭐</p>
+                <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5">
+                  <p className="text-[9px] font-black text-slate-400 uppercase mb-1 pr-2">Rating</p>
+                  <p className="text-xs font-bold pr-2">5.0 ⭐</p>
                 </div>
               </div>
               
               <div className="space-y-2 text-left">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Verified Credentials</p>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1 pr-2">Verified Credentials</p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-primary/10 text-primary text-[9px] font-black rounded-full uppercase">Identity Verified</span>
-                  <span className="px-3 py-1 bg-secondary/10 text-secondary text-[9px] font-black rounded-full uppercase">Phone Linked</span>
+                  <span className="px-3 py-1 bg-primary/10 text-primary text-[9px] font-black rounded-full uppercase pr-2">Identity Verified</span>
+                  <span className="px-3 py-1 bg-secondary/10 text-secondary text-[9px] font-black rounded-full uppercase pr-2">Phone Linked</span>
                 </div>
               </div>
             </div>

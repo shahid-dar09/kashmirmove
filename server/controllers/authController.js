@@ -44,23 +44,12 @@ const sendOTP = async (req, res) => {
         );
 
         // Send email
-        try {
-            await sendOTPEmail(email, otp, name || 'Valued User');
-            
-            res.status(200).json({
-                success: true,
-                message: `Verification code sent to ${email}. Please check your inbox.`
-            });
-        } catch (mailError) {
-            console.error('SMTP Email sending failed, using console fallback:', mailError.message);
-            console.log(`\n==================================================\n[DEMO MODE OTP] Code for ${email} is: ${otp}\n==================================================\n`);
-            
-            res.status(200).json({
-                success: true,
-                message: `[DEMO MODE] Verification code generated: ${otp} (SMTP mail ports are blocked on Railway, so we generated it here).`,
-                otp: otp
-            });
-        }
+        await sendOTPEmail(email, otp, name || 'Valued User');
+        
+        res.status(200).json({
+            success: true,
+            message: `Verification code sent to ${email}. Please check your inbox.`
+        });
 
     } catch (error) {
         console.error('sendOTP error:', error);

@@ -19,15 +19,7 @@ const generateOTP = () => {
 
 // ─── Send OTP Email ────────────────────────────────────────────────────────────
 const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables in your deployment dashboard.');
-    }
-
-    const mailOptions = {
-        from: `"KashmirMove" <${process.env.EMAIL_USER}>`,
-        to: toEmail,
-        subject: 'Your KashmirMove Verification Code',
-        html: `
+    const htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +87,49 @@ const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
   </table>
 </body>
 </html>
-        `,
+    `;
+
+    // 1. If Resend API Key is available, use Resend HTTP API (works perfectly on Railway/Netlify without SMTP blocks)
+    if (process.env.RESEND_API_KEY) {
+        console.log(`[MAILER] Sending email to ${toEmail} using Resend HTTP API...`);
+        try {
+            const response = await fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    from: 'KashmirMove <onboarding@resend.dev>',
+                    to: toEmail,
+                    subject: 'Your KashmirMove Verification Code',
+                    html: htmlContent
+                })
+            });
+
+            const resData = await response.json();
+            if (!response.ok) {
+                throw new Error(resData.message || 'Unknown Resend error');
+            }
+            console.log(`[MAILER] Email successfully sent to ${toEmail} via Resend. ID: ${resData.id}`);
+            return;
+        } catch (resendError) {
+            console.error('[MAILER] Resend API failed:', resendError.message);
+            throw new Error(`Email delivery failed via Resend API: ${resendError.message}`);
+        }
+    }
+
+    // 2. Otherwise, fallback to standard Gmail SMTP (Nodemailer) for local development
+    console.log(`[MAILER] Sending email to ${toEmail} using Gmail SMTP (Local Dev fallback)...`);
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables in your deployment dashboard, or configure RESEND_API_KEY.');
+    }
+
+    const mailOptions = {
+        from: `"KashmirMove" <${process.env.EMAIL_USER}>`,
+        to: toEmail,
+        subject: 'Your KashmirMove Verification Code',
+        html: htmlContent
     };
 
     await transporter.sendMail(mailOptions);

@@ -1,18 +1,15 @@
 const nodemailer = require('nodemailer');
 
-// ─── Dynamic SMTP Transporter ──────────────────────────────────────────────────
-// Supports standard Gmail SMTP (port 587/465) or Brevo SMTP (port 2525) automatically
+// ─── SMTP Transporter (Local Dev fallback) ─────────────────────────────────────
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: parseInt(process.env.SMTP_PORT || '587') === 465,
+    service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
-    connectionTimeout: 10000, // 10s connection timeout
-    greetingTimeout: 10000,   // 10s greeting timeout
-    socketTimeout: 10000,     // 10s socket timeout
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
 });
 
 // ─── Generate a 6-digit OTP ────────────────────────────────────────────────────
@@ -22,10 +19,6 @@ const generateOTP = () => {
 
 // ─── Send OTP Email ────────────────────────────────────────────────────────────
 const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables.');
-    }
-
     const htmlContent = `
 <!DOCTYPE html>
 <html>
@@ -96,22 +89,50 @@ const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
 </html>
     `;
 
-    // Sender email address details
-    // If using Brevo, the 'from' address must be the verified sender (which is kashmirmove.app@gmail.com)
-    const fromSender = process.env.SMTP_HOST === 'smtp-relay.brevo.com' 
-        ? `"KashmirMove" <kashmirmove.app@gmail.com>` 
-        : `"KashmirMove" <${process.env.EMAIL_USER}>`;
+    // 1. In Production (Railway): Use Resend HTTP API (standard web port 443, never blocked by Railway plans)
+    if (process.env.RESEND_API_KEY) {
+        console.log(`[MAILER] Sending REAL email to ${toEmail} using Resend HTTPS API...`);
+        try {
+            const response = await fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    from: 'KashmirMove <onboarding@resend.dev>',
+                    to: toEmail,
+                    subject: 'Your KashmirMove Verification Code',
+                    html: htmlContent
+                })
+            });
+
+            const resData = await response.json();
+            if (!response.ok) {
+                throw new Error(resData.message || 'Unknown Resend error');
+            }
+            console.log(`[MAILER] REAL Email sent successfully via Resend. ID: ${resData.id}`);
+            return;
+        } catch (error) {
+            console.error('[MAILER] Resend API Error:', error.message);
+            throw new Error(`Email delivery failed via Resend API: ${error.message}`);
+        }
+    }
+
+    // 2. Local Dev: Use standard Gmail SMTP (Nodemailer)
+    console.log(`[MAILER] Sending REAL email to ${toEmail} using Gmail SMTP (Local Dev)...`);
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables.');
+    }
 
     const mailOptions = {
-        from: fromSender,
+        from: `"KashmirMove" <${process.env.EMAIL_USER}>`,
         to: toEmail,
         subject: 'Your KashmirMove Verification Code',
         html: htmlContent
     };
 
-    console.log(`[MAILER] Attempting to send OTP email to ${toEmail} using host: ${process.env.SMTP_HOST || 'smtp.gmail.com'} on port: ${process.env.SMTP_PORT || '587'}...`);
     await transporter.sendMail(mailOptions);
-    console.log(`[MAILER] OTP email successfully sent to ${toEmail}`);
 };
 
 module.exports = { generateOTP, sendOTPEmail };

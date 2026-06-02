@@ -1,8 +1,11 @@
 const nodemailer = require('nodemailer');
 
-// ─── Transporter ──────────────────────────────────────────────────────────────
+// ─── Dynamic SMTP Transporter ──────────────────────────────────────────────────
+// Supports standard Gmail SMTP (port 587/465) or Brevo SMTP (port 2525) automatically
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: parseInt(process.env.SMTP_PORT || '587'),
+    secure: parseInt(process.env.SMTP_PORT || '587') === 465,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -19,6 +22,10 @@ const generateOTP = () => {
 
 // ─── Send OTP Email ────────────────────────────────────────────────────────────
 const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables.');
+    }
+
     const htmlContent = `
 <!DOCTYPE html>
 <html>
@@ -89,50 +96,22 @@ const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
 </html>
     `;
 
-    // 1. If Resend API Key is available, use Resend HTTP API (works perfectly on Railway/Netlify without SMTP blocks)
-    if (process.env.RESEND_API_KEY) {
-        console.log(`[MAILER] Sending email to ${toEmail} using Resend HTTP API...`);
-        try {
-            const response = await fetch('https://api.resend.com/emails', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    from: 'KashmirMove <onboarding@resend.dev>',
-                    to: toEmail,
-                    subject: 'Your KashmirMove Verification Code',
-                    html: htmlContent
-                })
-            });
-
-            const resData = await response.json();
-            if (!response.ok) {
-                throw new Error(resData.message || 'Unknown Resend error');
-            }
-            console.log(`[MAILER] Email successfully sent to ${toEmail} via Resend. ID: ${resData.id}`);
-            return;
-        } catch (resendError) {
-            console.error('[MAILER] Resend API failed:', resendError.message);
-            throw new Error(`Email delivery failed via Resend API: ${resendError.message}`);
-        }
-    }
-
-    // 2. Otherwise, fallback to standard Gmail SMTP (Nodemailer) for local development
-    console.log(`[MAILER] Sending email to ${toEmail} using Gmail SMTP (Local Dev fallback)...`);
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables in your deployment dashboard, or configure RESEND_API_KEY.');
-    }
+    // Sender email address details
+    // If using Brevo, the 'from' address must be the verified sender (which is kashmirmove.app@gmail.com)
+    const fromSender = process.env.SMTP_HOST === 'smtp-relay.brevo.com' 
+        ? `"KashmirMove" <kashmirmove.app@gmail.com>` 
+        : `"KashmirMove" <${process.env.EMAIL_USER}>`;
 
     const mailOptions = {
-        from: `"KashmirMove" <${process.env.EMAIL_USER}>`,
+        from: fromSender,
         to: toEmail,
         subject: 'Your KashmirMove Verification Code',
         html: htmlContent
     };
 
+    console.log(`[MAILER] Attempting to send OTP email to ${toEmail} using host: ${process.env.SMTP_HOST || 'smtp.gmail.com'} on port: ${process.env.SMTP_PORT || '587'}...`);
     await transporter.sendMail(mailOptions);
+    console.log(`[MAILER] OTP email successfully sent to ${toEmail}`);
 };
 
 module.exports = { generateOTP, sendOTPEmail };

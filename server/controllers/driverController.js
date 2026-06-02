@@ -3,6 +3,20 @@ const pool = require('../config/db');
 const { uploadToCloudinary } = require('../utils/cloudinary');
 const { generateOTP, sendOTPEmail } = require('../utils/mailer');
 
+const DISTRICT_CENTERS = {
+    'Srinagar': { lat: 34.0837, lng: 74.7973 },
+    'Anantnag': { lat: 33.7298, lng: 75.1467 },
+    'Ganderbal': { lat: 34.3133, lng: 75.5667 },
+    'Budgam': { lat: 34.2044, lng: 75.0044 },
+    'Badgam': { lat: 34.2044, lng: 75.0044 },
+    'Pulwama': { lat: 33.9244, lng: 75.3244 },
+    'Kulgam': { lat: 33.6133, lng: 75.5333 },
+    'Bandipora': { lat: 34.4244, lng: 74.6344 },
+    'Baramulla': { lat: 34.2044, lng: 74.3444 },
+    'Kupwara': { lat: 34.5244, lng: 74.2544 },
+    'Shopian': { lat: 33.7144, lng: 74.8344 }
+};
+
 const registerDriver = async (req, res) => {
     let connection;
     
@@ -85,11 +99,12 @@ const registerDriver = async (req, res) => {
 
         const { area } = req.body;
         const driverArea = area || 'Srinagar';
+        const center = DISTRICT_CENTERS[driverArea] || DISTRICT_CENTERS['Srinagar'];
 
-        // 2. Create Driver (status = pending, with area)
+        // 2. Create Driver (status = pending, with area and default coordinates)
         const [driverResult] = await connection.query(
-            'INSERT INTO drivers (user_id, status, area) VALUES (?, ?, ?)',
-            [userId, 'pending', driverArea]
+            'INSERT INTO drivers (user_id, status, area, current_lat, current_lng) VALUES (?, ?, ?, ?, ?)',
+            [userId, 'pending', driverArea, center.lat, center.lng]
         );
         const driverId = driverResult.insertId;
 
@@ -420,19 +435,6 @@ const cancelRide = async (req, res) => {
         console.error(error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
-};
-
-const DISTRICT_CENTERS = {
-    'Srinagar': { lat: 34.0837, lng: 74.7973 },
-    'Anantnag': { lat: 33.7298, lng: 75.1467 },
-    'Ganderbal': { lat: 34.3133, lng: 75.5667 },
-    'Budgam': { lat: 34.2044, lng: 75.0044 },
-    'Pulwama': { lat: 33.9244, lng: 75.3244 },
-    'Kulgam': { lat: 33.6133, lng: 75.5333 },
-    'Bandipora': { lat: 34.4244, lng: 74.6344 },
-    'Baramulla': { lat: 34.2044, lng: 74.3444 },
-    'Kupwara': { lat: 34.5244, lng: 74.2544 },
-    'Shopian': { lat: 33.7144, lng: 74.8344 }
 };
 
 const updateLocation = async (req, res) => {

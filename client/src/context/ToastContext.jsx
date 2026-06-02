@@ -41,12 +41,13 @@ export const ToastProvider = ({ children }) => {
 
   const getColors = (type) => {
     switch (type) {
-      case 'success': return 'border-secondary/20 bg-secondary/5';
-      case 'error': return 'border-rose/20 bg-rose/5';
-      case 'warning': return 'border-saffron/20 bg-saffron/5';
-      default: return 'border-arctic/20 bg-arctic/5';
+      case 'success': return 'border-secondary/30 bg-[#0F0F1A]/95 text-white shadow-[0_4px_30px_rgba(245,158,11,0.15)]';
+      case 'error': return 'border-rose/30 bg-[#0F0F1A]/95 text-white shadow-[0_4px_30px_rgba(239,68,68,0.15)]';
+      case 'warning': return 'border-saffron/30 bg-[#0F0F1A]/95 text-white shadow-[0_4px_30px_rgba(245,158,11,0.15)]';
+      default: return 'border-arctic/30 bg-[#0F0F1A]/95 text-white shadow-[0_4px_30px_rgba(6,182,212,0.15)]';
     }
   };
+
 
   return (
     <ToastContext.Provider value={{ addToast }}>

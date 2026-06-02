@@ -89,38 +89,48 @@ const sendOTPEmail = async (toEmail, otp, recipientName = 'Valued User') => {
 </html>
     `;
 
-    // 1. In Production (Railway): Use Resend HTTP API (standard web port 443, never blocked by Railway plans)
-    if (process.env.RESEND_API_KEY) {
-        console.log(`[MAILER] Sending REAL email to ${toEmail} using Resend HTTPS API...`);
+    // 1. In Production (Railway): Use Brevo HTTPS API (standard port 443, never blocked)
+    // Allows sending to ANY recipient in the world from verified Gmail without a custom domain!
+    if (process.env.BREVO_API_KEY) {
+        console.log(`[MAILER] Sending email to ${toEmail} using Brevo HTTPS API...`);
         try {
-            const response = await fetch('https://api.resend.com/emails', {
+            const response = await fetch('https://api.brevo.com/v3/smtp/email', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-                    'Content-Type': 'application/json'
+                    'accept': 'application/json',
+                    'api-key': process.env.BREVO_API_KEY,
+                    'content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    from: 'KashmirMove <onboarding@resend.dev>',
-                    to: toEmail,
+                    sender: {
+                        name: "KashmirMove",
+                        email: "kashmirmove.app@gmail.com"
+                    },
+                    to: [
+                        {
+                            email: toEmail,
+                            name: recipientName
+                        }
+                    ],
                     subject: 'Your KashmirMove Verification Code',
-                    html: htmlContent
+                    htmlContent: htmlContent
                 })
             });
 
             const resData = await response.json();
             if (!response.ok) {
-                throw new Error(resData.message || 'Unknown Resend error');
+                throw new Error(resData.message || 'Unknown Brevo API error');
             }
-            console.log(`[MAILER] REAL Email sent successfully via Resend. ID: ${resData.id}`);
+            console.log(`[MAILER] Email successfully sent to ${toEmail} via Brevo HTTP API. ID: ${resData.messageId}`);
             return;
         } catch (error) {
-            console.error('[MAILER] Resend API Error:', error.message);
-            throw new Error(`Email delivery failed via Resend API: ${error.message}`);
+            console.error('[MAILER] Brevo API Error:', error.message);
+            throw new Error(`Email delivery failed via Brevo HTTP API: ${error.message}`);
         }
     }
 
     // 2. Local Dev: Use standard Gmail SMTP (Nodemailer)
-    console.log(`[MAILER] Sending REAL email to ${toEmail} using Gmail SMTP (Local Dev)...`);
+    console.log(`[MAILER] Sending email to ${toEmail} using Gmail SMTP (Local Dev)...`);
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
         throw new Error('SMTP credentials are missing. Please add EMAIL_USER and EMAIL_PASS environment variables.');
     }

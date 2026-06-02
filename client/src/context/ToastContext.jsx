@@ -9,13 +9,26 @@ export const ToastProvider = ({ children }) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
-  const addToast = useCallback((message, type = 'info', duration = 5000) => {
+  const addToast = useCallback((messageOrTitle, typeOrDesc = 'info', durationOrType = 5000) => {
+    let message = messageOrTitle;
+    let type = typeOrDesc;
+    let duration = 5000;
+
+    // Detect signature: addToast(title, description, type)
+    if (typeof durationOrType === 'string') {
+      message = `${messageOrTitle}: ${typeOrDesc}`;
+      type = durationOrType;
+    } else if (typeof durationOrType === 'number') {
+      duration = durationOrType;
+    }
+
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type, duration }]);
     setTimeout(() => {
       removeToast(id);
     }, duration);
   }, [removeToast]);
+
 
   const getIcon = (type) => {
     switch (type) {

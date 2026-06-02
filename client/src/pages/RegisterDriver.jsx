@@ -16,7 +16,8 @@ import {
   Upload,
   CheckCircle2,
   KeyRound,
-  RefreshCw
+  RefreshCw,
+  MapPin
 } from 'lucide-react';
 
 const RegisterDriver = () => {
@@ -377,6 +378,29 @@ const RegisterDriver = () => {
                                  required
                                />
                             </div>
+                         </div>
+                      </div>
+
+                      <div className="space-y-3 pt-4">
+                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4 opacity-60">OPERATING AREA / DISTRICT</label>
+                         <div className="relative">
+                            <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600" size={18} />
+                            <select 
+                              value={formData.area}
+                              onChange={(e) => setFormData({...formData, area: e.target.value})}
+                              className="w-full bg-[#16162A]/50 border border-white/5 rounded-2xl py-5 pl-16 pr-8 font-bold focus:border-primary/50 focus:bg-[#16162A] outline-none transition-all appearance-none text-white px-16"
+                            >
+                               <option value="Srinagar" className="bg-obsidian">Srinagar</option>
+                               <option value="Budgam" className="bg-obsidian">Budgam</option>
+                               <option value="Ganderbal" className="bg-obsidian">Ganderbal</option>
+                               <option value="Anantnag" className="bg-obsidian">Anantnag</option>
+                               <option value="Pulwama" className="bg-obsidian">Pulwama</option>
+                               <option value="Kulgam" className="bg-obsidian">Kulgam</option>
+                               <option value="Baramulla" className="bg-obsidian">Baramulla</option>
+                               <option value="Kupwara" className="bg-obsidian">Kupwara</option>
+                               <option value="Shopian" className="bg-obsidian">Shopian</option>
+                               <option value="Bandipora" className="bg-obsidian">Bandipora</option>
+                            </select>
                          </div>
                       </div>
 

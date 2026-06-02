@@ -85,9 +85,13 @@ const DISTRICT_COORDINATES = {
   1: { name: "Srinagar", lat: 34.0837, lng: 74.7973 },
   2: { name: "Anantnag", lat: 33.7298, lng: 75.1467 },
   3: { name: "Ganderbal", lat: 34.3133, lng: 75.5667 },
-  4: { name: "Badgam", lat: 34.2044, lng: 75.0044 },
+  4: { name: "Budgam", lat: 34.2044, lng: 75.0044 },
   5: { name: "Pulwama", lat: 33.9244, lng: 75.3244 },
   6: { name: "Kulgam", lat: 33.6133, lng: 75.5333 },
+  7: { name: "Baramulla", lat: 34.2000, lng: 74.3500 },
+  8: { name: "Kupwara", lat: 34.5000, lng: 74.2500 },
+  9: { name: "Shopian", lat: 33.7200, lng: 74.8300 },
+  10: { name: "Bandipora", lat: 34.4200, lng: 74.6500 },
 };
 
 // Calculate distance between two coordinates (Haversine formula)

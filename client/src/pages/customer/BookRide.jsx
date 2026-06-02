@@ -30,9 +30,13 @@ const KASHMIR_DISTRICTS = [
   { id: 1, name: 'Srinagar', lat: 34.0837, lng: 74.7973 },
   { id: 2, name: 'Anantnag', lat: 33.7298, lng: 75.1467 },
   { id: 3, name: 'Ganderbal', lat: 34.3133, lng: 75.5667 },
-  { id: 4, name: 'Badgam', lat: 34.2044, lng: 75.0044 },
+  { id: 4, name: 'Budgam', lat: 34.2044, lng: 75.0044 },
   { id: 5, name: 'Pulwama', lat: 33.9244, lng: 75.3244 },
-  { id: 6, name: 'Kulgam', lat: 33.6133, lng: 75.5333 }
+  { id: 6, name: 'Kulgam', lat: 33.6133, lng: 75.5333 },
+  { id: 7, name: 'Baramulla', lat: 34.2000, lng: 74.3500 },
+  { id: 8, name: 'Kupwara', lat: 34.5000, lng: 74.2500 },
+  { id: 9, name: 'Shopian', lat: 33.7200, lng: 74.8300 },
+  { id: 10, name: 'Bandipora', lat: 34.4200, lng: 74.6500 }
 ];
 
 const VEHICLE_TYPES = {

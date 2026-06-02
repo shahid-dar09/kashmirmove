@@ -93,10 +93,15 @@ const registerCustomer = async (req, res) => {
         // OTP is valid — clean it up
         await pool.query('DELETE FROM verification_otps WHERE email = ?', [email]);
 
-        // Check email not taken (race condition guard)
-        const [existingUser] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-        if (existingUser.length > 0) {
-            return res.status(400).json({ success: false, message: 'User already exists' });
+        // Check email or phone not taken (race condition guard)
+        const [existingEmail] = await pool.query('SELECT id FROM users WHERE email = ?', [email]);
+        if (existingEmail.length > 0) {
+            return res.status(400).json({ success: false, message: 'An account with this email already exists. Please log in.' });
+        }
+
+        const [existingPhone] = await pool.query('SELECT id FROM users WHERE phone = ?', [phone]);
+        if (existingPhone.length > 0) {
+            return res.status(400).json({ success: false, message: 'An account with this phone number already exists.' });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -309,4 +314,44 @@ const getPublicStats = async (req, res) => {
     }
 };
 
-module.exports = { sendOTP, registerCustomer, login, updateProfile, getProfile, uploadAvatar, getPublicStats };
+const checkExists = async (req, res) => {
+    try {
+        const { email, phone } = req.body;
+
+        if (!email && !phone) {
+            return res.status(400).json({ success: false, message: 'Email or phone number is required' });
+        }
+
+        if (email) {
+            const [emailCheck] = await pool.query('SELECT id FROM users WHERE email = ?', [email]);
+            if (emailCheck.length > 0) {
+                return res.status(200).json({ 
+                    success: true, 
+                    exists: true, 
+                    field: 'email',
+                    message: 'An account with this email already exists. Please log in.' 
+                });
+            }
+        }
+
+        if (phone) {
+            const [phoneCheck] = await pool.query('SELECT id FROM users WHERE phone = ?', [phone]);
+            if (phoneCheck.length > 0) {
+                return res.status(200).json({ 
+                    success: true, 
+                    exists: true, 
+                    field: 'phone',
+                    message: 'An account with this phone number already exists.' 
+                });
+            }
+        }
+
+        return res.status(200).json({ success: true, exists: false });
+    } catch (error) {
+        console.error('checkExists error:', error);
+        res.status(500).json({ success: false, message: 'Server error during check' });
+    }
+};
+
+module.exports = { sendOTP, registerCustomer, login, updateProfile, getProfile, uploadAvatar, getPublicStats, checkExists };
+

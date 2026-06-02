@@ -50,6 +50,17 @@ const RegisterCustomer = () => {
 
     setOtpLoading(true);
     try {
+      // First, check if email/phone already exists in database
+      const checkRes = await api.post('/auth/check-exists', {
+        email: formData.email,
+        phone: formData.phone
+      });
+      if (checkRes.data.success && checkRes.data.exists) {
+        addToast("Account Already Exists", checkRes.data.message, "error");
+        setOtpLoading(false);
+        return;
+      }
+
       const res = await api.post('/auth/send-otp', {
         email: formData.email,
         name: formData.name
@@ -65,6 +76,7 @@ const RegisterCustomer = () => {
       setOtpLoading(false);
     }
   };
+
 
   // Resend OTP
   const handleResendOTP = async () => {

@@ -62,13 +62,30 @@ const RegisterDriver = () => {
     }));
   };
 
-  const handleNext = (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone || !formData.password) {
       return addToast("Validation Error", "Please complete all identity fields.", "error");
     }
-    setStep(2);
+    setLoading(true);
+    try {
+      const res = await api.post('/auth/check-exists', {
+        email: formData.email,
+        phone: formData.phone
+      });
+      if (res.data.success && res.data.exists) {
+        addToast("Account Already Exists", res.data.message, "error");
+        setLoading(false);
+        return;
+      }
+      setStep(2);
+    } catch (err) {
+      addToast("Validation Error", err.response?.data?.message || "Failed to validate unique credentials.", "error");
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   // Step 2 → 3: Send OTP before final submit
   const handleSendOTP = async (e) => {

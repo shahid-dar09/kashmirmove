@@ -81,11 +81,18 @@ const registerDriver = async (req, res) => {
         if (profilePhotoCloudUrl) profilePhotoPath = profilePhotoCloudUrl;
         if (idProofCloudUrl) idProofPath = idProofCloudUrl;
 
-        const [existingUser] = await connection.query('SELECT * FROM users WHERE email = ?', [email]);
-        if (existingUser.length > 0) {
+        const [existingEmail] = await connection.query('SELECT id FROM users WHERE email = ?', [email]);
+        if (existingEmail.length > 0) {
             await connection.rollback();
-            return res.status(400).json({ success: false, message: 'User already exists' });
+            return res.status(400).json({ success: false, message: 'An account with this email already exists. Please log in.' });
         }
+
+        const [existingPhone] = await connection.query('SELECT id FROM users WHERE phone = ?', [phone]);
+        if (existingPhone.length > 0) {
+            await connection.rollback();
+            return res.status(400).json({ success: false, message: 'An account with this phone number already exists.' });
+        }
+
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);

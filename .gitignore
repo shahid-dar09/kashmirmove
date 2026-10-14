@@ -4,8 +4,10 @@ client/node_modules/
 server/node_modules/
 
 # Production builds
+dist/
 client/dist/
 client/dist-ssr/
+server/dist/
 
 # Environment variables and secrets
 .env
